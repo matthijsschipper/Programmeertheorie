@@ -3,7 +3,7 @@ class Crossing():
         self.location = (x_coordinate, y_coordinate, z_coordinate)
         self.links = []
         self.is_gate = False
-        self.name = none
+        self.name = None
         
     def place_gate(self, number):
         """
@@ -16,11 +16,14 @@ class Crossing():
         """
         Create link between current and adjacent crossing.
         """
-        paths.append((adjacent_crossingn))
+        paths.append((adjacent_crossing))
     
     def get_links(self):
         """
         Returns list of linked crossings
         """
         return(self.links)
+
+    def __repr__(self):
+        return f'Crossing - {self.name}'
 

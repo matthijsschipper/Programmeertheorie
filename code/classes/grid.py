@@ -36,8 +36,24 @@ class Grid():
         max_x = max(x_coordinates) + 1
         max_y = max(y_coordinates) + 1
 
-        for rows in range(max_y + 1):
-            row_list = []
-            self.grid.append(row_list)
-            for colums in range(max_x + 1):
-                row_list.append(colums)
+        for layer in range(8):
+            layer_list = []
+            self.grid.append(layer_list)
+            for row in range(max_y + 1):
+                row_list = []
+                layer_list.append(row_list)
+                for i in range(max_x + 1):
+                    row_list.append(Crossing(i, row, layer))
+        
+        self.make_gates()
+        
+    def make_gates(self):
+        for gate in self.coordinates:
+            row_number = int(gate[2])
+            col_number = int(gate[0])
+
+            crossing = self.grid[0][row_number][col_number]
+            crossing.place_gate('Gate')
+        
+        for row in self.grid[0]:
+            print(row)
