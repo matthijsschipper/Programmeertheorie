@@ -65,5 +65,3 @@ class Grid():
         print(self.coordinates)
 
         Route(start, end)
-
-        
