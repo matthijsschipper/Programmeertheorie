@@ -7,3 +7,7 @@ class Grid():
         # from file, retrieve size of grid and locations of gates
         # create and initialize array
         pass
+
+    def read_data(self, infile):
+        # Read data, retrieve min + max X and Y coordinates for grid size
+        pass
