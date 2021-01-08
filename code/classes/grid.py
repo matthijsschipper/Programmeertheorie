@@ -1,4 +1,5 @@
 from .crossing import Crossing
+from .route import Route
 import numpy as np
 import csv
 
@@ -12,6 +13,7 @@ class Grid():
         """
         Read data and call make_grid function
         """
+        # Read gate coordinate data
         with open(infile, 'r') as new_file:
             data = [line.rstrip() for line in new_file]
             # Remove title
@@ -25,13 +27,13 @@ class Grid():
         """
         x_coordinates = []
         y_coordinates = []
-        self.coordinates = []
+        self.coordinates = {}
         self.grid = []
 
         for coordinate in data:
             x_coordinates.append(int(coordinate[2]))
             y_coordinates.append(int(coordinate[4]))
-            self.coordinates.append(coordinate[2:])
+            self.coordinates[int(coordinate[0])] = tuple(coordinate[2:].split(','))
         
         max_x = max(x_coordinates) + 1
         max_y = max(y_coordinates) + 1
@@ -48,12 +50,20 @@ class Grid():
         self.make_gates()
         
     def make_gates(self):
-        for gate in self.coordinates:
-            row_number = int(gate[2])
+        for gate in self.coordinates.values():
+            row_number = int(gate[1])
             col_number = int(gate[0])
 
             crossing = self.grid[0][row_number][col_number]
             crossing.place_gate('Gate')
         
-        for row in self.grid[0]:
-            print(row)
+        self.plot_route()
+    
+    def plot_route(self):
+        start = self.coordinates[1]
+        end = self.coordinates[3]
+        print(self.coordinates)
+
+        Route(start, end)
+
+        
