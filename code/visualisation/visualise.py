@@ -19,7 +19,7 @@ def visualise(infile):
 
             # seperate footer row
             if row[0][0:4] == 'chip':
-                costs = int(row[1])
+                gen_info = row[0][0:12]
             
             else:
 
@@ -64,4 +64,4 @@ def visualise(infile):
     ax.invert_xaxis()
 
     # save plot
-    plt.savefig('./data/visualisations/first_try_3d.png')
+    plt.savefig(f"./data/visualisations/3d_{gen_info}.png")
