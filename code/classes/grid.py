@@ -7,6 +7,7 @@ class Grid():
         # from file, retrieve size of grid and locations of gates
         # create and initialize array
         self.read_data(infile)
+        self.grid = []
 
     def read_data(self, infile):
         """
@@ -35,7 +36,6 @@ class Grid():
         max_x = max(x_coordinates) + 1
         max_y = max(y_coordinates) + 1
 
-        grid = []
 
         for rows in range(max_y):
             row_list = []
