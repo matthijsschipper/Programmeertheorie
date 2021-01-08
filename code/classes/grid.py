@@ -33,7 +33,7 @@ class Grid():
         for coordinate in data:
             x_coordinates.append(int(coordinate[2]))
             y_coordinates.append(int(coordinate[4]))
-            self.coordinates[int(coordinate[0])] = tuple(coordinate[2:].split(','))
+            self.coordinates[int(coordinate[0])] = tuple(int(i) for i in coordinate[2:].split(','))
         
         max_x = max(x_coordinates) + 1
         max_y = max(y_coordinates) + 1
