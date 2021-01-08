@@ -1,5 +1,5 @@
 from .crossing import Crossing
-import numpy
+import numpy as np
 import csv
 
 class Grid():
