@@ -73,10 +73,17 @@ class Grid():
     def plot_route(self):
         """
         Plot route with given start and end coordinates (might prove to be not necessary later?).
+        Required gate connections files are retrieved from data directory.
         """
-        start = self.coordinates[1]
-        end = self.coordinates[3]
+        with open('data/chip_0/netlist_1.csv', 'r') as new_file:
+            # Extracting all required connections
+            data = [line.rstrip() for line in new_file]
 
-        Route(start, end)
+            # Remove title
+            data.pop(0)
 
-        
+            for line in data:
+                origin_gate = self.coordinates[int(line[0])]
+                destination_gate = self.coordinates[int(line[2])]
+
+                Route(origin_gate, destination_gate)
