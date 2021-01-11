@@ -67,6 +67,7 @@ class Grid():
         """
 
         # create empty grid, size is given in (z, y, x)
+        ### also works with nested lists, nparray is just easier to see, and I'm exhausted, so that could be changed later
         x, y, z = self.size[0], self.size[1], self.size[2]
         self.grid = np.ndarray(shape = (z, y, x), dtype = object)
 
