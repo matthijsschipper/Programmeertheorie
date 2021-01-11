@@ -4,6 +4,12 @@ from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 def visualise(infile):
+    """
+    Takes in the standard-formatted output.csv file
+    Outputs a visual representation of that file in the form of a graph
+    Saves that file in the data/visualisations/ folder
+    """
+
     with open(infile) as file:
 
         # read through file
