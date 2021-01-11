@@ -51,8 +51,8 @@ class Grid():
         
     def make_gates(self):
         for gate in self.coordinates.values():
-            row_number = int(gate[1])
-            col_number = int(gate[0])
+            row_number = gate[1]
+            col_number = gate[0]
 
             crossing = self.grid[0][row_number][col_number]
             crossing.place_gate('Gate')
