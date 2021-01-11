@@ -4,9 +4,16 @@ import numpy as np
 import csv
 
 class Grid():
+    """
+    Grid class makes an object of a 3D matrix, which is filled with Crossing objects.
+    """
     def __init__(self, infile):
         # from file, retrieve size of grid and locations of gates
         # create and initialize array
+        self.grid = []
+        self.coordinates = {}
+        self.x_coordinates = []
+        self.y_coordinates = []
         self.read_data(infile)
 
     def read_data(self, infile):
@@ -25,18 +32,13 @@ class Grid():
         """
         Determine max X and Y coordinates and store coordinates in list
         """
-        x_coordinates = []
-        y_coordinates = []
-        self.coordinates = {}
-        self.grid = []
-
         for coordinate in data:
-            x_coordinates.append(int(coordinate[2]))
-            y_coordinates.append(int(coordinate[4]))
+            self.x_coordinates.append(int(coordinate[2]))
+            self.y_coordinates.append(int(coordinate[4]))
             self.coordinates[int(coordinate[0])] = tuple(int(i) for i in coordinate[2:].split(','))
         
-        max_x = max(x_coordinates) + 1
-        max_y = max(y_coordinates) + 1
+        max_x = max(self.x_coordinates) + 1
+        max_y = max(self.y_coordinates) + 1
 
         for layer in range(8):
             layer_list = []
