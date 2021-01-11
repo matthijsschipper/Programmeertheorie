@@ -62,7 +62,6 @@ class Grid():
     def plot_route(self):
         start = self.coordinates[1]
         end = self.coordinates[3]
-        print(self.coordinates)
 
         Route(start, end)
 
