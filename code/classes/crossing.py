@@ -94,3 +94,10 @@ class Crossing():
         
         return self.directions
 
+    def get_name(self):
+        """
+        Returns the name of the crossing object
+        """
+
+        return self.name
+
