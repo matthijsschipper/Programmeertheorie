@@ -1,29 +1,63 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>300</x><y>38</y><w>210</w><h>190</h></coordinates><panel_attributes>Crossing
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>640</x><y>38</y><w>210</w><h>270</h></coordinates><panel_attributes>Crossing
 --
-location: (Int, Int, Int)
-links: [Crossing]
-is_gate: Bool
-name: Int
+name: [str]
+is_gate: [boolean]
+location: [tuple]
+directions [list]
+visited: [boolean]
+intersection: [boolean]
 --
+set_directions(self, grid_size)
+__repr__(self)
 place_gate(self, number)
-create_link(self, adjacent_crossing)
-get_links(self)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>38</y><w>210</w><h>190</h></coordinates><panel_attributes>Grid
+add_blockade(self, direction)
+remove_blockade(self, direction)
+set_visited(self)
+get_coordinates(self)
+get_possible_directions(self)
+get_name(self)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>38</y><w>210</w><h>370</h></coordinates><panel_attributes>Grid
 --
-grid: [Crossing]
-coordinates: {Int: Tuple}
-x_coordinates: [Int]
-y_coordinates: [Int]
+grid: [nested lists]
+size: [list]
+gate_coordinates: [dict]
+netlist: [list]
+amount_of_intersections: [int]
+chip_id: [int]
+netlist_id: [int]
+current_crossing: [crossing object]
+current_net: [net object]
 --
-read_data(self, infile)
-make_grid(self, data)
-make_gates(self)
-plot_route(self)
-def get_output(self)
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>298</y><w>210</w><h>190</h></coordinates><panel_attributes>Route
+read_chip_data(self, file)
+make_grid(self)
+set_netlist(self, file)
+available_nets(self)
+choose_net(self, net)
+add_to_net(self, direction)
+delete_net(self, net, steps)
+delete_last_crossing(self, net)
+get_directions(self)
+get_directions_to_end(self)
+netlist_filled(self)
+net_is_finished(self)
+get_output(self)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>38</y><w>210</w><h>300</h></coordinates><panel_attributes>Net
 --
-start: (Int, Int)
-end: (Int, Int)
-routelist: [(Int, Int)]
+start: [crossing object]
+end: [crossing object]
+routelist: [list of crossing objects]
+finished: [boolean]
 --
-add_step(self)
+__repr__(self)
+add_crossing(self, crossing)
+get_latest_crossing(self)
+get_latest_crossings(self)
+delete_last_crossing(self)
+show_route(self)
+show_route_coordinates(self)
+get_end(self)
+get_start(self)
+get_route_to_end(self)
+is_finished(self)
+mark_unfinished(self)
+get_length(self)
 </panel_attributes><additional_attributes></additional_attributes></element></diagram>

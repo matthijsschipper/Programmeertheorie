@@ -14,6 +14,7 @@ class Random():
         for net in netlist:
 
             self.grid.choose_net(net)
+            print(net)
 
             self.steps = 0
             start_gate, end_gate = net.start, net.end
