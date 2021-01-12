@@ -88,8 +88,6 @@ class Grid():
             gate = self.grid[z_coordinate][y_coordinate][x_coordinate]
             gate.place_gate(f"{gate_nr}")
 
-        print(self.grid)
-
     def set_netlist(self, infile):
         """
         Takes standard-formatted netlist file as input
@@ -264,7 +262,6 @@ class Grid():
         
         return False
     
-    '''
     def get_output(self):
         """
         Hier zijn nog een aantal variabelen voor nodig, namelijk een lijst met nets, de chip en de netlist
@@ -274,8 +271,7 @@ class Grid():
             writer.writerow(["net", "wires"])
 
             for net in netlist:
-                routelist = self.plot_route(net[0], net[1])
+                routelist = self.show_route()
                 writer.writerow([net, f'"{routelist}"'])
             
-            writer.writerow([f"chip_{chip_id}_net_{net_id},{total_cost}"])
-    '''
+            # writer.writerow([f"chip_{chip_id}_net_{net_id},{total_cost}"])

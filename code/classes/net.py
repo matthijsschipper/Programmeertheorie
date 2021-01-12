@@ -27,7 +27,7 @@ class Net:
         if crossing == self.end:
             self.finished = True
 
-    def show_path(self):
+    def show_route(self):
         """
         Returns all crossing objects, in order, that have been added to the net
         """
