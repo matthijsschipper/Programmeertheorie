@@ -66,18 +66,20 @@ class Grid():
         Creates the 3d array that hold all crossings
         """
 
-        # create empty grid, size is given in (z, y, x)
-        ### also works with nested lists, nparray is just easier to see, and I'm exhausted, so that could be changed later
+        # save x, y, z values of the size of the grid
         x, y, z = self.size[0], self.size[1], self.size[2]
-        self.grid = np.ndarray(shape = (z, y, x), dtype = object)
 
-        # loop through grid to initialize it with crossingobjects, i for z, j for y and k for x
+        # Create 3D matrix with found size
+        for height in range(z):
+            height_list = []
+            self.grid.append(height_list)
 
-        # self.size[n] might be changed to z/y/x
-        for i in range(self.size[2]):
-            for j in range(self.size[1]):
-                for k in range(self.size[0]):
-                    self.grid[i, j, k] = Crossing(k, j, i, self.size)
+            for column in range(y):
+                column_list = []
+                height_list.append(column_list)
+
+                for row in range(x):
+                    column_list.append(Crossing(row, column, height))
         
         # mark gates
         for gate_nr in self.gate_coordinates:
