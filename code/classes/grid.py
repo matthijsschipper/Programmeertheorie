@@ -128,9 +128,7 @@ class Grid():
                 # create net object and save it to grid
                 self.netlist.append(Net(start_crossing, end_crossing))
 
-        ###
-        ### SHOULD PROBABLY BE CHANGED FOR ALGORTHMS
-        ###
+        # default setting, can be changed by algorithm
         self.current_net = self.netlist[0]
         self.current_crossing = self.current_net.get_start()
 
@@ -140,6 +138,31 @@ class Grid():
                 self.netlist_id = int(char)
             except:
                 pass
+
+    def available_nets(self):
+        """
+        Returns all net objects in the netlist that aren't marked as finished
+        """
+        unfinished_nets = []
+
+        # search through nets
+        for net in self.netlist:
+            if not net.is_finished():
+                unfinished_nets.append(net)
+
+        return unfinished_nets
+
+    def choose_net(self, net):
+        """
+        After calling which nets are available, pass the net you want to work on making
+        If net is an unfinished net, sets net to current net, set current crossing to latest crossing in net
+        """
+
+        if net in self.available_nets():
+            self.current_net = net
+            self.current_crossing = net.get_latest_crossing()
+            return True
+        return False
 
     def add_to_net(self, direction):
         """
@@ -222,6 +245,61 @@ class Grid():
         # if a non-valid direction is passed, return false
         return False
 
+    def delete_net(self, net, steps):
+        """
+        Takes a net object as input, and the number of steps you want to remove from the route
+        Deletes the asked amount of steps from the end of the route from the net objects and crossing objects
+        If amount of steps is bigger then the total steps in the route, or -1, deletes the entire route
+        """
+
+        if steps > net.get_length() or steps < 0:
+            steps = net.get_length() - 1
+        while steps > 0:
+            self.delete_last_crossing(net)
+            steps  -= 1
+
+    def delete_last_crossing(self, net):
+        """
+        Takes a net object as input
+        Removes the last added crossing from the route
+        Removes the blockades in the crossing objects
+        """
+
+        # retrieve relevant crossing objects
+        crossings = net.get_latest_crossings()
+        last_crossing, second_last_crossing = crossings[0], crossings[1]
+
+        # retrieves the direction between the crossing objects
+        last_crossing_coordinates = last_crossing.get_coordinates()
+        second_last_crossing_coordinates = second_last_crossing.get_coordinates()
+
+        x_difference = last_crossing[0] - second_last_crossing[0]
+        y_difference = last_crossing[1] - second_last_crossing[1]
+        z_difference = last_crossing[2] - second_last_crossing[2]
+
+        # removes the blockades on both crossings
+        if x_difference < 0:
+            last_crossing.remove_blockade('E')
+            second_last_crossing.remove_blockade('W')
+        elif x_difference > 0:
+            last_crossing.remove_blockade('W')
+            second_last_crossing('E')
+        elif y_difference < 0:
+            last_crossing.remove_blockade('S')
+            second_last_crossing.remove_blockade('N')
+        elif y_difference > 0:
+            last_crossing.remove_blockade('N')
+            second_last_crossing.remove_blockade('S')
+        elif z_difference < 0:
+            last_crossing.remove_blockade('U')
+            second_last_crossing.remove_blockade('D')
+        elif z_difference > 0:
+            last_crossing.remove_blockade('D')
+            second_last_crossing.remove_blockade('U')
+
+        # deletes the last crossing object in the net
+        net.delete_last_crossing()
+
     def get_directions(self):
         """
         Returns possible directions from current crossing as list
@@ -284,6 +362,7 @@ class Grid():
         """
         Can be called on the grid to write an outputfile
         TODO: De kosten moeten nog uitgerekend worden
+        TODO: add possibility to pass name of file?
         """
 
         with open("./data/example/our_output.csv", 'w') as file:
@@ -301,3 +380,45 @@ class Grid():
             # temporarily hardcoded for testing
             total_cost = 65
             output.writerow([f"chip_{self.chip_id}_net_{self.netlist_id},{total_cost}"])
+
+    # def direction_to_coordinates(self, direction):
+    #     """
+    #     Takes a direction as string as input
+    #     Returns the according new crossing object
+    #     """
+
+    #     # if direction is north, y coordinate goes down by one (may seem weird, has to do with indexing)
+    #     if direction == 'N':
+    #         new_y_coordinate = current_coordinates[1] - 1
+
+    #         new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
+
+    #     # if direction is east, x coordinate goes up by one
+    #     elif direction == 'E':
+    #         new_x_coordinate = current_coordinates[1] + 1
+
+    #         new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
+
+    #     # if direction is south, y coordinate goes up by one (may seem weird, has to do with indexing)
+    #     elif direction == 'S':
+    #         new_y_coordinate = current_coordinates[1] + 1
+
+    #         new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
+
+    #     # if direction is west, x coordinate goes down by one
+    #     elif direction == 'W':
+    #         new_x_coordinate = current_coordinates[1] - 1
+
+    #         new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
+
+    #     # if direction is up, z coordinate goes up by one
+    #     elif direction == 'U':
+    #         new_z_coordinate = current_coordinates[1] + 1
+
+    #         new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
+
+    #     # if direction is down, z coordinate goes down by one
+    #     elif direction == 'D':
+    #         new_z_coordinate = current_coordinates[1] - 1
+
+    #         new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
