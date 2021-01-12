@@ -7,7 +7,9 @@ class Crossing():
 
         self.name = None
         self.is_gate = False
-        self.location = (x_coordinate, y_coordinate, z_coordinate)
+        # Temporarily change self.location to list instead of tuple
+        self.location = [x_coordinate, y_coordinate, z_coordinate]
+        # self.location = (x_coordinate, y_coordinate, z_coordinate)
         self.directions = ['N', 'S', 'E', 'W', 'U', 'D']
         self.visited = False
         self.intersection = False
