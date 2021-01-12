@@ -27,6 +27,20 @@ class Net:
         if crossing == self.end:
             self.finished = True
 
+    def get_latest_crossings(self):
+        """
+        Returns the last two crossing objects in the routelist as a list, order: last, second-to-last
+        """
+
+        return [self.routelist[-1], self.routelist[-2]]
+    
+    def delete_last_crossing(self):
+        """
+        Deletes the last crossing from the route
+        """
+
+        self.routelist = del(self.routelist[-1])
+
     def show_route(self):
         """
         Returns all crossing objects, in order, that have been added to the net
@@ -83,9 +97,18 @@ class Net:
         return [x_distance, y_distance, z_distance]
 
     def is_finished(self):
-        """Returns true if path is finished, else false"""
+        """
+        Returns true if path is finished, else false
+        """
 
         return self.finished
+
+    def get_length(self):
+        """
+        Returns an int of the length of the route so far
+        """
+
+        return len(self.routelist)
 
     # def add_step(self):
     #     """

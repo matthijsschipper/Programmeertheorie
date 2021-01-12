@@ -59,13 +59,22 @@ class Crossing():
         """
         Takes a letter that represents a direction (N,S,E,W,U or D)
         Removes that letter from the list of directions
-        Returns false if location was out of reach, else true
+        Returns false if location wasn't an option anyway
         """
 
         if direction in self.directions:
             self.directions.remove(direction)
             return True
         return False
+
+    def remove_blockade(self, direction):
+        """
+        Takes a letter that represents a direction (N,S,E,W,U or D)
+        Adds that latter back to the list
+        """
+
+        if direction no in self.directions:
+            self.directions.append(direction)
 
     def set_visited(self):
         """
