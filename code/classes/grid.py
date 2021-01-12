@@ -266,14 +266,15 @@ class Grid():
         """
         TODO: Hier zijn nog een aantal variabelen voor nodig, namelijk de chip en de kosten moeten uitgerekend worden
         """
-        
-        with open("./data/example/output.csv", 'w') as file:
+
+        with open("./data/example/our_output.csv", 'w') as file:
             output = writer(file)
             output.writerow(["net", "wires"])
 
             for net in self.netlist:
-                net = tuple(int(net[0]), int(net[1]))
+                start_gate, end_gate = net.get_start().get_name(), net.get_end().get_name()
+                route = tuple([int(start_gate), int(end_gate)])
                 routelist = net.show_route_coordinates()
-                output.writerow([net, f'"{routelist}"'])
+                output.writerow([route, f"{routelist}"])
             
             # writer.writerow([f"chip_{chip_id}_net_{net_id},{total_cost}"])
