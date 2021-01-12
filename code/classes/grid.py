@@ -258,6 +258,9 @@ class Grid():
             self.delete_last_crossing(net)
             steps  -= 1
 
+        # when a crossing is removed, the net can never be finished anymore
+        net.mark_unfinished()
+
     def delete_last_crossing(self, net):
         """
         Takes a net object as input
