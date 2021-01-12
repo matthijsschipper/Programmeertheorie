@@ -234,8 +234,6 @@ class Grid():
                 index = self.netlist.index(self.current_net)
                 if index < len(self.netlist):
                     self.current_net = self.netlist[index + 1]
-                elif index == len(self.netlist):
-                    self.current_net == self.netlist[index]
                 
                 # if all connections are made, set current net and current crossing to None
                 else:
