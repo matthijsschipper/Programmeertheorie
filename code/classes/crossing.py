@@ -73,7 +73,7 @@ class Crossing():
         Adds that latter back to the list
         """
 
-        if direction no in self.directions:
+        if direction not in self.directions:
             self.directions.append(direction)
 
     def set_visited(self):

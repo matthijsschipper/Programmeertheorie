@@ -8,11 +8,11 @@ class Random():
         self.current_location = None
         self.current_crossing = None
         self.directions = None
-        self.steps = 0
         self.random_routes(self.netlist)
     
     def random_routes(self, netlist):
         for connection in netlist:
+            self.steps = 0
             start_gate, end_gate = connection.start, connection.end
             self.current_location = start_gate.location
             self.end_location = end_gate.location
@@ -45,6 +45,7 @@ class Random():
                 # Count steps
                 self.steps += 1
 
+                # Continue kan eruit
                 if random_direction == 'N':
                     self.current_location[1] -= 1
                     continue

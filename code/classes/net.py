@@ -39,7 +39,7 @@ class Net:
         Deletes the last crossing from the route
         """
 
-        self.routelist = del(self.routelist[-1])
+        # self.routelist = del(self.routelist[-1])
 
     def show_route(self):
         """
