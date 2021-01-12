@@ -160,7 +160,7 @@ class Grid():
 
         if net in self.available_nets():
             self.current_net = net
-            self.current_crossing = net.get_latest_crossings()
+            self.current_crossing = net.get_latest_crossing()
             return True
         return False
 
