@@ -5,13 +5,13 @@ class Random():
     def  __init__(self, grid):
         self.grid = copy.deepcopy(grid)
         self.netlist = self.grid.netlist
-        self.current_location = None
-        self.current_crossing = None
+        # self.current_location = None
+        # self.current_crossing = None
         self.directions = None
         self.random_routes(self.netlist)
     
     def random_routes(self, netlist):
-        for connection in netlist:
+        for net in netlist:
             self.steps = 0
             start_gate, end_gate = connection.start, connection.end
             self.current_location = start_gate.location
