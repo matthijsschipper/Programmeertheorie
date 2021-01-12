@@ -234,6 +234,8 @@ class Grid():
                 index = self.netlist.index(self.current_net)
                 if index < len(self.netlist):
                     self.current_net = self.netlist[index + 1]
+                elif index == len(self.netlist):
+                    self.current_net == self.netlist[index]
                 
                 # if all connections are made, set current net and current crossing to None
                 else:
@@ -286,7 +288,7 @@ class Grid():
             second_last_crossing.remove_blockade('W')
         elif x_difference > 0:
             last_crossing.remove_blockade('W')
-            second_last_crossing('E')
+            second_last_crossing.remove_blockade('E')
         elif y_difference < 0:
             last_crossing.remove_blockade('S')
             second_last_crossing.remove_blockade('N')
