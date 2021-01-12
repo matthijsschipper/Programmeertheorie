@@ -188,7 +188,7 @@ class Grid():
 
             # if direction if east, x coordinate goes up by one
             elif direction == 'E':
-                new_x_coordinate = current_coordinates[1] + 1
+                new_x_coordinate = current_coordinates[0] + 1
 
                 new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
                 new_crossing.add_blockade('W')
@@ -202,21 +202,21 @@ class Grid():
                 
             # if direction if west, x coordinate goes down by one
             elif direction == 'W':
-                new_x_coordinate = current_coordinates[1] - 1
+                new_x_coordinate = current_coordinates[0] - 1
 
                 new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
                 new_crossing.add_blockade('E')
                 
             # if direction is up, z coordinate goes up by one
             elif direction == 'U':
-                new_z_coordinate = current_coordinates[1] + 1
+                new_z_coordinate = current_coordinates[2] + 1
 
                 new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
                 new_crossing.add_blockade('D')
                 
             # if direction is down, z coordinate goes down by one
             elif direction == 'D':
-                new_z_coordinate = current_coordinates[1] - 1
+                new_z_coordinate = current_coordinates[2] - 1
 
                 new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
                 new_crossing.add_blockade('U')
