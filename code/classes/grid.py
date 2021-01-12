@@ -266,6 +266,7 @@ class Grid():
         """
         TODO: Hier zijn nog een aantal variabelen voor nodig, namelijk de chip en de kosten moeten uitgerekend worden
         """
+        
         with open("./data/example/output.csv", 'w') as file:
             output = writer(file)
             output.writerow(["net", "wires"])
