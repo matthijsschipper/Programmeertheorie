@@ -27,6 +27,13 @@ class Net:
         if crossing == self.end:
             self.finished = True
 
+    def get_latest_crossing(self):
+        """
+        Returns the last crossing object in the routelist
+        """
+
+        return self.routelist[-1]
+
     def get_latest_crossings(self):
         """
         Returns the last two crossing objects in the routelist as a list, order: last, second-to-last
@@ -39,7 +46,7 @@ class Net:
         Deletes the last crossing from the route
         """
 
-        self.routelist = del(self.routelist[-1])
+        self.routelist.pop()
 
     def show_route(self):
         """
