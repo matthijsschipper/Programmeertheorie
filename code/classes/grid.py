@@ -226,19 +226,10 @@ class Grid():
 
             # react accordingly if crossing is the end of the net
             if self.current_net.is_finished():
-                
-                # get to next net object
-                ###
-                ### SHOULD PROBABLY BE CHANGED FOR DIFFERENT ALGORITHMS
-                ###
-                index = self.netlist.index(self.current_net)
-                if index < len(self.netlist):
-                    self.current_net = self.netlist[index + 1]
-                
-                # if all connections are made, set current net and current crossing to None
-                else:
-                    self.current_net = None
-                    self.current_crossing = None
+
+                # resent current net and crossing till user picks a new net with choose_net()
+                self.current_net = None
+                self.current_crossing = None
 
             return True
 
