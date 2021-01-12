@@ -15,6 +15,9 @@ class Grid():
         self.netlist = []
         self.amount_of_intersections = 0
 
+        self.chip_id = None
+        self.netlist_id = None
+
         self.current_crossing = None
         self.current_net = None
 
@@ -59,6 +62,13 @@ class Grid():
 
         # +2, because there is supposed to be a row and column clean of gates around the chip
         self.size = [x_max + 2, y_max + 2, 2]
+
+        # save the number of the chip you're working with
+        for char in infile:
+            try:
+                self.chip_id = int(char)
+            except:
+                pass
 
     def make_grid(self):
         """
@@ -117,11 +127,19 @@ class Grid():
 
                 # create net object and save it to grid
                 self.netlist.append(Net(start_crossing, end_crossing))
+
         ###
         ### SHOULD PROBABLY BE CHANGED FOR ALGORTHMS
         ###
         self.current_net = self.netlist[0]
         self.current_crossing = self.current_net.get_start()
+
+        # save netlist id
+        for char in infile:
+            try:
+                self.netlist_id = int(char)
+            except:
+                pass
 
     def add_to_net(self, direction):
         """
@@ -264,7 +282,8 @@ class Grid():
     
     def get_output(self):
         """
-        TODO: Hier zijn nog een aantal variabelen voor nodig, namelijk de chip en de kosten moeten uitgerekend worden
+        Can be called on the grid to write an outputfile
+        TODO: De kosten moeten nog uitgerekend worden
         """
 
         with open("./data/example/our_output.csv", 'w') as file:
@@ -273,8 +292,12 @@ class Grid():
 
             for net in self.netlist:
                 start_gate, end_gate = net.get_start().get_name(), net.get_end().get_name()
-                route = tuple([int(start_gate), int(end_gate)])
+                route = tuple([int(start_gate),int(end_gate)])
+                route_string = str(route).replace(" ", "")
                 routelist = net.show_route_coordinates()
-                output.writerow([route, f"{routelist}"])
+                routelist_string = str(routelist).replace(" ", "")
+                output.writerow([route_string, f"{routelist_string}"])
             
-            # writer.writerow([f"chip_{chip_id}_net_{net_id},{total_cost}"])
+            # temporarily hardcoded for testing
+            total_cost = 65
+            output.writerow([f"chip_{self.chip_id}_net_{self.netlist_id},{total_cost}"])

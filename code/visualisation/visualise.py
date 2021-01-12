@@ -33,7 +33,7 @@ def visualise(infile):
                 if str(row[0][1]) not in gates:
                     gates[row[0][1]] = (int(row[1][2]), int(row[1][4]), 0)
                 if str(row[0][3]) not in gates:
-                    gates[row[0][3]] = (int(row[1][-7]), int(row[1][-5]), 0)
+                    gates[row[0][3]] = (int(row[1][-5]), int(row[1][-3]), 0)
 
                 # save path as list of x, y and z coordinates
                 x_coordinates, y_coordinates, z_coordinates = [], [], []

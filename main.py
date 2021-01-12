@@ -6,5 +6,8 @@ if __name__ == "__main__":
     
     # create grid object
     grid = grid.Grid("./data/example/print_0.csv", "./data/example/netlist_1.csv")
+    grid.get_output()
 
-    random = random.Random(grid)
+    # random = random.Random(grid)
+
+    # vis.visualise("./data/example/our_output.csv")
