@@ -12,4 +12,4 @@
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
 | Birgit | 10:00 | 13:00 | Worked with Matthijs to adjust the datastructure to the algorithm. |
-| Birgit | 14:00 |  | Continuing fixing bugs in the datastructure. |
+| Birgit | 14:00 | 17:15 | Continuing fixing bugs in the datastructure. |
