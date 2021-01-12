@@ -103,6 +103,13 @@ class Net:
 
         return self.finished
 
+    def mark_unfinished(self):
+        """
+        Marks net unfinished
+        """
+
+        self.finished = False
+
     def get_length(self):
         """
         Returns an int of the length of the route so far
