@@ -276,9 +276,9 @@ class Grid():
         last_crossing_coordinates = last_crossing.get_coordinates()
         second_last_crossing_coordinates = second_last_crossing.get_coordinates()
 
-        x_difference = last_crossing[0] - second_last_crossing[0]
-        y_difference = last_crossing[1] - second_last_crossing[1]
-        z_difference = last_crossing[2] - second_last_crossing[2]
+        x_difference = last_crossing_coordinates[0] - second_last_crossing_coordinates[0]
+        y_difference = last_crossing_coordinates[1] - second_last_crossing_coordinates[1]
+        z_difference = last_crossing_coordinates[2] - second_last_crossing_coordinates[2]
 
         # removes the blockades on both crossings
         if x_difference < 0:
