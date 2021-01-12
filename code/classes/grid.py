@@ -78,15 +78,17 @@ class Grid():
                 height_list.append(column_list)
 
                 for row in range(x):
-                    column_list.append(Crossing(row, column, height))
+                    column_list.append(Crossing(row, column, height, self.size))
         
         # mark gates
         for gate_nr in self.gate_coordinates:
             x_coordinate, y_coordinate, z_coordinate = self.gate_coordinates[gate_nr][0], self.gate_coordinates[gate_nr][1], self.gate_coordinates[gate_nr][2]
 
-            # reverse order of coordinates for numpy array
+            # reverse order of coordinates for indexing grid
             gate = self.grid[z_coordinate][y_coordinate][x_coordinate]
             gate.place_gate(f"{gate_nr}")
+
+        print(self.grid)
 
     def set_netlist(self, infile):
         """
