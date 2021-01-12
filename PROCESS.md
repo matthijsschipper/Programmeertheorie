@@ -13,3 +13,5 @@
 | --- | --- | --- | --- |
 | Birgit | 10:00 | 13:00 | Worked with Matthijs to adjust the datastructure to the algorithm. |
 | Birgit | 14:00 | 17:15 | Continuing fixing bugs in the datastructure. |
+| Matthijs | 06:15 | 11:00 | Developed a random algorithm and worked together with Birgit on finetuning this algorithm and adjusting it to the datastructure |
+| Matthijs | 14:00 | 16:30 | Worked with Birgit on fixing bugs in the datastructure and the random algorithm |
