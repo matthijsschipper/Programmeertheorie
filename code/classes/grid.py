@@ -361,6 +361,13 @@ class Grid():
         
         return False
     
+    def net_is_finished(self):
+        """
+        Returns false if the current net isn't finished, else true
+        """
+
+        return self.current_net.is_finished()
+
     def get_output(self):
         """
         Can be called on the grid to write an outputfile
@@ -383,45 +390,3 @@ class Grid():
             # temporarily hardcoded for testing
             total_cost = 65
             output.writerow([f"chip_{self.chip_id}_net_{self.netlist_id},{total_cost}"])
-
-    # def direction_to_coordinates(self, direction):
-    #     """
-    #     Takes a direction as string as input
-    #     Returns the according new crossing object
-    #     """
-
-    #     # if direction is north, y coordinate goes down by one (may seem weird, has to do with indexing)
-    #     if direction == 'N':
-    #         new_y_coordinate = current_coordinates[1] - 1
-
-    #         new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
-
-    #     # if direction is east, x coordinate goes up by one
-    #     elif direction == 'E':
-    #         new_x_coordinate = current_coordinates[1] + 1
-
-    #         new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
-
-    #     # if direction is south, y coordinate goes up by one (may seem weird, has to do with indexing)
-    #     elif direction == 'S':
-    #         new_y_coordinate = current_coordinates[1] + 1
-
-    #         new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
-
-    #     # if direction is west, x coordinate goes down by one
-    #     elif direction == 'W':
-    #         new_x_coordinate = current_coordinates[1] - 1
-
-    #         new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
-
-    #     # if direction is up, z coordinate goes up by one
-    #     elif direction == 'U':
-    #         new_z_coordinate = current_coordinates[1] + 1
-
-    #         new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
-
-    #     # if direction is down, z coordinate goes down by one
-    #     elif direction == 'D':
-    #         new_z_coordinate = current_coordinates[1] - 1
-
-    #         new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
