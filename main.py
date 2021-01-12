@@ -1,6 +1,6 @@
 from code.classes import grid, crossing, net
-from code.algorithms import random
 from code.visualisation import visualise as vis
+from code.algorithms import greedy as gr, random
 
 if __name__ == "__main__":
     
@@ -10,6 +10,5 @@ if __name__ == "__main__":
     grid.choose_net(nets[3])
     print(grid.current_net)
 
-    # random = random.Random(grid)
-
-    # vis.visualise("./data/example/our_output.csv")
+    # Testing random algorithm
+    r = random.Random(grid)
