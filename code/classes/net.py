@@ -36,12 +36,13 @@ class Net:
 
     def show_route_coordinates(self):
         """"
-        TODO
+        Returns the coordinates of all the loactions in the net as a list of tuples
         """
 
         coordinate_list= []
         for crossing in self.routelist:
-            coordinate_list.append(crossing.get_coordinates())
+            coordinates = crossing.get_coordinates()
+            coordinate_list.append(tuple(coordinates))
         return coordinate_list
             
 

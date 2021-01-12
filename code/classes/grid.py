@@ -264,13 +264,14 @@ class Grid():
     
     def get_output(self):
         """
-        Hier zijn nog een aantal variabelen voor nodig, namelijk een lijst met nets, de chip en de netlist
+        TODO: Hier zijn nog een aantal variabelen voor nodig, namelijk de chip en de kosten moeten uitgerekend worden
         """
-        with open(".output.csv", 'w') as file:
+        with open("./data/example/output.csv", 'w') as file:
             output = writer(file)
             output.writerow(["net", "wires"])
 
             for net in self.netlist:
+                net = tuple(int(net[0]), int(net[1]))
                 routelist = net.show_route_coordinates()
                 output.writerow([net, f'"{routelist}"'])
             
