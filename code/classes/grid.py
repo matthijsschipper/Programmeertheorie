@@ -266,12 +266,12 @@ class Grid():
         """
         Hier zijn nog een aantal variabelen voor nodig, namelijk een lijst met nets, de chip en de netlist
         """
-        with open('output.csv', 'w') as file:
-            writer = csv.writer(file)
+        with open("./data/exmaple/output.csv", 'w') as file:
+            writer = writer(file)
             writer.writerow(["net", "wires"])
 
-            for net in netlist:
-                routelist = self.show_route()
+            for net in self.netlist:
+                routelist = self.show_route_coordinates()
                 writer.writerow([net, f'"{routelist}"'])
             
             # writer.writerow([f"chip_{chip_id}_net_{net_id},{total_cost}"])

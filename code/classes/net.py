@@ -34,6 +34,17 @@ class Net:
 
         return self.routelist
 
+    def show_route_coordinates(self):
+        """"
+        TODO
+        """
+
+        coordinate_list= []
+        for crossing in self.routelist:
+            coordinate_list.append(crossing.get_coordinates())
+        return coordinate_list
+            
+
     def get_end(self):
         """
         Returns the crossing object of the end of the net
