@@ -1,7 +1,6 @@
 from .crossing import Crossing
 from .net import Net
 from csv import reader, writer
-import numpy as np
 
 class Grid():
     def __init__(self, printfile, netlistfile):
