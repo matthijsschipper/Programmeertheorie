@@ -72,6 +72,8 @@ class Grid():
         self.grid = np.ndarray(shape = (z, y, x), dtype = object)
 
         # loop through grid to initialize it with crossingobjects, i for z, j for y and k for x
+
+        # self.size[n] might be changed to z/y/x
         for i in range(self.size[2]):
             for j in range(self.size[1]):
                 for k in range(self.size[0]):
