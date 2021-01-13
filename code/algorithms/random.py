@@ -77,8 +77,7 @@ class Random():
               
         self.calculate_costs()
         return True
-
-    
+ 
     def calculate_costs(self):
         """
         Costs are calculated by multiplying the total length of wires with 300 * the amount of intersections.
