@@ -22,45 +22,48 @@ class Random():
         """
         Iterate over every Net object and start plotting a route from the start Crossing object.
         """
-        for net in netlist:
-            self.grid.choose_net(net)
+        while self.netlist != []:
+            for net in self.netlist:
+                self.grid.choose_net(net)
 
-            self.steps = 0
-            self.start_gate = net.start
-            self.end_gate = net.end
-            self.dead_end = False
+                self.steps = 0
+                self.start_gate = net.start
+                self.end_gate = net.end
+                self.dead_end = False
 
-            """
-            Wat er fout ging: self.grid.net_is_finished() aangeroepen -> roept current_net.is_finished() aan
-            -> returned boolean -> loop luistert niet als boolean is -> response te sloom?
-            """
-            # Net finished variables return True if crossing added to routelist is the destination
-            while not net.finished:
+                """
+                Wat er fout ging: self.grid.net_is_finished() aangeroepen -> roept current_net.is_finished() aan
+                -> returned boolean -> loop luistert niet als boolean is -> response te sloom?
+                """
+                # Net finished variables return True if crossing added to routelist is the destination
+                while not net.finished:
 
-                # Empty directions list means a dead end
-                if self.grid.get_directions() == []:
-                    print(f'Dead end from {self.start_gate} to {self.end_gate} ({self.steps} steps taken)')
-                    self.dead_end = True
-                    
-                    # Delete dead end nets
-                    self.grid.delete_net(net, -1)
-                    break
+                    # Empty directions list means a dead end
+                    if self.grid.get_directions() == []:
+                        print(f'Dead end from {self.start_gate} to {self.end_gate} ({self.steps} steps taken)')
+                        self.dead_end = True
 
-                # Choose random direction ('N', 'E', 'S', 'W', 'U', 'D')
-                self.directions = self.grid.get_directions()
-                random_direction = random.choice(self.directions)
+                        # Delete dead end nets
+                        self.grid.delete_net(net, -1)
+                        break
 
-                # Call add_to_net function
-                self.grid.add_to_net(random_direction)
+                    # Choose random direction ('N', 'E', 'S', 'W', 'U', 'D')
+                    self.directions = self.grid.get_directions()
+                    random_direction = random.choice(self.directions)
 
-                # Count steps
-                self.steps += 1
+                    # Call add_to_net function
+                    self.grid.add_to_net(random_direction)
 
-            # Print statement is not applicable to routes with a dead end
-            if self.dead_end:
-                continue
+                    # Count steps
+                    self.steps += 1
 
-            print(f'Amount of steps to get from {self.start_gate} to {self.end_gate} with random assigning directions is: {self.steps}.')
+                self.netlist = self.grid.available_nets()
+
+                # Print statement is not applicable to routes with a dead end
+                if self.dead_end:
+                    continue
+
+                print(f'Amount of steps to get from {self.start_gate} to {self.end_gate} with random assigning directions is: {self.steps}.')
         
         self.check_netlist_implementation()
         
