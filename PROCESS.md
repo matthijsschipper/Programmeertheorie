@@ -23,3 +23,4 @@
 | --- | --- | --- | --- |
 | Matthijs | 07:00 | 15:00 | First I dived into the new datastructure and tried to get a grasp of how it works in detail, together with the random algorithm. I then found out that the algorithm was not working properly and debugged it for a few hours. In the two hours before the lecture, I worked on the baseline document together with Birgit. |
 | Birgit | 13:00 | 15:00 | Added a feature to the visualisation, worked in the baseline document. |
+| Birgit | 20:00 |  | Searching for bugs, fixed intersection count for removing routes, updated notes on the database. Changed random algoritm so if it fails to lay down a net, it removes it and tries again later. Removed methods from database we didn't use. |
