@@ -169,7 +169,8 @@ class Grid():
         """
 
         if self.current_crossing.add_blockade(direction):
-            if not self.current_crossing.set_visited():
+            intersection = self.current_crossing.set_visited()
+            if intersection == False:
                 self.amount_of_intersections += 1
 
             # retrieve new crossing object at right location

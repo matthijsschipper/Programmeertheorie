@@ -85,10 +85,10 @@ class Crossing():
         Returns true if no intersection is created, else returns false (gates don't count as intersection)
         """
 
-        if self.visited > 0 and not self.is_gate:
+        self.visited += 1
+        if self.visited > 1 and not self.is_gate and self.intersection == False:
             self.intersection = True
             return False
-        self.visited += 1
         return True
 
     def get_coordinates(self):

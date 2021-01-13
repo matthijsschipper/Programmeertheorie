@@ -96,7 +96,6 @@ class Random():
         
         total_costs = total_wires_length
         total_costs += (self.grid.amount_of_intersections * 300)
-        print("intersections is", self.grid.amount_of_intersections)
 
         self.grid.get_output(total_costs)
 
