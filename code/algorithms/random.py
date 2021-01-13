@@ -92,4 +92,4 @@ class Random():
 
         print(f'Total amount of costs for this ciruit: {self.total_costs}.')
 
-        return True
+        return self.total_costs
