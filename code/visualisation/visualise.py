@@ -1,39 +1,50 @@
-import csv
+from csv import reader
 import numpy as np
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-def visualise(infile):
+def visualise(printfile, outputfile):
     """
     Takes in the standard-formatted output.csv file
     Outputs a visual representation of that file in the form of a graph
     Saves that file in the data/visualisations/ folder
     """
 
-    with open(infile) as file:
+    with open(printfile) as file:
 
         # read through file
-        reader = csv.reader(file)
+        file_reader = reader(file)
 
         # skip the header
-        next(reader, None)
+        next(file_reader, None)
+
+        # save coordinates and numbers of gates into dictionary
+        data = [line.rstrip() for line in file]
+        gates = {}
+        for element in data:
+            coordinates = element[2:].split(",")
+            x, y = int(coordinates[0]), int(coordinates[1])
+
+            # save gate coordinates to dictionary
+            gates[element[0]] = [x, y, 0]
+
+    with open(outputfile) as file:
+
+        # read through file
+        file_reader = reader(file)
+
+        # skip the header
+        next(file_reader, None)
         
         # save information in variables
         net_coordinates = []
-        gates = {}
-        for row in reader:
+        for row in file_reader:
 
             # seperate footer row
             if row[0][0:4] == 'chip':
                 gen_info = row[0][0:12]
             
             else:
-
-                # save all gate locations
-                if str(row[0][1]) not in gates:
-                    gates[row[0][1]] = (int(row[1][2]), int(row[1][4]), 0)
-                if str(row[0][3]) not in gates:
-                    gates[row[0][3]] = (int(row[1][-5]), int(row[1][-3]), 0)
 
                 # save path as list of x, y and z coordinates
                 x_coordinates, y_coordinates, z_coordinates = [], [], []

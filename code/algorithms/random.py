@@ -55,7 +55,7 @@ class Random():
 
                 # Count steps
                 self.steps += 1
-                
+
             # Print statement is not applicable to routes with a dead end
             if self.dead_end:
                 continue
