@@ -267,6 +267,7 @@ class Grid():
         # retrieve relevant crossing objects
         crossings = net.get_latest_crossings()
         last_crossing, second_last_crossing = crossings[0], crossings[1]
+        print(f"Crossings to be deleted {last_crossing.get_coordinates()}{second_last_crossing.get_coordinates()}")
 
         # retrieves the direction between the crossing objects
         last_crossing_coordinates = last_crossing.get_coordinates()
