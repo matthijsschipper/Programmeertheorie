@@ -22,4 +22,4 @@ if __name__ == "__main__":
     #                 if location[0] != 0 and location[0] != 7 and location[1] != 0 and location[1] != 6:
     #                     print(location, amount_of_directions)
 
-    # vis.visualise("./data/example/our_output.csv")
+    vis.visualise("./data/example/our_output.csv", "./data/example/print_0.csv")

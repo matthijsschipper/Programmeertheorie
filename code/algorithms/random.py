@@ -39,7 +39,7 @@ class Random():
 
                 # Empty directions list means a dead end
                 if self.grid.get_directions() == []:
-                    print(f'Dead end from {start_gate} to {end_gate} ({self.steps} steps taken)')
+                    print(f'Dead end from {self.start_gate} to {self.end_gate} ({self.steps} steps taken)')
                     self.dead_end = True
                     
                     # Delete dead end nets
@@ -55,12 +55,12 @@ class Random():
 
                 # Count steps
                 self.steps += 1
-                
+
             # Print statement is not applicable to routes with a dead end
             if self.dead_end:
                 continue
 
-            print(f'Amount of steps to get from {start_gate} to {end_gate} with random assigning directions is: {self.steps}.')
+            print(f'Amount of steps to get from {self.start_gate} to {self.end_gate} with random assigning directions is: {self.steps}.')
         
         self.check_netlist_implementation()
         
