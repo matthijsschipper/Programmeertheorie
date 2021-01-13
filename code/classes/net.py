@@ -48,13 +48,6 @@ class Net:
 
         self.routelist.pop()
 
-    def show_route(self):
-        """
-        Returns all crossing objects, in order, that have been added to the net
-        """
-
-        return self.routelist
-
     def show_route_coordinates(self):
         """"
         Returns the coordinates of all the loactions in the net as a list of tuples
@@ -65,22 +58,7 @@ class Net:
             coordinates = crossing.get_coordinates()
             coordinate_list.append(tuple(coordinates))
         return coordinate_list
-            
-
-    def get_end(self):
-        """
-        Returns the crossing object of the end of the net
-        """
-
-        return self.end
-
-    def get_start(self):
-        """
-        Returns the crossing object at the start of the net
-        """
-
-        return self.start
-    
+             
     def get_route_to_end(self):
         """
         Returns the amount of steps still needed in a certain direction as a list, order: x, y, z
@@ -102,13 +80,6 @@ class Net:
         z_distance = destination[2] - current_location[2]
 
         return [x_distance, y_distance, z_distance]
-
-    def is_finished(self):
-        """
-        Returns true if path is finished, else false
-        """
-
-        return self.finished
 
     def mark_unfinished(self):
         """

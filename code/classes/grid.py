@@ -127,7 +127,7 @@ class Grid():
 
         # default setting, can be changed by algorithm
         self.current_net = self.netlist[0]
-        self.current_crossing = self.current_net.get_start()
+        self.current_crossing = self.current_net.start
 
         # save netlist id
         for char in infile:
@@ -144,7 +144,7 @@ class Grid():
 
         # search through nets
         for net in self.netlist:
-            if not net.is_finished():
+            if not net.finished:
                 unfinished_nets.append(net)
 
         return unfinished_nets
@@ -221,13 +221,13 @@ class Grid():
             self.current_crossing = new_crossing
 
             # react accordingly if crossing is the end of the net
-            if self.current_net.is_finished():
+            if self.current_net.finished:
 
                 # go to next unfinished net per default
                 possible_nets = self.available_nets()
                 if possible_nets != []:
                     self.current_net = possible_nets[0]
-                    self.current_crossing = self.current_net.get_start()
+                    self.current_crossing = self.current_net.start
                 else:
                     self.current_net = None
                     self.current_crossing = None
@@ -346,33 +346,10 @@ class Grid():
 
         return directions
 
-    def netlist_filled(self):
-        """
-        Returns true of all requested connections have been made, else false
-        """
-
-        # current_crossing is only set to None if all nets are marked finished
-        if self.current_crossing == None:
-
-            checklist = []
-            # double check
-            for net in self.netlist:
-                if not net.is_finished():
-                    return False
-            return True
-        return False
-    
-    def net_is_finished(self):
-        """
-        Returns false if the current net isn't finished, else true
-        """
-
-        return self.current_net.is_finished()
-
     def get_output(self, total_costs):
         """
+        Takes the total_costs of the chip as int as input
         Can be called on the grid to write an outputfile
-        TODO: add possibility to pass name of file?
         """
 
         with open("./data/example/our_output.csv", 'w') as file:
@@ -380,7 +357,7 @@ class Grid():
             output.writerow(["net", "wires"])
 
             for net in self.netlist:
-                start_gate, end_gate = net.get_start().get_name(), net.get_end().get_name()
+                start_gate, end_gate = net.start.get_name(), net.end.get_name()
                 route = tuple([int(start_gate),int(end_gate)])
                 route_string = str(route).replace(" ", "")
                 routelist = net.show_route_coordinates()
