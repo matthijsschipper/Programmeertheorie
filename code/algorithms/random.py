@@ -6,6 +6,8 @@ class Random():
         self.grid = copy.deepcopy(grid)
         self.netlist = self.grid.available_nets()
         self.directions = None
+        self.total_wires_length = 0
+        self.total_costs = 0
         self.random_routes(self.netlist)
     
     def random_routes(self, netlist):
@@ -46,4 +48,16 @@ class Random():
 
             print(f'Amount of steps to get from {start_gate} to {end_gate} with random assigning directions is: {self.steps}.')
         
-        self.grid.get_output()
+        self.calculate_costs()
+    
+    def calculate_costs(self):
+
+        for net in self.grid.netlist:
+            self.total_wires_length += (net.get_length() - 1)
+        
+        self.total_costs += self.total_wires_length
+        self.total_costs += (self.grid.amount_of_intersections * 300)
+
+        self.grid.get_output(self.total_costs)
+
+        return True
