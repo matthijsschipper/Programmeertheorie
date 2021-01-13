@@ -365,10 +365,9 @@ class Grid():
 
         return self.current_net.is_finished()
 
-    def get_output(self):
+    def get_output(self, total_costs):
         """
         Can be called on the grid to write an outputfile
-        TODO: De kosten moeten nog uitgerekend worden
         TODO: add possibility to pass name of file?
         """
 
@@ -384,6 +383,4 @@ class Grid():
                 routelist_string = str(routelist).replace(" ", "")
                 output.writerow([route_string, f"{routelist_string}"])
             
-            # temporarily hardcoded for testing
-            total_cost = 65
-            output.writerow([f"chip_{self.chip_id}_net_{self.netlist_id},{total_cost}"])
+            output.writerow([f"chip_{self.chip_id}_net_{self.netlist_id},{total_costs}"])
