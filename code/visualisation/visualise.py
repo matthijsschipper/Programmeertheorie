@@ -41,6 +41,8 @@ def visualise(printfile, outputfile):
         gates = {}
         for row in file_reader:
 
+            print(row)
+
             # seperate footer row
             if row[0][0:4] == 'chip':
                 gen_info = row[0][0:12]
@@ -50,6 +52,7 @@ def visualise(printfile, outputfile):
                 # save path as list of x, y and z coordinates
                 x_coordinates, y_coordinates, z_coordinates = [], [], []
                 path = row[1].strip("[]()").split("),(")
+                # print(path)
 
                 for element in path:
                     x_coordinates.append(int(element[0]))

@@ -5,10 +5,10 @@ from code.algorithms import random
 if __name__ == "__main__":
     
     # create grid object
-    grid = grid.Grid("./data/example/print_0.csv", "./data/example/netlist_1.csv")
+#    grid = grid.Grid("./data/example/print_0.csv", "./data/example/netlist_1.csv")
 
     # Testing random algorithm
-    r = random.Random(grid)
+#    r = random.Random(grid)
 
     # testing deleting routes
     # for height in r.grid.grid:
@@ -22,4 +22,4 @@ if __name__ == "__main__":
     #                 if location[0] != 0 and location[0] != 7 and location[1] != 0 and location[1] != 6:
     #                     print(location, amount_of_directions)
 
-    vis.visualise("./data/example/our_output.csv", "./data/example/print_0.csv")
+    vis.visualise("./data/example/output.csv", "./data/example/print_0.csv")
