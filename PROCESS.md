@@ -17,3 +17,8 @@
 | Matthijs | 06:15 | 11:00 | Developed a random algorithm and worked together with Birgit on finetuning this algorithm and adjusting it to the datastructure |
 | Matthijs | 14:00 | 16:30 | Worked with Birgit on fixing bugs in the datastructure and the random algorithm |
 | Jade | 11:00 | 15:00 | Suggested improvements to the new datastructure and started working on new algorithm.
+
+## 13-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
+| Matthijs | 07:00 | 15:00 | First I dived into the new datastructure and tried to get a grasp of how it works in detail, together with the random algorithm. I then found out that the algorithm was not working properly and debugged it for a few hours. In the two hours before the lecture, I worked on the baseline document together with Birgit.
