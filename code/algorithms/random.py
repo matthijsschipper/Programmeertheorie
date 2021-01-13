@@ -10,7 +10,6 @@ class Random():
     
     def random_routes(self, netlist):
         for net in netlist:
-
             self.grid.choose_net(net)
 
             self.steps = 0
@@ -20,12 +19,17 @@ class Random():
             self.dead_end = False
 
             # Randomly walk over grid until current Crossing object is end_gate
-            while not self.grid.net_is_finished():
-                
+
+            """
+            Wat er fout ging: self.grid.net_is_finished() aangeroepen -> roept current_net.is_finished() aan
+            -> returned boolean -> loop luistert niet als boolean is -> response te sloom?
+            """
+            while not net.finished:
+
                 if self.grid.get_directions() == []:
-                    print(f'Dead end')
+                    print(f'Dead end from {start_gate} to {end_gate} ({self.steps} steps taken)')
                     self.dead_end = True
-                    self.grid.delete_net(net, -1)
+                    # self.grid.delete_net(net, -1)
                     break
 
                 self.directions = self.grid.get_directions()
@@ -43,6 +47,3 @@ class Random():
             print(f'Amount of steps to get from {start_gate} to {end_gate} with random assigning directions is: {self.steps}.')
         
         self.grid.get_output()
-    
-    def __str__(self):
-        return f'{self.netlist}'
