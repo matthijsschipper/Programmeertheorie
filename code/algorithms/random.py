@@ -8,6 +8,7 @@ class Random():
         self.directions = None
         self.total_wires_length = 0
         self.total_costs = 0
+        self.check_netlist = False
         self.random_routes(self.netlist)
     
     def random_routes(self, netlist):
@@ -48,7 +49,15 @@ class Random():
 
             print(f'Amount of steps to get from {start_gate} to {end_gate} with random assigning directions is: {self.steps}.')
         
+    def check_netlist_implementation(self):
+        for net in self.grid.netlist:
+            if not net.finished:
+                print('NOT FINISHED')
+                return False
+        
         self.calculate_costs()
+        return True
+
     
     def calculate_costs(self):
 
@@ -59,5 +68,7 @@ class Random():
         self.total_costs += (self.grid.amount_of_intersections * 300)
 
         self.grid.get_output(self.total_costs)
+
+        print(f'Total amount of costs for this ciruit: {self.total_costs}.')
 
         return True
