@@ -74,9 +74,10 @@ class Crossing():
         if direction not in self.directions:
             self.directions.append(direction)
 
-        self.visited -= 1
-        if self.visited < 2:
-            self.intersection = False
+        if self.visited > 0:
+            self.visited -= 1
+            if self.visited < 2:
+                self.intersection = False
 
     def set_visited(self):
         """

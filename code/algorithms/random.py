@@ -13,8 +13,6 @@ class Random():
         self.directions = None
         self.start_gate = None
         self.end_gate = None
-        self.total_wires_length = 0
-        self.total_costs = 0
         
         self.random_routes(self.netlist)
     
@@ -22,7 +20,11 @@ class Random():
         """
         Iterate over every Net object and start plotting a route from the start Crossing object.
         """
-        while self.netlist != []:
+
+        # counts the amount of tries has passed, aborts if failure is almost certainly garanteed
+        attemps = 0
+
+        while self.netlist != [] and attemps < 50:
             for net in self.netlist:
                 self.grid.choose_net(net)
 
@@ -59,13 +61,17 @@ class Random():
 
                 self.netlist = self.grid.available_nets()
 
+                attemps += 1
+
                 # Print statement is not applicable to routes with a dead end
                 if self.dead_end:
                     continue
 
                 print(f'Amount of steps to get from {self.start_gate} to {self.end_gate} with random assigning directions is: {self.steps}.')
+                
         
-        self.check_netlist_implementation()
+        if not self.check_netlist_implementation():
+            print("Netlist implementation failed.")
         
     def check_netlist_implementation(self):
         """
@@ -84,14 +90,16 @@ class Random():
         An intersection is where lines use the same crossing object, but have a different direction.
         """
 
+        total_wires_length = 0
         for net in self.grid.netlist:
-            self.total_wires_length += (net.get_length() - 1)
+            total_wires_length += (net.get_length() - 1)
         
-        self.total_costs += self.total_wires_length
-        self.total_costs += (self.grid.amount_of_intersections * 300)
+        total_costs = total_wires_length
+        total_costs += (self.grid.amount_of_intersections * 300)
+        print("intersections is", self.grid.amount_of_intersections)
 
-        self.grid.get_output(self.total_costs)
+        self.grid.get_output(total_costs)
 
-        print(f'Total amount of costs for this ciruit: {self.total_costs}.')
+        print(f'Total amount of costs for this ciruit: {total_costs}.')
 
-        return self.total_costs
+        return total_costs

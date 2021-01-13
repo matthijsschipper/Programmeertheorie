@@ -273,6 +273,9 @@ class Grid():
         y_difference = last_crossing_coordinates[1] - second_last_crossing_coordinates[1]
         z_difference = last_crossing_coordinates[2] - second_last_crossing_coordinates[2]
 
+        # check if last of second last crossing is an intersection
+        check_last_crossing, check_second_last_crossing = last_crossing.intersection, second_last_crossing.intersection
+
         # removes the blockades on both crossings
         if x_difference < 0:
             last_crossing.remove_blockade('E')
@@ -292,6 +295,14 @@ class Grid():
         elif z_difference > 0:
             last_crossing.remove_blockade('D')
             second_last_crossing.remove_blockade('U')
+
+        # adjusts amount of intersections accordingly
+        if check_last_crossing == True:
+            if last_crossing.intersection == False:
+                self.amount_of_intersections -= 1
+        if check_second_last_crossing == True:
+            if second_last_crossing.intersection == False:
+                self.amount_of_intersections -= 1
 
         # deletes the last crossing object in the net
         net.delete_last_crossing()
