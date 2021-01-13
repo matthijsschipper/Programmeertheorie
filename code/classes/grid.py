@@ -52,10 +52,7 @@ class Grid():
 
                 # check for maximum values of x and y
                 x, y = int(coordinates[0]), int(coordinates[1])
-                if x > x_max:
-                    x_max = x
-                if y > y_max:
-                    y_max = y
+                x_max, y_max = max(x, x_max), max(y, y_max)
 
                 # save gate coordinates to dictionary
                 self.gate_coordinates[element[0]] = [x, y, 0]
@@ -171,8 +168,7 @@ class Grid():
         Returns false if invalid direction is passed, else true
         """
 
-        if direction in self.current_crossing.get_possible_directions():
-            self.current_crossing.add_blockade(direction)
+        if self.current_crossing.add_blockade(direction):
             if not self.current_crossing.set_visited():
                 self.amount_of_intersections += 1
 
@@ -186,19 +182,19 @@ class Grid():
                 new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
                 new_crossing.add_blockade('S')
 
-            # if direction if east, x coordinate goes up by one
-            elif direction == 'E':
-                new_x_coordinate = current_coordinates[0] + 1
-
-                new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
-                new_crossing.add_blockade('W')
-
             # if direction if north, y coordinate goes up by one (may seem weird, has to do with indexing)
             elif direction == 'S':
                 new_y_coordinate = current_coordinates[1] + 1
 
                 new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
                 new_crossing.add_blockade('N')
+
+            # if direction if east, x coordinate goes up by one
+            elif direction == 'E':
+                new_x_coordinate = current_coordinates[0] + 1
+
+                new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
+                new_crossing.add_blockade('W')
                 
             # if direction if west, x coordinate goes down by one
             elif direction == 'W':
@@ -236,7 +232,8 @@ class Grid():
                     self.current_net = None
                     self.current_crossing = None
 
-            return True
+            return True  
+        return False
 
         # if a non-valid direction is passed, return false
         return False
@@ -349,12 +346,9 @@ class Grid():
             checklist = []
             # double check
             for net in self.netlist:
-                checklist.append(net.is_finished())
-            
-            if False in checklist:
-                return False
+                if not net.is_finished():
+                    return False
             return True
-        
         return False
     
     def net_is_finished(self):

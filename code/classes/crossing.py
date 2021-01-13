@@ -7,8 +7,6 @@ class Crossing():
 
         self.name = None
         self.is_gate = False
-        # # Temporarily change self.location to list instead of tuple
-        # self.location = [x_coordinate, y_coordinate, z_coordinate]
         self.location = (x_coordinate, y_coordinate, z_coordinate)
         self.directions = ['N', 'S', 'E', 'W', 'U', 'D']
         self.visited = False
@@ -85,9 +83,8 @@ class Crossing():
         if self.visited and not self.is_gate:
             self.intersection = True
             return False
-        else:
-            self.visited = True
-            return True
+        self.visited = True
+        return True
 
     def get_coordinates(self):
         """
