@@ -58,7 +58,7 @@ class Grid():
                 self.gate_coordinates[element[0]] = [x, y, 0]
 
         # +2, because there is supposed to be a row and column clean of gates around the chip
-        self.size = [x_max + 2, y_max + 2, 2]
+        self.size = [x_max + 2, y_max + 2, 8]
 
         # save the number of the chip you're working with
         for char in infile:
@@ -171,7 +171,7 @@ class Grid():
         if self.current_crossing.add_blockade(direction):
 
             # retrieve new crossing object at right location
-            current_coordinates = self.current_crossing.get_coordinates()
+            current_coordinates = self.current_crossing.location
 
             # if direction if north, y coordinate goes down by one (may seem weird, has to do with indexing)
             if direction == 'N':
@@ -276,8 +276,8 @@ class Grid():
         last_crossing, second_last_crossing = crossings[0], crossings[1]
 
         # retrieves the direction between the crossing objects
-        last_crossing_coordinates = last_crossing.get_coordinates()
-        second_last_crossing_coordinates = second_last_crossing.get_coordinates()
+        last_crossing_coordinates = last_crossing.location
+        second_last_crossing_coordinates = second_last_crossing.location
 
         x_difference = last_crossing_coordinates[0] - second_last_crossing_coordinates[0]
         y_difference = last_crossing_coordinates[1] - second_last_crossing_coordinates[1]
@@ -319,7 +319,7 @@ class Grid():
         Returns possible directions from current crossing as list
         """
 
-        return self.current_crossing.get_possible_directions()
+        return self.current_crossing.directions
 
     def get_directions_to_end(self):
         """
@@ -364,7 +364,7 @@ class Grid():
             output.writerow(["net", "wires"])
 
             for net in self.netlist:
-                start_gate, end_gate = net.start.get_name(), net.end.get_name()
+                start_gate, end_gate = net.start.name, net.end.name
                 route = tuple([int(start_gate),int(end_gate)])
                 route_string = str(route).replace(" ", "")
                 routelist = net.show_route_coordinates()

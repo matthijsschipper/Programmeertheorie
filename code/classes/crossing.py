@@ -84,25 +84,3 @@ class Crossing():
 
         if (self.initial_amount_of_directions - len(self.directions)) < 3 and self.intersection == True and not self.is_gate:
             self.intersection = False
-
-    def get_coordinates(self):
-        """
-        Returns a list of crossings location
-        """
-
-        return self.location
-    
-    def get_possible_directions(self):
-        """
-        Returns a list of all possible direction you can go to from this crossing
-        """
-        
-        return self.directions
-
-    def get_name(self):
-        """
-        Returns the name of the crossing object
-        """
-
-        return self.name
-

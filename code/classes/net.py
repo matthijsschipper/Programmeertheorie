@@ -55,7 +55,7 @@ class Net:
 
         coordinate_list= []
         for crossing in self.routelist:
-            coordinates = crossing.get_coordinates()
+            coordinates = crossing.location
             coordinate_list.append(tuple(coordinates))
         return coordinate_list
              
@@ -70,8 +70,8 @@ class Net:
 
         # save the coordinates of all relevant crossings
         current_crossing = self.routelist[-1]
-        current_location = current_crossing.get_coordinates()
-        destination = self.end.get_coordinates()
+        current_location = current_crossing.location
+        destination = self.end.location
 
         # calculate the distance in each direction
         # y direction is times minus one to account for indexing

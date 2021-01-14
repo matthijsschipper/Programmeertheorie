@@ -1,4 +1,4 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>640</x><y>38</y><w>210</w><h>240</h></coordinates><panel_attributes>Crossing
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>640</x><y>38</y><w>210</w><h>200</h></coordinates><panel_attributes>Crossing
 --
 location: [tuple]_[str]is_gate_ [boolean]
 directions: [list]
@@ -11,9 +11,6 @@ __repr__(self)
 place_gate(self, number)
 add_blockade(self, direction)
 remove_blockade(self, direction)
-get_coordinates(self)
-get_possible_directions(self)
-get_name(self)
 </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>38</y><w>210</w><h>340</h></coordinates><panel_attributes>Grid
 --
 grid: [nested lists]
