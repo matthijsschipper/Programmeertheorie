@@ -52,7 +52,6 @@ class steered_random_routes:
                 # run until net is finished
                 while not net.finished:
                     directions_to_end = self.grid.get_directions_to_end()
-
                     possible_directions = self.grid.get_directions()
 
                     # if net is stuck, delete net and break

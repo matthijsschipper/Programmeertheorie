@@ -34,7 +34,7 @@ class Net:
 
         return self.routelist[-1]
 
-    def get_latest_crossings(self):
+    def get_latest_two_crossings(self):
         """
         Returns the last two crossing objects in the routelist as a list, order: last, second-to-last
         """

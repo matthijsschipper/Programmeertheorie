@@ -166,62 +166,20 @@ class Grid():
         """
         Takes a letter to represent the direction as variable
         Adds the new location to the net, add blockades to involved crossings
-        Returns false if invalid direction is passed, else true
+        Returns false if invalid direction is passed or crossing is a gate not in the current_net, else true
         """
 
-        if self.current_crossing.add_blockade(direction):
+        # first check if this direction is still an option from the current crossing
+        if direction in self.current_crossing.directions:
+            new_crossing = self.crossing_at_direction(direction)
 
-            # retrieve new crossing object at right location
-            current_coordinates = self.current_crossing.location
+            # block the directions from both crossings
+            self.current_crossing.add_blockade(direction)
+            already_intersection = new_crossing.intersection
+            opposite = self.get_opposite(direction)
+            new_crossing.add_blockade(opposite[0])
 
-            # if direction if north, y coordinate goes down by one (may seem weird, has to do with indexing)
-            if direction == 'N':
-                new_y_coordinate = current_coordinates[1] - 1
-
-                new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
-                already_intersection = new_crossing.intersection
-                new_crossing.add_blockade('S')
-
-            # if direction if north, y coordinate goes up by one (may seem weird, has to do with indexing)
-            elif direction == 'S':
-                new_y_coordinate = current_coordinates[1] + 1
-
-                new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
-                already_intersection = new_crossing.intersection
-                new_crossing.add_blockade('N')
-
-            # if direction if east, x coordinate goes up by one
-            elif direction == 'E':
-                new_x_coordinate = current_coordinates[0] + 1
-
-                new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
-                already_intersection = new_crossing.intersection
-                new_crossing.add_blockade('W')
-                
-            # if direction if west, x coordinate goes down by one
-            elif direction == 'W':
-                new_x_coordinate = current_coordinates[0] - 1
-
-                new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
-                already_intersection = new_crossing.intersection
-                new_crossing.add_blockade('E')
-                
-            # if direction is up, z coordinate goes up by one
-            elif direction == 'U':
-                new_z_coordinate = current_coordinates[2] + 1
-
-                new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
-                already_intersection = new_crossing.intersection
-                new_crossing.add_blockade('D')
-                
-            # if direction is down, z coordinate goes down by one
-            elif direction == 'D':
-                new_z_coordinate = current_coordinates[2] - 1
-
-                new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
-                already_intersection = new_crossing.intersection
-                new_crossing.add_blockade('U')
-
+            # add new crossing object to the net
             self.current_net.add_crossing(new_crossing)
             self.current_crossing = new_crossing
 
@@ -273,7 +231,7 @@ class Grid():
         """
 
         # retrieve relevant crossing objects
-        crossings = net.get_latest_crossings()
+        crossings = net.get_latest_two_crossings()
         last_crossing, second_last_crossing = crossings[0], crossings[1]
 
         # retrieves the direction between the crossing objects
@@ -362,6 +320,71 @@ class Grid():
                 directions.append("D")
 
         return directions
+    
+    def crossing_at_direction(self, direction, crossing = ""):
+        """
+        Takes as input a direction and optionally a crossing object, default is the current_crossing in the grid
+        Returns the crossing object a certain direction away from the crossing object, no matter if there is a blockade
+        Returns None if an invalid direction was passed
+        """
+
+        if crossing == "":
+            crossing = self.current_crossing
+
+        if direction in ['N', 'S', 'E', 'W', 'U', 'D']:
+
+            current_coordinates = crossing.location
+
+            # if direction if north, y coordinate goes down by one (may seem weird, has to do with indexing)
+            if direction == 'N':
+                new_y_coordinate = current_coordinates[1] - 1
+
+                new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
+
+            # if direction if south, y coordinate goes up by one (may seem weird, has to do with indexing)
+            elif direction == 'S':
+                new_y_coordinate = current_coordinates[1] + 1
+
+                new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
+
+            # if direction if east, x coordinate goes up by one
+            elif direction == 'E':
+                new_x_coordinate = current_coordinates[0] + 1
+
+                new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
+
+            # if direction if west, x coordinate goes down by one
+            elif direction == 'W':
+                new_x_coordinate = current_coordinates[0] - 1
+
+                new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
+
+            # if direction is up, z coordinate goes up by one
+            elif direction == 'U':
+                new_z_coordinate = current_coordinates[2] + 1
+
+                new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
+
+            # if direction is down, z coordinate goes down by one
+            elif direction == 'D':
+                new_z_coordinate = current_coordinates[2] - 1
+
+                new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
+
+            return new_crossing
+        return None
+
+    def get_opposite(self, direction):
+        """
+        For each possible direction, returns the opposite
+        """
+
+        if direction in ['S', 'N']:
+            return [i for i in ['S', 'N'] if i != direction]
+        elif direction in ['E', 'W']:
+            return [i for i in ['E', 'W'] if i != direction]
+        elif direction in ['U', 'D']:
+            return [i for i in ['U', 'D'] if i != direction]
 
     def get_output(self, total_costs):
         """

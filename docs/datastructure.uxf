@@ -1,9 +1,10 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>640</x><y>38</y><w>210</w><h>200</h></coordinates><panel_attributes>Crossing
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>680</x><y>38</y><w>210</w><h>200</h></coordinates><panel_attributes>Crossing
 --
-location: [tuple]_[str]is_gate_ [boolean]
+name: [str]
+is_gate: [boolean]
+location: [tuple]
 directions: [list]
 initial_amount_of_directions: [int]
-visited: [boolean]
 intersection: [boolean]
 --
 set_directions(self, grid_size)
@@ -11,7 +12,7 @@ __repr__(self)
 place_gate(self, number)
 add_blockade(self, direction)
 remove_blockade(self, direction)
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>38</y><w>210</w><h>340</h></coordinates><panel_attributes>Grid
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>38</y><w>270</w><h>390</h></coordinates><panel_attributes>Grid
 --
 grid: [nested lists]
 size: [list]
@@ -31,9 +32,12 @@ choose_net(self, net)
 add_to_net(self, direction)
 delete_net(self, net, steps)
 delete_last_crossing(self, net)
+get_crossing(self, x, y, z)
 get_directions(self)
 get_directions_to_end(self)
-get_output(self)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>38</y><w>210</w><h>240</h></coordinates><panel_attributes>Net
+crossing_at_direction(self, direction, crossing)
+get_opposite(self, direction)
+get_output(self)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>38</y><w>210</w><h>240</h></coordinates><panel_attributes>Net
 --
 start: [crossing object]
 end: [crossing object]
@@ -43,7 +47,7 @@ finished: [boolean]
 __repr__(self)
 add_crossing(self, crossing)
 get_latest_crossing(self)
-get_latest_crossings(self)
+get_latest_two_crossings(self)
 delete_last_crossing(self)
 show_route_coordinates(self)
 get_route_to_end(self)

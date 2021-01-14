@@ -5,7 +5,7 @@ from code.algorithms import random, steered_random
 if __name__ == "__main__":
     
     chip_number = 0
-    netlist_number = 2
+    netlist_number = 1
 
     printfile = f"./data/chip_{chip_number}/print_{chip_number}.csv"
     netlistfile = f"./data/chip_{chip_number}/netlist_{netlist_number}.csv"
