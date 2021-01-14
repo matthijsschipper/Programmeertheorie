@@ -85,18 +85,6 @@ class Crossing():
         if (self.initial_amount_of_directions - len(self.directions)) < 3 and self.intersection == True and not self.is_gate:
             self.intersection = False
 
-    # def set_visited(self):
-    #     """
-    #     Sets visited variable of crossing to true, if crossing was already visited, sets intersection to true
-    #     Returns true if no intersection is created, else returns false (gates don't count as intersection)
-    #     """
-
-    #     self.visited += 1
-    #     if self.visited > 1 and not self.is_gate and self.intersection == False:
-    #         self.intersection = True
-    #         return False
-    #     return True
-
     def get_coordinates(self):
         """
         Returns a list of crossings location
