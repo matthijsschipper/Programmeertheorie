@@ -30,7 +30,6 @@
 | Jade | 13:00 | 15:00 | Worked on A* algorithm. |
 | Jade | 22:00 | 23:59 | Worked on A* algorithm. |
 
-
 ## 14-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
