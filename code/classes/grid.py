@@ -47,20 +47,20 @@ class Grid():
             # save coordinates and numbers of gates into dictionary, retrieve max_x and max_y
             data = [line.rstrip() for line in file]
             x_max, y_max = 0, 0
-            for element in data:
-                coordinates = element[2:].split(",")
+            for row in data:
+                information = row.split(",")
 
                 # check for maximum values of x and y
-                x, y = int(coordinates[0]), int(coordinates[1])
+                x, y = int(information[1]), int(information[2])
                 x_max, y_max = max(x, x_max), max(y, y_max)
 
                 # save gate coordinates to dictionary
-                self.gate_coordinates[element[0]] = [x, y, 0]
+                self.gate_coordinates[information[0]] = [x, y, 0]
 
         # +2, because there is supposed to be a row and column clean of gates around the chip
         self.size = [x_max + 2, y_max + 2, 8]
 
-        # save the number of the chip you're working with
+        # save the number of the chip you're working with and the location of the file
         for char in infile:
             try:
                 self.chip_id = int(char)
@@ -112,9 +112,9 @@ class Grid():
 
             # save nets into dictionary
             data = [line.rstrip() for line in file]
-            for element in data:
-                start = element[0]
-                end = element[2]
+            for row in data:
+                information = row.split(",")
+                start, end = information[0], information[1]
                 start_location = self.gate_coordinates[start]
                 end_location = self.gate_coordinates[end]
 
@@ -359,7 +359,7 @@ class Grid():
         Can be called on the grid to write an outputfile
         """
 
-        with open("./data/example/our_output.csv", 'w') as file:
+        with open(f"./data/chip_{self.chip_id}/our_output.csv", 'w') as file:
             output = writer(file)
             output.writerow(["net", "wires"])
 

@@ -93,4 +93,4 @@ class Net:
         Returns an int of the length of the route so far
         """
 
-        return len(self.routelist)
+        return len(self.routelist) - 1

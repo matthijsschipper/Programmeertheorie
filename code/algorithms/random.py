@@ -92,7 +92,7 @@ class Random():
 
         total_wires_length = 0
         for net in self.grid.netlist:
-            total_wires_length += (net.get_length() - 1)
+            total_wires_length += net.get_length()
         
         total_costs = total_wires_length
         total_costs += (self.grid.amount_of_intersections * 300)

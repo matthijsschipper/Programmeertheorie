@@ -21,12 +21,12 @@ def visualise(printfile, outputfile):
         # save coordinates and numbers of gates into dictionary
         data = [line.rstrip() for line in file]
         gates = {}
-        for element in data:
-            coordinates = element[2:].split(",")
-            x, y = int(coordinates[0]), int(coordinates[1])
+        for row in data:
+            information = row.split(",")
+            x, y = int(information[1]), int(information[2])
 
             # save gate coordinates to dictionary
-            gates[element[0]] = [x, y, 0]
+            gates[information[0]] = [x, y, 0]
 
     with open(outputfile) as file:
 
@@ -51,10 +51,11 @@ def visualise(printfile, outputfile):
                 path = row[1].strip("[]()").split("),(")
 
                 for element in path:
-                    x_coordinates.append(int(element[0]))
-                    y_coordinates.append(int(element[2]))
-                    if len(element) == 5:
-                        z_coordinates.append(int(element[4]))
+                    coordinates = element.split(",")
+                    x_coordinates.append(int(coordinates[0]))
+                    y_coordinates.append(int(coordinates[1]))
+                    if len(coordinates) == 3:
+                        z_coordinates.append(int(coordinates[2]))
                     else:
                         z_coordinates.append(0)
 

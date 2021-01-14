@@ -29,4 +29,5 @@
 ## 14-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
-| Birgit | 10:00 | | Trying to implement the intersection count in a different way, hoping it'll work better. Writing a new algorithm. |
+| Birgit | 10:00 | 13:00 | Trying to implement the intersection count in a different way, hoping it'll work better. Writing a new algorithm. |
+| Birgit | 13:45 | | Perfecting new algorithm to work on bigger chips" |
