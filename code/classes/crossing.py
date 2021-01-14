@@ -9,7 +9,8 @@ class Crossing():
         self.is_gate = False
         self.location = (x_coordinate, y_coordinate, z_coordinate)
         self.directions = ['N', 'S', 'E', 'W', 'U', 'D']
-        self.visited = 0
+        self.initial_amount_of_directions = 6
+        # self.visited = 0
         self.intersection = False
 
         self.set_directions(grid_size)
@@ -38,6 +39,8 @@ class Crossing():
         elif self.location[2] == (grid_size[2] - 1):
             self.directions.remove('U')
 
+        self.initial_amount_of_directions = len(self.directions)
+
     def __repr__(self):
         if self.name:
             return f"Gate-{self.name}"
@@ -57,11 +60,16 @@ class Crossing():
         """
         Takes a letter that represents a direction (N,S,E,W,U or D)
         Removes that letter from the list of directions
-        Returns false if location wasn't an option anyway
+        Returns false if location wasn't an option
         """
 
         if direction in self.directions:
             self.directions.remove(direction)
+
+            # check if crossing has become an intersection
+            if (self.initial_amount_of_directions - len(self.directions)) >= 3 and self.intersection == False and not self.is_gate:
+                self.intersection = True
+
             return True
         return False
 
@@ -74,22 +82,20 @@ class Crossing():
         if direction not in self.directions:
             self.directions.append(direction)
 
-        if self.visited > 0:
-            self.visited -= 1
-            if self.visited < 2:
-                self.intersection = False
+        if (self.initial_amount_of_directions - len(self.directions)) < 3 and self.intersection == True and not self.is_gate:
+            self.intersection = False
 
-    def set_visited(self):
-        """
-        Sets visited variable of crossing to true, if crossing was already visited, sets intersection to true
-        Returns true if no intersection is created, else returns false (gates don't count as intersection)
-        """
+    # def set_visited(self):
+    #     """
+    #     Sets visited variable of crossing to true, if crossing was already visited, sets intersection to true
+    #     Returns true if no intersection is created, else returns false (gates don't count as intersection)
+    #     """
 
-        self.visited += 1
-        if self.visited > 1 and not self.is_gate and self.intersection == False:
-            self.intersection = True
-            return False
-        return True
+    #     self.visited += 1
+    #     if self.visited > 1 and not self.is_gate and self.intersection == False:
+    #         self.intersection = True
+    #         return False
+    #     return True
 
     def get_coordinates(self):
         """

@@ -1,9 +1,10 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>640</x><y>38</y><w>210</w><h>270</h></coordinates><panel_attributes>Crossing
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>640</x><y>38</y><w>210</w><h>280</h></coordinates><panel_attributes>Crossing
 --
 name: [str]
 is_gate: [boolean]
 location: [tuple]
-directions [list]
+directions: [list]
+initial_amount_of_directions: [int]
 visited: [boolean]
 intersection: [boolean]
 --
@@ -16,7 +17,7 @@ set_visited(self)
 get_coordinates(self)
 get_possible_directions(self)
 get_name(self)
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>38</y><w>210</w><h>370</h></coordinates><panel_attributes>Grid
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>38</y><w>210</w><h>340</h></coordinates><panel_attributes>Grid
 --
 grid: [nested lists]
 size: [list]
@@ -38,9 +39,7 @@ delete_net(self, net, steps)
 delete_last_crossing(self, net)
 get_directions(self)
 get_directions_to_end(self)
-netlist_filled(self)
-net_is_finished(self)
-get_output(self)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>38</y><w>210</w><h>300</h></coordinates><panel_attributes>Net
+get_output(self)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>38</y><w>210</w><h>240</h></coordinates><panel_attributes>Net
 --
 start: [crossing object]
 end: [crossing object]
@@ -52,12 +51,8 @@ add_crossing(self, crossing)
 get_latest_crossing(self)
 get_latest_crossings(self)
 delete_last_crossing(self)
-show_route(self)
 show_route_coordinates(self)
-get_end(self)
-get_start(self)
 get_route_to_end(self)
-is_finished(self)
 mark_unfinished(self)
 get_length(self)
 </panel_attributes><additional_attributes></additional_attributes></element></diagram>

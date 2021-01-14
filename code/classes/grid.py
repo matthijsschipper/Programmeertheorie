@@ -169,9 +169,6 @@ class Grid():
         """
 
         if self.current_crossing.add_blockade(direction):
-            intersection = self.current_crossing.set_visited()
-            if intersection == False:
-                self.amount_of_intersections += 1
 
             # retrieve new crossing object at right location
             current_coordinates = self.current_crossing.get_coordinates()
@@ -181,6 +178,7 @@ class Grid():
                 new_y_coordinate = current_coordinates[1] - 1
 
                 new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
+                already_intersection = new_crossing.intersection
                 new_crossing.add_blockade('S')
 
             # if direction if north, y coordinate goes up by one (may seem weird, has to do with indexing)
@@ -188,6 +186,7 @@ class Grid():
                 new_y_coordinate = current_coordinates[1] + 1
 
                 new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
+                already_intersection = new_crossing.intersection
                 new_crossing.add_blockade('N')
 
             # if direction if east, x coordinate goes up by one
@@ -195,6 +194,7 @@ class Grid():
                 new_x_coordinate = current_coordinates[0] + 1
 
                 new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
+                already_intersection = new_crossing.intersection
                 new_crossing.add_blockade('W')
                 
             # if direction if west, x coordinate goes down by one
@@ -202,6 +202,7 @@ class Grid():
                 new_x_coordinate = current_coordinates[0] - 1
 
                 new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
+                already_intersection = new_crossing.intersection
                 new_crossing.add_blockade('E')
                 
             # if direction is up, z coordinate goes up by one
@@ -209,6 +210,7 @@ class Grid():
                 new_z_coordinate = current_coordinates[2] + 1
 
                 new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
+                already_intersection = new_crossing.intersection
                 new_crossing.add_blockade('D')
                 
             # if direction is down, z coordinate goes down by one
@@ -216,10 +218,16 @@ class Grid():
                 new_z_coordinate = current_coordinates[2] - 1
 
                 new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
+                already_intersection = new_crossing.intersection
                 new_crossing.add_blockade('U')
 
             self.current_net.add_crossing(new_crossing)
             self.current_crossing = new_crossing
+
+            # count if intersection is created
+            if not already_intersection:
+                if self.current_crossing.intersection:
+                    self.amount_of_intersections += 1
 
             # react accordingly if crossing is the end of the net
             if self.current_net.finished:
@@ -233,8 +241,7 @@ class Grid():
                     self.current_net = None
                     self.current_crossing = None
 
-            return True  
-        return False
+            return True
 
         # if a non-valid direction is passed, return false
         return False
@@ -248,6 +255,8 @@ class Grid():
 
         if steps > net.get_length() or steps < 0:
             steps = net.get_length() - 1
+        
+        # remove the last crossing from the net as many times as is necessary
         while steps > 0:
             self.delete_last_crossing(net)
             steps  -= 1
@@ -275,7 +284,7 @@ class Grid():
         z_difference = last_crossing_coordinates[2] - second_last_crossing_coordinates[2]
 
         # check if last of second last crossing is an intersection
-        check_last_crossing, check_second_last_crossing = last_crossing.intersection, second_last_crossing.intersection
+        check_last_crossing = last_crossing.intersection
 
         # removes the blockades on both crossings
         if x_difference < 0:
@@ -300,9 +309,6 @@ class Grid():
         # adjusts amount of intersections accordingly
         if check_last_crossing == True:
             if last_crossing.intersection == False:
-                self.amount_of_intersections -= 1
-        if check_second_last_crossing == True:
-            if second_last_crossing.intersection == False:
                 self.amount_of_intersections -= 1
 
         # deletes the last crossing object in the net
