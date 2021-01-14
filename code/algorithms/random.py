@@ -1,5 +1,5 @@
-import copy
-import random
+from copy import deepcopy
+from random import choice
 
 class Random():
     """
@@ -8,7 +8,7 @@ class Random():
     the available options, as well as the opposite direction from the new location.
     """
     def  __init__(self, grid):
-        self.grid = copy.deepcopy(grid)
+        self.grid = deepcopy(grid)
         self.netlist = self.grid.available_nets()
         self.directions = None
         self.start_gate = None
@@ -51,7 +51,7 @@ class Random():
 
                     # Choose random direction ('N', 'E', 'S', 'W', 'U', 'D')
                     self.directions = self.grid.get_directions()
-                    random_direction = random.choice(self.directions)
+                    random_direction = choice(self.directions)
 
                     # Call add_to_net function
                     self.grid.add_to_net(random_direction)
