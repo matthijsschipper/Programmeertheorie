@@ -35,4 +35,6 @@
 | --- | --- | --- | --- |
 | Jade | 00:00 | 04:00 | Worked on A* algorithm.|
 | Birgit | 10:00 | 13:00 | Trying to implement the intersection count in a different way, hoping it'll work better. Writing a new algorithm. |
+| Jade | 13:00 | 16:00 | Worked on A* algorithm.|
 | Birgit | 13:45 | 17:00 | Fixing minor errors in the reading of datafiles in the grid object and the visualisation function. Perfecting new algorithm to work on bigger chips and more difficult netlists. |
+| Jade | 23:00 | 23:59 | Worked on A* algorithm.|
