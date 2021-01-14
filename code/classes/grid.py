@@ -113,17 +113,18 @@ class Grid():
             # save nets into dictionary
             data = [line.rstrip() for line in file]
             for row in data:
-                information = row.split(",")
-                start, end = information[0], information[1]
-                start_location = self.gate_coordinates[start]
-                end_location = self.gate_coordinates[end]
+                if row:
+                    information = row.split(",")
+                    start, end = information[0], information[1]
+                    start_location = self.gate_coordinates[start]
+                    end_location = self.gate_coordinates[end]
 
-                # index the grid with [z][y][x]
-                start_crossing = self.grid[start_location[2]][start_location[1]][start_location[0]]
-                end_crossing = self.grid[end_location[2]][end_location[1]][end_location[0]]
+                    # index the grid with [z][y][x]
+                    start_crossing = self.grid[start_location[2]][start_location[1]][start_location[0]]
+                    end_crossing = self.grid[end_location[2]][end_location[1]][end_location[0]]
 
-                # create net object and save it to grid
-                self.netlist.append(Net(start_crossing, end_crossing))
+                    # create net object and save it to grid
+                    self.netlist.append(Net(start_crossing, end_crossing))
 
         # default setting, can be changed by algorithm
         self.current_net = self.netlist[0]
@@ -254,7 +255,7 @@ class Grid():
         """
 
         if steps > net.get_length() or steps < 0:
-            steps = net.get_length() - 1
+            steps = net.get_length()
         
         # remove the last crossing from the net as many times as is necessary
         while steps > 0:
@@ -359,7 +360,7 @@ class Grid():
         Can be called on the grid to write an outputfile
         """
 
-        with open(f"./data/chip_{self.chip_id}/our_output.csv", 'w') as file:
+        with open(f"./data/outputfiles/chip_{self.chip_id}_net_{self.netlist_id}.csv", 'w') as file:
             output = writer(file)
             output.writerow(["net", "wires"])
 

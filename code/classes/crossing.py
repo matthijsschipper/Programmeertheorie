@@ -10,7 +10,6 @@ class Crossing():
         self.location = (x_coordinate, y_coordinate, z_coordinate)
         self.directions = ['N', 'S', 'E', 'W', 'U', 'D']
         self.initial_amount_of_directions = 6
-        # self.visited = 0
         self.intersection = False
 
         self.set_directions(grid_size)

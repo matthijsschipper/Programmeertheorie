@@ -4,13 +4,21 @@ from code.algorithms import random, steered_random
 
 if __name__ == "__main__":
     
+    chip_number = 0
+    netlist_number = 2
+
+    printfile = f"./data/chip_{chip_number}/print_{chip_number}.csv"
+    netlistfile = f"./data/chip_{chip_number}/netlist_{netlist_number}.csv"
+    outputfile = f"./data/outputfiles/chip_{chip_number}_net_{netlist_number}.csv"
+
     # create grid object
-    grid = grid.Grid("./data/chip_1/print_1.csv", "./data/chip_1/netlist_4.csv")
+    grid = grid.Grid(printfile, netlistfile)
 
     # Testing random algorithm
     # r = random.Random(grid)
 
+    # Testing steered random algorithm
     steered_random_object = steered_random.steered_random_routes(grid)
-    steered_random_object.run()
+    steered_random_object.run(10)
 
-    vis.visualise("./data/chip_1/print_1.csv", "./data/chip_1/our_output.csv")
+    vis.visualise(printfile, outputfile)

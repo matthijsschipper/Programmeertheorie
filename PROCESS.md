@@ -30,4 +30,4 @@
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
 | Birgit | 10:00 | 13:00 | Trying to implement the intersection count in a different way, hoping it'll work better. Writing a new algorithm. |
-| Birgit | 13:45 | | Perfecting new algorithm to work on bigger chips" |
+| Birgit | 13:45 | | Fixing minor errors in the reading of datafiles in the grid object and the visualisation function. Perfecting new algorithm to work on bigger chips. |
