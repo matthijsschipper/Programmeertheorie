@@ -1,4 +1,3 @@
-'''
 import copy
 from queue import PriorityQueue
 
@@ -8,10 +7,11 @@ class Astar():
         self.grid = copy.deepcopy(grid)
         self.netlist = self.grid.available_nets()
 
-        self.run(self.netlist)
+        self.run()
     
     def run(self, netlist):
-        for net in netlist:
+        for net in self.netlist:
+            self.grid.current_net = net
 
             # miss in methode in grid
             start = net.start
@@ -19,6 +19,7 @@ class Astar():
 
             count = 0
             open_set = PriorityQueue()
+            
             # f-score, count for breaking ties 
             open_set.put((0, count, start))
             previous = {}
@@ -28,7 +29,7 @@ class Astar():
             g_score[start] = 0
 
             f_score = {crossing: float("inf") for row in self.grid for crossing in row}
-            f_score[start] = h(start, end)
+            f_score[start] = h_score(start)
 
             # items in PriorityQueue
             items = {start}
@@ -38,7 +39,7 @@ class Astar():
                 items.remove(current)
 
                 if current == end:
-                    # make path
+                    reconstruct(previous)
                     return True
                 
                 for neighbor in current.neighbors:
@@ -47,7 +48,8 @@ class Astar():
                     if temp_g_score < g_score[neighbor]:
                         previous[neighbor] = current
                         g_score[neighbor] = temp_g_score
-                        f_score[neighbor] = temp_g_score + h(neighbor.get_coordinates(), end.get_coordinates())
+                        f_score[neighbor] = temp_g_score + h_score(neighbor)
+                        
                         if neighbor not in items:
                             count += 1
                             open_set.put((f_score[neighbor], count, neighbor))
@@ -55,18 +57,19 @@ class Astar():
         
         return False
     
-
-                
-    def h(self, crossing, end_crossing):
+    def h_score(self, crossing):
         self.current_crossing = crossing
         # nog iets doen met current_net
         return len(get_directions_to_end())
     
-    def set_parent(self, crossing, parent):
-        pass
-    
-    def get_path():
-        pass
+    def reconsturct(self, current, previous):
+        path = []
+        # aanpassen
+        while current in previous:
+            path.append(current.location)
+            current = previous[current]
+        
+        print(path)
 
 
 # CHANGES TO DATASTRUCTURE
@@ -76,7 +79,7 @@ self.neighbors = []
 
 in Grid class
 
-get crossing(self, x, y, z):
+get_crossing(self, x, y, z):
     return self.grid[z][y][x]
 
 set_neighbors(self, crossing):
@@ -107,5 +110,3 @@ set_neighbors(self, crossing):
             new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]     
 
         crossing.neighbors.append(new_crossing)
-'''
-
