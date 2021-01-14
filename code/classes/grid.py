@@ -315,6 +315,15 @@ class Grid():
         # deletes the last crossing object in the net
         net.delete_last_crossing()
 
+    def get_crossing(self, x, y, z):
+        """
+        Takes the coordinates x, y and z as integers as input
+        Returns the crossing object in that location
+        """
+
+        # indexing order: z, y, x
+        return self.grid[z][y][x]
+
     def get_directions(self):
         """
         Returns possible directions from current crossing as list
