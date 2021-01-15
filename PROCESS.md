@@ -38,3 +38,8 @@
 | Jade | 13:00 | 16:00 | Worked on A* algorithm.|
 | Birgit | 13:45 | 17:00 | Fixing minor errors in the reading of datafiles in the grid object and the visualisation function. Perfecting new algorithm to work on bigger chips and more difficult netlists. |
 | Jade | 23:00 | 23:59 | Worked on A* algorithm.|
+
+## 15-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
+| Matthijs | 16:00 | | 20:00 | Looked into designing a Hillclimber algorithm. |
