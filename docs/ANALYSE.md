@@ -4,3 +4,4 @@
 ### Birgit
 Als je de paden random legt, kun je zelf voor de simpelste netlist vaak geen oplossing vinden.
 ![example random algoritm](./images/random_chip_0_net_1.png "Example image")
+*Example of an outcome from the random algoritm*
