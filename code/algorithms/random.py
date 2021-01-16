@@ -34,15 +34,12 @@ class Random():
                 self.end_gate = net.end
                 self.dead_end = False
 
-                """
-                Wat er fout ging: self.grid.net_is_finished() aangeroepen -> roept current_net.is_finished() aan
-                -> returned boolean -> loop luistert niet als boolean is -> response te sloom?
-                """
                 # Net finished variables return True if crossing added to routelist is the destination
                 while not net.finished:
 
                     # Empty directions list means a dead end
                     if self.grid.get_directions() == []:
+
                         # print(f'Dead end from {self.start_gate} to {self.end_gate} ({self.steps} steps taken)')
                         self.dead_end = True
 
@@ -78,6 +75,7 @@ class Random():
         """
         Check if any net is not finished. If true, stop. Else, move on to cost calculation.
         """
+
         for net in self.grid.netlist:
             if not net.finished:
                 return False
