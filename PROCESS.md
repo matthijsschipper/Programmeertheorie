@@ -50,4 +50,4 @@
 ## 16-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
-| Birgit | 11:00 |
+| Birgit | 12:00 |
