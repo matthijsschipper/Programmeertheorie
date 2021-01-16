@@ -42,4 +42,12 @@
 ## 15-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
-| Birgit | 10:00 | | Working on a way to look one step ahead in the steered random algoritm. Trying to write a better way to decide if it'll go up or down. |
+| Jade | 0:00 | 2:00 | Completed first version of A* algorithm, still needs debugging though. |
+| Birgit | 10:00 | 12:30 | Working on a way to look one step ahead in the steered random algoritm. Trying to write a better way to decide if it'll go up or down. |
+| Matthijs | 16:00 | 20:00 | Looked into designing a Hillclimber algorithm. |
+| Jade | 14:00 | 17:00 | Worked on debugging A* algorithm. |
+
+## 16-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
+| Birgit | 11:00 |
