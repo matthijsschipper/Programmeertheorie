@@ -42,4 +42,6 @@
 ## 15-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
+| Jade | 0:00 | | 2:00 | Completed first version of A* algorithm, still needs debugging though. |
 | Matthijs | 16:00 | | 20:00 | Looked into designing a Hillclimber algorithm. |
+| Jade | 14:00 | | 17:00 | Worked on debugging A* algorithm. |
