@@ -1,4 +1,4 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>680</x><y>38</y><w>210</w><h>200</h></coordinates><panel_attributes>Crossing
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>680</x><y>38</y><w>210</w><h>210</h></coordinates><panel_attributes>Crossing
 --
 name: [str]
 is_gate: [boolean]

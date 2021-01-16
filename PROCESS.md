@@ -26,8 +26,8 @@
 | Jade | 00:00 | 04:00 | Worked on A* algorithm.|
 | Matthijs | 07:00 | 15:00 | First I dived into the new datastructure and tried to get a grasp of how it works in detail, together with the random algorithm. I then found out that the algorithm was not working properly and debugged it for a few hours. In the two hours before the lecture, I worked on the baseline document together with Birgit. |
 | Birgit | 13:00 | 15:00 | Added a feature to the visualisation, worked in the baseline document. |
-| Birgit | 20:00 | 23:30 | Searching for bugs, wasn't able to entirely fix intersection count for finished outputs, updated notes on the datastructure. Changed random algoritm so if it fails to lay down a net, it removes it and tries again later. Removed methods from datastructure we didn't use. |
 | Jade | 13:00 | 15:00 | Worked on A* algorithm. |
+| Birgit | 20:00 | 23:30 | Searching for bugs, wasn't able to entirely fix intersection count for finished outputs, updated notes on the datastructure. Changed random algoritm so if it fails to lay down a net, it removes it and tries again later. Removed methods from datastructure we didn't use. |
 | Jade | 22:00 | 23:59 | Worked on A* algorithm. |
 
 ## 14-01-2021
@@ -38,3 +38,8 @@
 | Jade | 13:00 | 16:00 | Worked on A* algorithm.|
 | Birgit | 13:45 | 17:00 | Fixing minor errors in the reading of datafiles in the grid object and the visualisation function. Perfecting new algorithm to work on bigger chips and more difficult netlists. |
 | Jade | 23:00 | 23:59 | Worked on A* algorithm.|
+
+## 15-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
+| Birgit | 10:00 | | Working on a way to look one step ahead in the steered random algoritm. Trying to write a better way to decide if it'll go up or down. |
