@@ -70,8 +70,8 @@ class Random():
         
         if not self.check_netlist_implementation():
             print("Netlist implementation failed.")
-
-        return self.netlist
+        
+        return netlist
         
     def check_netlist_implementation(self):
         """
