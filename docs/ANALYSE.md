@@ -23,7 +23,9 @@ Al hoewel het logisch is dat een random algoritme weinig 'goede' oplossingen gen
 * Als je random kanten op gaat, leg je hele lange paden aan waardoor je voor andere paden minder mogelijkheden overhoudt.
 * Je zou perongeluk met je pad andere gates kunnen insluiten, waardoor er voor die gates geen enkele mogelijkheid meer is.
 * Met de random paden leg je ontzettend veel kruispunten, waaronder met jezelf, wat hoge kosten oplevert.
+
 Wat kan beter?
+
 * Probeer richting je eindgate te lopen
 * Probeer de ruimte die je hebt efficient te gebruiken, de voorkeur is om zo laag mogelijk te zitten
 * Leg de nets die de korste afstand moeten overbruggen eerst
