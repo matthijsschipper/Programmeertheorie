@@ -25,8 +25,8 @@ class Random():
         # counts the amount of tries has passed, aborts if failure is almost certainly garanteed
         attemps = 0
 
-        while self.netlist != [] and attemps < 50:
-            for net in self.netlist:
+        while netlist != [] and attemps < 200:
+            for net in netlist:
                 self.grid.choose_net(net)
 
                 self.steps = 0
@@ -57,7 +57,7 @@ class Random():
                     # Count steps
                     self.steps += 1
 
-                self.netlist = self.grid.available_nets()
+                netlist = self.grid.available_nets()
 
                 attemps += 1
 
@@ -70,6 +70,8 @@ class Random():
         
         if not self.check_netlist_implementation():
             print("Netlist implementation failed.")
+
+        return self.netlist
         
     def check_netlist_implementation(self):
         """
