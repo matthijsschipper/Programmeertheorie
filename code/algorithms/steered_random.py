@@ -51,8 +51,8 @@ class steered_random_routes:
                 return False
 
         # if the crossing will become an intersection, try to avoid it
-        if (to_be_added_crossing.initial_amount_of_directions - len(to_be_added_crossing.directions)) > 1:
-            return False
+        # if (to_be_added_crossing.initial_amount_of_directions - len(to_be_added_crossing.directions)) > 1:
+        #     return False
 
         return True
 
@@ -90,7 +90,7 @@ class steered_random_routes:
                     # if net is stuck, delete net and break
                     if not possible_directions:
                         print(f"{net} failed")
-                        self.grid.delete_net(net, -1)
+                        # self.grid.delete_net(net, -1)
                         succes = False
                         break
                 
@@ -117,7 +117,7 @@ class steered_random_routes:
                             # if none of the directions are possible, register net as failure
                             if found_direction == False:
                                 print(f"{net} failed")
-                                self.grid.delete_net(net, -1)
+                                # self.grid.delete_net(net, -1)
                                 succes = False
                                 break
 

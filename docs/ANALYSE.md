@@ -42,8 +42,16 @@ Een voorbeeld van een oplossing die hij dan voor de eerste netlist genereert sta
 ![example 2 steered random algoritm](./images/steered_random2_chip_0_net_1.png "Example image")
 
 Netlist 2 implementeren, lukt echter vaak al niet.
-Zo ziet een gefaalde 'oplossing' er bijvoorbeeld uit, als je het algoritme maar een poging geeft per net:
+Een goede oplossing:
 
 ![example 3 steered random algoritm](./images/steered_random3_chip_0_net_2.png "Example image")
+
+Zo ziet een gefaalde 'oplossing' er bijvoorbeeld uit, als je het algoritme maar een poging geeft per net:
+Als je kruispunten 'aan' zet
+
 ![example 4 steered random algoritm](./images/steered_random4_chip_0_net_2.png "Example image")
+
+Of als je kruispunten uit zet
+
+![example 5 steered random algoritm](./images/steered_random5_chip_0_net_2.png "Example image")
 
