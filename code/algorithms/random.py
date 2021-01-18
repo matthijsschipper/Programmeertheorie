@@ -67,7 +67,6 @@ class Random():
 
                 # print(f'Amount of steps to get from {self.start_gate} to {self.end_gate} with random assigning directions is: {self.steps}.')
                 
-        
         if not self.check_netlist_implementation():
             print("Netlist implementation failed.")
         
