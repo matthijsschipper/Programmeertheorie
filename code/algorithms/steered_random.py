@@ -147,3 +147,4 @@ class steered_random_routes:
 
         total_costs = 300 * self.grid.amount_of_intersections + self.total_wires_length
         self.grid.get_output(total_costs)
+
