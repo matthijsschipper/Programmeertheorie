@@ -1,6 +1,6 @@
 from code.classes import grid, crossing, net
 from code.visualisation import visualise as vis
-from code.algorithms import random, steered_random, astar
+from code.algorithms import random, steered_random, astar, hillclimber as hc
 
 if __name__ == "__main__":
     
