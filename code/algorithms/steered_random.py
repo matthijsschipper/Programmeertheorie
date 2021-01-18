@@ -50,6 +50,10 @@ class steered_random_routes:
             if to_be_added_crossing != net.end:
                 return False
 
+        # if the crossing will become an intersection, try to avoid it
+        if (to_be_added_crossing.initial_amount_of_directions - len(to_be_added_crossing.directions)) > 1:
+            return False
+
         return True
 
     def run(self, tries):
