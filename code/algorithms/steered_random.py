@@ -50,6 +50,10 @@ class steered_random_routes:
             if to_be_added_crossing != net.end:
                 return False
 
+        # if the crossing will become an intersection, try to avoid it
+        if (to_be_added_crossing.initial_amount_of_directions - len(to_be_added_crossing.directions)) > 1:
+            return False
+
         return True
 
     def run(self, tries):
@@ -147,4 +151,3 @@ class steered_random_routes:
 
         total_costs = 300 * self.grid.amount_of_intersections + self.total_wires_length
         self.grid.get_output(total_costs)
-

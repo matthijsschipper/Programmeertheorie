@@ -30,7 +30,14 @@ Wat kan beter?
 * Probeer de ruimte die je hebt efficient te gebruiken, de voorkeur is om zo laag mogelijk te zitten
 * Leg de nets die de korste afstand moeten overbruggen eerst
 
-Aan de hand hiervan heb ik een 'steered random' algoritm geschreven, dat produceerde oplossingen zoals hieronder.
+Aan de hand van bovenstaande punten heb ik een 'steered random' algoritm geschreven, dat produceerde oplossingen zoals hieronder.
 
 ![example steered random algoritm](./images/steered_random_chip_0_net_1.png "Example image")
+
+Nu zie je bij deze oplossing bijvoorbeeld, dat het pad nu te snel naar beneden getrokken wordt.
+Het zou dus veel toegevoegde waarde hebben, als het algoritme een plek vooruit kon kijken.
+Als hij toch vooruit kijkt, gaat hij ook proberen intersecties te vermijden.
+Een voorbeeld van een oplossing die hij dan voor de eerste netlist genereert staat hieronder.
+
+![example 2 steered random algoritm](./images/steered_random2_chip_0_net_1.png "Example image")
 
