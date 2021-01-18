@@ -90,7 +90,6 @@ class steered_random_routes:
                     # if net is stuck, delete net and break
                     if not possible_directions:
                         print(f"{net} failed")
-                        print(net.show_route_coordinates())
                         self.grid.delete_net(net, -1)
                         succes = False
                         break

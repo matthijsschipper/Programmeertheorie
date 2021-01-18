@@ -50,10 +50,12 @@
 ## 16-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
-| Birgit | 12:00 | | Working on analysis. |
+| Birgit | 12:00 | 13:00 | Working on analysis. |
 
 ## 18-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
+| Birgit | 11:00 | 12:00 | Worked on analysis |
 | Matthijs | 10:00 | 15:00 | Working on hillclimber algorithm |
 | Matthijs | 17:00 | 19:30 | Working on hillclimber algorithm |
+| Birgit | 22:30 | | |

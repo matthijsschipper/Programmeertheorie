@@ -1,6 +1,6 @@
 from code.classes import grid, crossing, net
 from code.visualisation import visualise as vis
-from code.algorithms import random, steered_random, astar, hillclimber as hc
+from code.algorithms import random, steered_random, astar
 
 if __name__ == "__main__":
     
@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     # Testing steered random algorithm
     steered_random_object = steered_random.steered_random_routes(grid)
-    steered_random_object.run(3)
+    steered_random_object.run(1)
 
     # Testing A* algorithm
     # a = astar.Astar(grid)
