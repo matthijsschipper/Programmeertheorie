@@ -15,10 +15,10 @@ if __name__ == "__main__":
     grid = grid.Grid(printfile, netlistfile)
 
     # Testing random algorithm
-    # r = random.Random(grid)
+    r = random.Random(grid)
 
     # Testing steered random algorithm
-    steered_random_object = steered_random.steered_random_routes(grid)
-    steered_random_object.run(10)
+    # steered_random_object = steered_random.steered_random_routes(grid)
+    # steered_random_object.run(10)
 
     vis.visualise(printfile, outputfile)
