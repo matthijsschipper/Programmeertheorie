@@ -41,3 +41,6 @@ Een voorbeeld van een oplossing die hij dan voor de eerste netlist genereert sta
 
 ![example 2 steered random algoritm](./images/steered_random2_chip_0_net_1.png "Example image")
 
+Netlist 2 implementeren, lukt echter vaak al niet.
+Zo ziet een gefaalde 'oplossing' er bijvoorbeeld uit:
+
