@@ -13,6 +13,7 @@ class Random():
         self.directions = None
         self.start_gate = None
         self.end_gate = None
+        self.solved = False
         
         self.random_routes(self.netlist)
     
@@ -33,16 +34,13 @@ class Random():
                 self.end_gate = net.end
                 self.dead_end = False
 
-                """
-                Wat er fout ging: self.grid.net_is_finished() aangeroepen -> roept current_net.is_finished() aan
-                -> returned boolean -> loop luistert niet als boolean is -> response te sloom?
-                """
                 # Net finished variables return True if crossing added to routelist is the destination
                 while not net.finished:
 
                     # Empty directions list means a dead end
                     if self.grid.get_directions() == []:
-                        print(f'Dead end from {self.start_gate} to {self.end_gate} ({self.steps} steps taken)')
+
+                        # print(f'Dead end from {self.start_gate} to {self.end_gate} ({self.steps} steps taken)')
                         self.dead_end = True
 
                         # Delete dead end nets
@@ -67,7 +65,7 @@ class Random():
                 if self.dead_end:
                     continue
 
-                print(f'Amount of steps to get from {self.start_gate} to {self.end_gate} with random assigning directions is: {self.steps}.')
+                # print(f'Amount of steps to get from {self.start_gate} to {self.end_gate} with random assigning directions is: {self.steps}.')
                 
         
         if not self.check_netlist_implementation():
@@ -77,11 +75,13 @@ class Random():
         """
         Check if any net is not finished. If true, stop. Else, move on to cost calculation.
         """
+
         for net in self.grid.netlist:
             if not net.finished:
                 return False
               
         self.calculate_costs()
+        self.solved = True
         return True
  
     def calculate_costs(self):
@@ -102,3 +102,12 @@ class Random():
         print(f'Total amount of costs for this ciruit: {total_costs}.')
 
         return total_costs
+    
+    def is_solution(self):
+        """
+        Check if a solution exists. Is useful if random algorithm is used in other algoritms.
+        """
+        if self.solved:
+            return True
+        
+        return False
