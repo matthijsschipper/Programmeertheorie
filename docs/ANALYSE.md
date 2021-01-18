@@ -46,6 +46,7 @@ Een goede oplossing:
 
 ![example 3 steered random algoritm](./images/steered_random3_chip_0_net_2.png "Example image")
 
+Deze zit echter nog wel erg hoog in de kosten, door de grote hoeveelheid kruispunten.
 Zo ziet een gefaalde 'oplossing' er bijvoorbeeld uit, als je het algoritme maar een poging geeft per net:
 Als je kruispunten 'aan' zet
 
@@ -55,3 +56,13 @@ Of als je kruispunten uit zet
 
 ![example 5 steered random algoritm](./images/steered_random5_chip_0_net_2.png "Example image")
 
+Dan zie je ook het random aspect in het algoritme terug, omdat het niet zo goed weet hoe het het probleem dan moet oplossen.
+
+Wat kan er nog verbeterd worden?
+* De selectie van welke nets eerst gelegd worden kan uitgebreid worden.
+* Het pad 1-4 faalt vaak, omdat deze als laatst gelegd wordt en er 3 nets naar 4 gaan, het algoritme snapt niet dat het kort 'om kan lopen' en dus het niet lukt.
+Dit kan beter door bv aan de start, voor elke gat en elk net, de richtingen vanaf de gates te verdelen. Dit kan echter ook een verplaatsing van hetzelfde probleem zijn.
+* Hoe deal je met Fog of war principe
+* Reflect op paden die er al liggen op basis van toekomst
+* Test links, rechts en overheen, verwijder daarna gewoon weer, korte wegen proberen
+* Waarom gaat hij 7 plekken volledig omhoog, dan opzij en dan alle 7 weer omlaag?
