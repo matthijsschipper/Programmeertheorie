@@ -59,3 +59,9 @@
 | Matthijs | 10:00 | 15:00 | Working on hillclimber algorithm |
 | Matthijs | 17:00 | 19:30 | Working on hillclimber algorithm |
 | Birgit | 22:30 | 00:00 | Wrote down ideas for improving algorithm in analysis |
+
+## 19-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
+| Birgit | 10:00 | 10:30 | Resolving proxy errors |
+| Birgit | 10:30 | | Working out ideas of yesterday for the algorithm |

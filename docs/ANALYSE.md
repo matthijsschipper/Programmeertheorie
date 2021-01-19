@@ -60,9 +60,11 @@ Dan zie je ook het random aspect in het algoritme terug, omdat het niet zo goed 
 
 Wat kan er nog verbeterd worden?
 * De selectie van welke nets eerst gelegd worden kan uitgebreid worden.
-* Het pad 1-4 faalt vaak, omdat deze als laatst gelegd wordt en er 3 nets naar 4 gaan, het algoritme snapt niet dat het kort 'om kan lopen' en dus het niet lukt.
-Dit kan beter door bv aan de start, voor elke gat en elk net, de richtingen vanaf de gates te verdelen. Dit kan echter ook een verplaatsing van hetzelfde probleem zijn.
+* Het pad 1-4 faalt vaak, omdat deze als laatst gelegd wordt en er 3 nets naar 4 gaan, het algoritme snapt niet dat het kort 'om kan lopen' en daardoor faalt het.
+Dit kan beter door bv aan de start, voor elke gate en elk net, de richtingen vanaf de gates te verdelen. Dit kan echter ook een verplaatsing van hetzelfde probleem zijn.
 * Hoe deal je met Fog of war principe
 * Reflect op paden die er al liggen op basis van toekomst
-* Test links, rechts en overheen, verwijder daarna gewoon weer, korte wegen proberen
+* Test links, rechts en overheen, verwijder daarna gewoon weer, kortste wegen proberen
 * Waarom gaat hij 7 plekken volledig omhoog, dan opzij en dan alle 7 weer omlaag?
+* Ipv random een pad te kiezen, altijd zo veel mogelijk naar de buitenkant afwijken?
+* Paden met 4 nets eerder leggen dan met minder?

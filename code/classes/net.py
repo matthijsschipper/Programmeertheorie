@@ -59,7 +59,7 @@ class Net:
             coordinate_list.append(tuple(coordinates))
         return coordinate_list
              
-    def get_route_to_end(self, current_crossing):
+    def get_route_to_end(self, current_crossing = ""):
         """
         Returns the amount of steps still needed in a certain direction as a list, order: x, y, z
         If net is finished, returns None
@@ -90,8 +90,19 @@ class Net:
         self.finished = False
 
     def get_length(self):
+
         """
         Returns an int of the length of the route so far
         """
 
         return len(self.routelist) - 1
+
+    def reverse(self):
+        """
+        Reverses the start and the end of a net
+        """
+
+        start = self.start
+        self.start = self.end
+        self.end = start
+        self.routelist  = [self.start]

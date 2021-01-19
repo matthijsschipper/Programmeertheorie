@@ -28,6 +28,15 @@ class steered_random_routes:
         
         return [i[1] for i in nets_with_length]
 
+    def select_outer_nets(self, netlist):
+        """
+        Takes the netlist of a grid as input
+        Determines which nets are most on the sides of the grid
+        Returns an ordered list where the first nets are the most on the outside
+        """
+
+        pass
+
     def check_direction(self, net, direction):
         """
         Takes a net object and a direction as input
@@ -51,8 +60,8 @@ class steered_random_routes:
                 return False
 
         # if the crossing will become an intersection, try to avoid it
-        # if (to_be_added_crossing.initial_amount_of_directions - len(to_be_added_crossing.directions)) > 1:
-        #     return False
+        if (to_be_added_crossing.initial_amount_of_directions - len(to_be_added_crossing.directions)) > 1:
+            return False
 
         return True
 
@@ -80,7 +89,6 @@ class steered_random_routes:
 
                 # select this net as current net in the grid
                 self.grid.choose_net(net)
-                print(f"starting on {net}")
 
                 # run until net is finished
                 while not net.finished:
@@ -89,8 +97,7 @@ class steered_random_routes:
 
                     # if net is stuck, delete net and break
                     if not possible_directions:
-                        print(f"{net} failed")
-                        # self.grid.delete_net(net, -1)
+                        self.grid.delete_net(net, -1)
                         succes = False
                         break
                 
@@ -116,8 +123,7 @@ class steered_random_routes:
                             
                             # if none of the directions are possible, register net as failure
                             if found_direction == False:
-                                print(f"{net} failed")
-                                # self.grid.delete_net(net, -1)
+                                self.grid.delete_net(net, -1)
                                 succes = False
                                 break
 
@@ -147,6 +153,12 @@ class steered_random_routes:
 
             ordered_nets = [i for i in ordered_nets if i not in succeeded_nets]
             tries -= 1
+
+        succesful = True
+        for net in self.grid.netlist:
+            if net.finished == False:
+                succesful = False
+        print(f"All nets have succeeded: {succesful}")
 
         total_costs = 300 * self.grid.amount_of_intersections + self.total_wires_length
         self.grid.get_output(total_costs)

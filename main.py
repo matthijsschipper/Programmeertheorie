@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     # Testing steered random algorithm
     steered_random_object = steered_random.steered_random_routes(grid)
-    steered_random_object.run(1)
+    steered_random_object.run(50)
 
     # Testing A* algorithm
     # a = astar.Astar(grid)
