@@ -158,23 +158,3 @@ class Astar():
         self.grid.current_crossing = net.start
         for direction in directions:
             self.grid.add_to_net(direction)
-
-
-'''
-Aanpassing net class
-
- def get_route_to_end(self, current_crossing = ""):
-        """
-        Returns the amount of steps still needed in a certain direction as a list, order: x, y, z
-        If net is finished, returns None
-        """
-
-        if self.finished == True:
-            return None
-
-        # save the coordinates of all relevant crossings
-        if current_crossing == "":
-            current_crossing = self.routelist[-1]
-        current_location = current_crossing.location
-        destination = self.end.location
-'''
