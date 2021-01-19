@@ -1,11 +1,11 @@
 from code.classes import grid, crossing, net
 from code.visualisation import visualise as vis
-from code.algorithms import random, steered_random, astar
+from code.algorithms import random, steered_random, astar, hillclimber as hc
 
 if __name__ == "__main__":
     
     chip_number = 0
-    netlist_number = 2
+    netlist_number = 1
 
     printfile = f"./data/chip_{chip_number}/print_{chip_number}.csv"
     netlistfile = f"./data/chip_{chip_number}/netlist_{netlist_number}.csv"
@@ -15,11 +15,14 @@ if __name__ == "__main__":
     grid = grid.Grid(printfile, netlistfile)
 
     # Testing random algorithm
-    # r = random.Random(grid)
+    r = random.Random(grid)
 
     # Testing steered random algorithm
-    steered_random_object = steered_random.steered_random_routes(grid)
-    steered_random_object.run(1)
+    # steered_random_object = steered_random.steered_random_routes(grid)
+    # s = steered_random_object.run(1)
+
+    # Testing hillclimber algorithm
+    test = hc.HillClimber(r).random_solution
 
     # Testing A* algorithm
     # a = astar.Astar(grid)
