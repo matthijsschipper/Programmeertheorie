@@ -65,3 +65,4 @@
 | --- | --- | --- | --- |
 | Birgit | 10:00 | 10:30 | Resolving proxy errors |
 | Birgit | 10:30 | | Working out ideas of yesterday for the algorithm |
+| Matthijs | 08.30 | 20:00 | Developing hillclimber algorithm |
