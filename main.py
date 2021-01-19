@@ -18,11 +18,8 @@ if __name__ == "__main__":
     r = random.Random(grid)
 
     # Testing steered random algorithm
-    # steered_random_object = steered_random.steered_random_routes(grid)
-    # s = steered_random_object.run(1)
-
-    # Testing hillclimber algorithm
-    test = hc.HillClimber(r).random_solution
+    steered_random_object = steered_random.steered_random_routes(grid)
+    steered_random_object.run(50)
 
     # Testing A* algorithm
     # a = astar.Astar(grid)

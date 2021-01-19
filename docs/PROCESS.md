@@ -63,4 +63,5 @@
 ## 19-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
-| Matthijs | 08.30 | 20:00 (breaks included) | Developing hillclimber algorithm |
+| Birgit | 10:00 | 10:30 | Resolving proxy errors |
+| Birgit | 10:30 | | Working out ideas of yesterday for the algorithm |
