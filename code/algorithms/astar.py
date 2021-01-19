@@ -11,7 +11,6 @@ class Astar():
     
     def run(self):
         c = 1
-        print (f"netlist = {self.netlist}")
 
         for net in self.netlist:
 
@@ -36,10 +35,10 @@ class Astar():
             previous = {}
 
             # AANPASSEN voor 3d
-            g_score = {crossing: float("inf") for row in self.grid.grid[0] for crossing in row}
+            g_score = {crossing: float("inf") for layer in self.grid.grid for row in layer for crossing in row}
             g_score[start] = 0
 
-            f_score = {crossing: float("inf") for row in self.grid.grid[0] for crossing in row}
+            f_score = {crossing: float("inf") for layer in self.grid.grid for row in layer for crossing in row}
             f_score[start] = self.h_score(start)
             #print(f"f_score start: {f_score[start]}")
 
@@ -52,20 +51,30 @@ class Astar():
                 items.remove(current)
 
                 if current == end:
-                    self.reconstruct(current, previous, start)
+                    path = self.reconstruct(current, previous, start)
+                    #self.net(path)
+                    
+                    # print(path) als je .location gebruikt in reconstruct
+                    directions_to_end = self.get_directions_to_end(path)
+                    print(f"directions to end: {directions_to_end}")
+                    self.add_net(directions_to_end, net)
+                    
                     print("jeej eind bereikt")
                     break
                 
                 neighbors = []
 
+                # aanpassen -> zonder current crossing
+
                 self.grid.current_crossing = current
 
                 directions = self.grid.get_directions()
-                #print(f"directions: {directions}")
 
+                '''
                 # weghalen bij 3d en korter schrijven
                 if 'U' in directions:
                     directions.remove('U')
+                '''
                 
                 print(f"directions: {directions}")
 
@@ -73,12 +82,10 @@ class Astar():
                     neighbors.append(self.grid.crossing_at_direction(direction))
                 
                 # later weghalen
-                for neighbor in neighbors:
-                    print(f"neighbor: {neighbor.location}")
+                #for neighbor in neighbors:
+                #    print(f"neighbor: {neighbor.location}")
                 
                 temp_g_score = g_score[current] + 1
-                #hier ggat het mis
-                print(f"temp g_score: {temp_g_score}")
 
                 for neighbor in neighbors:
                     
@@ -86,23 +93,18 @@ class Astar():
                         previous[neighbor] = current
                         g_score[neighbor] = temp_g_score
                         f_score[neighbor] = temp_g_score + self.h_score(neighbor)
-
-                        #print(f"g_score neighbor: {g_score[neighbor]}")
-                        #print(f"f_score neighbor: {f_score[neighbor]}")
                         
                         if neighbor not in items:
                             count += 1
                             open_set.put((f_score[neighbor], count, neighbor))
                             items.add(neighbor)
-                    print("")
+                print("")
             print("")
-                    
-                    
-            # stop na 1 net
             #break
         
-        return False
-    
+        total_costs = 300 * self.grid.amount_of_intersections + 200
+        self.grid.get_output(total_costs)
+
     def h_score(self, crossing):
         self.grid.current_crossing = crossing
         #print(f"directions to end from {crossing.location}: {self.grid.current_net.get_route_to_end(crossing)}")
@@ -111,14 +113,52 @@ class Astar():
     def reconstruct(self, current, previous, start):
         path = []
         
-        # aanpassen
         while current in previous:
-            path.append(current.location)
+            path.append(current)
             current = previous[current]
         
-        path.append(start.location)
-        
-        print(f"path: {path}")
+        path.append(start)
+        path.reverse()
+
+        return path
+    
+    def get_directions_to_end(self, path):
+        directions = []
+
+        for i in range(len(path) - 1):
+            current = path[i].location
+            print(f"current: {current}")
+            next = path[i + 1].location
+            print(f"next: {next}")
+
+            if next[0] - current[0] == 1:
+                directions.append('E')
+            elif next[0] - current[0] == -1:
+                directions.append('W')
+            elif next[1] - current[1] == 1:
+                directions.append('S')
+            elif next[1] - current[1] == -1:
+                directions.append('N')
+            elif next[2] - current[2] == 1:
+                directions.append('U')
+            elif next[2] - current[2] == -1:
+                directions.append('D')
+            
+            print(directions)
+            
+        return directions
+    
+    #weghalen
+    def net(self, path):
+        for step in path:
+            self.grid.current_net.add_crossing(step)
+
+    
+    def add_net(self, directions, net):
+        self.grid.current_crossing = net.start
+        for direction in directions:
+            self.grid.add_to_net(direction)
+
 
 '''
 Aanpassing net class
