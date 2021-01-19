@@ -59,7 +59,7 @@ class Net:
             coordinate_list.append(tuple(coordinates))
         return coordinate_list
              
-    def get_route_to_end(self):
+    def get_route_to_end(self, current_crossing):
         """
         Returns the amount of steps still needed in a certain direction as a list, order: x, y, z
         If net is finished, returns None
@@ -69,7 +69,8 @@ class Net:
             return None
 
         # save the coordinates of all relevant crossings
-        current_crossing = self.routelist[-1]
+        if current_crossing == "":
+            current_crossing = self.routelist[-1]
         current_location = current_crossing.location
         destination = self.end.location
 
