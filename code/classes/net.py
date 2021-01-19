@@ -65,11 +65,11 @@ class Net:
         If net is finished, returns None
         """
 
-        if self.finished == True:
-            return None
+        # if self.finished == True:
+        #     return None
 
         # save the coordinates of all relevant crossings
-        current_crossing = self.routelist[-1]
+        current_crossing = self.routelist[0]
         current_location = current_crossing.location
         destination = self.end.location
 
