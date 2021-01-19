@@ -26,8 +26,6 @@ class Random():
         attemps = 0
 
         while netlist != [] and attemps < 200:
-            if attemps == 180:
-                print('CLOSE TO FAILING')
             for net in netlist:
                 self.grid.choose_net(net)
 
