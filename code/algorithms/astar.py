@@ -13,6 +13,9 @@ class Astar():
         self.grid = copy.deepcopy(grid)
         self.netlist = self.grid.available_nets()
 
+        self.failed_nets = []
+        self.costs = 0
+
         self.run()
     
     def run(self):
@@ -54,15 +57,16 @@ class Astar():
                 
                 directions = self.grid.get_directions(current)
                 
-                neighbors = []
-
                 for direction in directions:
-                    neighbors.append(self.grid.crossing_at_direction(direction, current))
-                
-                temp_g_score = g_score[current] + 1
-
-                for neighbor in neighbors:
+                    temp_g_score = g_score[current] + 1
                     
+                    neighbor = self.grid.crossing_at_direction(direction, current)
+
+                    # verwijder deze 2 regels om alleen de afstand de beschouwen
+                    if (neighbor.initial_amount_of_directions - len(neighbor.directions)) > 1:
+                        temp_g_score += 300
+                        
+
                     if temp_g_score < g_score[neighbor]:
                         previous[neighbor] = current
                         g_score[neighbor] = temp_g_score
@@ -72,6 +76,9 @@ class Astar():
                             count += 1
                             open_set.put((f_score[neighbor], count, neighbor))
                             items.add(neighbor)
+
+            if not net.finished:
+                self.failed_nets.append(f"from {net.start} to {net.end}")
         
         intersections = self.grid.amount_of_intersections
 
@@ -81,6 +88,7 @@ class Astar():
         print("")
         print(f"Total length: {length}")
         print(f"Amount of intersections: {intersections}")
+        print(f"{len(self.failed_nets)} failed nets: {self.failed_nets}")
         print(f"Costs: {self.costs}")
         print("")
 
