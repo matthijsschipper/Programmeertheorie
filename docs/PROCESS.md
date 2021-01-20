@@ -66,8 +66,9 @@
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
 | Jade | 00:00 | 02:00 | Worked on debugging A* algorithm. |
-| Birgit | 10:00 | 10:30 | Resolving proxy errors |
-| Birgit | 10:30 | | Working out ideas of yesterday for the algorithm |
 | Matthijs | 08.30 | 20:00 | Developing hillclimber algorithm |
+| Birgit | 10:00 | 10:30 | Resolving proxy errors |
+| Birgit | 10:30 | 14:00 | Working out ideas of yesterday for the algorithm |
 | Jade | 13:00 | 16:00 | Worked on A* algorithm |
+| Birgit | 14:00 | 18:00 | Wrote report for deadline and geathered the results |
 | Jade | 22:00 | 23:59 | Finished A* algorithm (could still use some cleanup though). |
