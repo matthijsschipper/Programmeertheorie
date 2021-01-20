@@ -37,3 +37,4 @@ if __name__ == "__main__":
 
 
     # vis.visualise(printfile, outputfile, 'optimalizations')
+    # vis.visualise(printfile, outputfile)
