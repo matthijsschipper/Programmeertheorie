@@ -15,60 +15,55 @@ class HillClimber():
 
         self.random_solution = copy.deepcopy(random_solution)
 
-        self.mutate_single_route()
-    
-    def mutate_single_route(self):
+    def optimize_wire_length(self):
         """
-        Pick random route, try to find new route.
+        Optimize given solution on base of wire length for every net.
         """
+        self.index = 0
 
-        '''
-        FOR OPTIMIZING ON BASE OF WIRE LENGTH
-        '''
-        
-        # self.index = 0
+        for net in self.random_solution.grid.netlist:
+            new_solution = copy.deepcopy(self.random_solution)
+            new_grid = new_solution.grid
 
-        # for net in self.random_solution.grid.netlist:
-        #     new_solution = copy.deepcopy(self.random_solution)
-        #     new_grid = new_solution.grid
+            net = new_grid.netlist[self.index]
 
-        #     net = new_grid.netlist[self.index]
+            print(f'Optimizing net {net}....')
 
-        #     print(f'Optimizing net {net}....')
+            self.length = net.get_length()
 
-        #     self.length = net.get_length()
+            print(f'Original length: {self.length}')
 
-        #     print(f'Original length: {self.length}')
+            distance = net.get_route_to_end()
+            distance = abs(distance[0]) + abs(distance[1]) + 1
 
-        #     distance = net.get_route_to_end()
-        #     distance = abs(distance[0]) + abs(distance[1]) + 1
+            # Remove net
+            new_grid.delete_net(net, -1)
 
-        #     # Remove net
-        #     new_grid.delete_net(net, -1)
+            steps = 0
 
-        #     steps = 0
+            while self.length >= distance and steps < 200:
 
-        #     while self.length >= distance and steps < 200:
+                new_route = Random(new_grid)
 
-        #         r = Random(new_grid)
-
-        #         self.check_length(r)
+                self.check_length(new_route)
                 
-        #         steps += 1
+                steps += 1
             
-        #     print(f'Found new length of {self.random_solution.grid.netlist[self.index].get_length()}')
-        #     print()
+            print(f'Found new length of {self.random_solution.grid.netlist[self.index].get_length()}')
+            print()
             
-        #     self.index += 1
+            self.index += 1
 
-        # costs = self.random_solution.calculate_costs()
-        # self.random_solution.grid.get_output(costs)
+        costs = self.random_solution.calculate_costs()
+        self.random_solution.grid.get_output(costs)
 
-        '''
-        FOR OPTIMIZING ON BASE OF COSTS
-        '''
-            
-        for i in range(1000):
+        return self.random_solution
+    
+    def optimize_costs(self, iterations):
+        """
+        Otimize a given solution on base of the total costs.
+        """
+        for i in range(iterations):
             # Make new copy of solution
             new_solution = copy.deepcopy(self.random_solution)
             new_grid = new_solution.grid
@@ -90,6 +85,8 @@ class HillClimber():
             self.check_solution(r)
         
         self.random_solution.grid.get_output(self.costs)
+
+        return self.random_solution
     
     def check_solution(self, new_solution):
         """
@@ -107,6 +104,10 @@ class HillClimber():
             print(f'Found new costs: {self.costs}')
     
     def check_length(self, new_solution):
+        """
+        If new found length is equal to or shorter than old length, update the current
+        solution with the new found solution.
+        """
         net = new_solution.grid.netlist[self.index]
         new_length = net.get_length()
         old_length = self.length
