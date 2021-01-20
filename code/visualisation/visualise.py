@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-def visualise(printfile, outputfile):
+def visualise(printfile, outputfile, folder):
     """
     Takes in the standard-formatted output.csv file
     Outputs a visual representation of that file in the form of a graph
@@ -82,4 +82,4 @@ def visualise(printfile, outputfile):
     ax.invert_xaxis()
 
     # save plot
-    plt.savefig(f"./data/visualisations/3d_{gen_info}.png")
+    plt.savefig(f"./data/visualisations/{folder}/3d_{gen_info}_{folder}.png")
