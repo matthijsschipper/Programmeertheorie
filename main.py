@@ -4,8 +4,8 @@ from code.algorithms import random, steered_random, astar
 
 if __name__ == "__main__":
     
-    chip_number = 0
-    netlist_number = 2
+    chip_number = 1
+    netlist_number = 4
 
     printfile = f"./data/chip_{chip_number}/print_{chip_number}.csv"
     netlistfile = f"./data/chip_{chip_number}/netlist_{netlist_number}.csv"
@@ -19,9 +19,9 @@ if __name__ == "__main__":
 
     # Testing steered random algorithm
     steered_random_object = steered_random.steered_random_routes(grid)
-    steered_random_object.run(50)
+    grid = steered_random_object.run(50)
 
     # Testing A* algorithm
     # a = astar.Astar(grid)
 
-    vis.visualise(printfile, outputfile)
+    # vis.visualise(printfile, outputfile)
