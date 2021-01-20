@@ -46,7 +46,7 @@ class HillClimber():
 
             steps = 0
 
-            while self.length >= distance and steps < 200:
+            while self.length >= distance and steps < 50:
 
                 new_route = Random(new_grid)
 
@@ -139,7 +139,7 @@ class HillClimber():
         new_length = net.get_length()
         old_length = self.length
         new_costs = new_solution.calculate_costs()
-        current_costs = self.random_solution.calculate_costs()
+        current_costs = self.random_solution.costs
 
         if new_length == 0:
             return
