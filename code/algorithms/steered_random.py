@@ -12,6 +12,7 @@ class steered_random_routes:
     def __init__(self, grid):
         self.grid = deepcopy(grid)
         self.total_wires_length = 0
+        self.run(50)
 
     def select_shortest_nets(self, netlist):
         """
@@ -159,8 +160,8 @@ class steered_random_routes:
             if net.finished == False:
                 succesful = False
 
-        return self.grid
+        # return self.grid
 
-        total_costs = 300 * self.grid.amount_of_intersections + self.total_wires_length
+        self.costs = 300 * self.grid.amount_of_intersections + self.total_wires_length
 
-        self.grid.get_output(total_costs)
+        self.grid.get_output(self.costs)

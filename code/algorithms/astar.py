@@ -75,16 +75,16 @@ class Astar():
         
         intersections = self.grid.amount_of_intersections
 
-        costs =  length + 300 * intersections
+        self.costs =  length + 300 * intersections
 
         # Optional
         print("")
         print(f"Total length: {length}")
         print(f"Amount of intersections: {intersections}")
-        print(f"Costs: {costs}")
+        print(f"Costs: {self.costs}")
         print("")
 
-        self.grid.get_output(costs)
+        self.grid.get_output(self.costs)
 
     def h_score(self, crossing):
         self.grid.current_crossing = crossing

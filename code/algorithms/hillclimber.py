@@ -10,70 +10,85 @@ class HillClimber():
     """
     def __init__(self, random_solution):
         # Check for validity
-        if not random_solution.is_solution():
-            raise Exception('HillClimber requires a valid solution.')
+        # if not random_solution.is_solution():
+        #     raise Exception('HillClimber requires a valid solution.')
 
         self.random_solution = copy.deepcopy(random_solution)
+        self.old_costs = random_solution.costs
+        self.old_intersections = random_solution.grid.amount_of_intersections
+        self.old_total_length = []
+        self.new_total_length = []
 
-        self.mutate_single_route()
-    
-    def mutate_single_route(self):
+    def optimize_wire_length(self, chip_number, netlist_number):
         """
-        Pick random route, try to find new route.
+        Optimize given solution on base of wire length for every net.
         """
+        self.index = 0
 
-        '''
-        FOR OPTIMIZING ON BASE OF WIRE LENGTH
-        '''
-        
-        # self.index = 0
+        for net in self.random_solution.grid.netlist:
+            new_solution = copy.deepcopy(self.random_solution)
+            new_grid = new_solution.grid
 
-        # for net in self.random_solution.grid.netlist:
-        #     new_solution = copy.deepcopy(self.random_solution)
-        #     new_grid = new_solution.grid
+            net = new_grid.netlist[self.index]
 
-        #     net = new_grid.netlist[self.index]
+            print(f'Optimizing net {net}....')
 
-        #     print(f'Optimizing net {net}....')
+            self.length = net.get_length()
+            self.old_total_length.append(self.length)
 
-        #     self.length = net.get_length()
+            print(f'Original length: {self.length}')
 
-        #     print(f'Original length: {self.length}')
+            distance = net.get_route_to_end()
+            distance = abs(distance[0]) + abs(distance[1]) + 1
 
-        #     distance = net.get_route_to_end()
-        #     distance = abs(distance[0]) + abs(distance[1]) + 1
+            # Remove net
+            new_grid.delete_net(net, -1)
 
-        #     # Remove net
-        #     new_grid.delete_net(net, -1)
+            steps = 0
 
-        #     steps = 0
+            while self.length >= distance and steps < 200:
 
-        #     while self.length >= distance and steps < 200:
+                new_route = Random(new_grid)
 
-        #         r = Random(new_grid)
-
-        #         self.check_length(r)
+                self.check_length(new_route)
                 
-        #         steps += 1
+                steps += 1
             
-        #     print(f'Found new length of {self.random_solution.grid.netlist[self.index].get_length()}')
-        #     print()
-            
-        #     self.index += 1
+            print(f'Found new length of {self.random_solution.grid.netlist[self.index].get_length()}')
+            print()
 
-        # costs = self.random_solution.calculate_costs()
-        # self.random_solution.grid.get_output(costs)
-
-        '''
-        FOR OPTIMIZING ON BASE OF COSTS
-        '''
+            self.new_total_length.append(self.length)
             
-        for i in range(1000):
+            self.index += 1
+
+        costs = self.random_solution.costs
+        self.random_solution.grid.get_output(costs)
+
+        print(f'''
+        Wire length optimization results:
+        -------------------------------------------------------
+        Optimized chip {chip_number} and netlist {netlist_number}
+        Optimized costs from {self.old_costs} to {costs}
+        Optimized intersections from {self.old_intersections} to {self.random_solution.grid.amount_of_intersections}
+        Optimized total length from {sum(self.old_total_length)} to {sum(self.new_total_length)}
+        ''')
+
+        return self.random_solution
+    
+    def optimize_costs(self, iterations, chip_number, netlist_number):
+        """
+        Otimize a given solution on base of the total costs.
+        """
+        self.costs = self.random_solution.costs
+        self.iterations = iterations
+        for i in range(iterations):
+            if i % 100 == 0:
+                print(f'On iteration {i}/{iterations}')
             # Make new copy of solution
             new_solution = copy.deepcopy(self.random_solution)
             new_grid = new_solution.grid
             route_points = new_grid.netlist
-            self.costs = new_solution.calculate_costs()
+            # self.costs = new_solution.c
 
             if i == 0:
                 print(f'Original costs: {self.costs}')
@@ -90,6 +105,16 @@ class HillClimber():
             self.check_solution(r)
         
         self.random_solution.grid.get_output(self.costs)
+
+        print(f'''
+        Cost optimization results for {self.iterations} tries:
+        -------------------------------------------------------
+        Optimized chip {chip_number} and netlist {netlist_number}
+        Optimized costs from {self.old_costs} to {self.costs}
+        Optimized intersections from {self.old_intersections} to {self.random_solution.grid.amount_of_intersections}
+        ''')
+
+        return self.random_solution
     
     def check_solution(self, new_solution):
         """
@@ -107,6 +132,10 @@ class HillClimber():
             print(f'Found new costs: {self.costs}')
     
     def check_length(self, new_solution):
+        """
+        If new found length is equal to or shorter than old length, update the current
+        solution with the new found solution.
+        """
         net = new_solution.grid.netlist[self.index]
         new_length = net.get_length()
         old_length = self.length
