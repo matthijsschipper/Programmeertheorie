@@ -3,6 +3,12 @@ from queue import PriorityQueue
 
 
 class Astar():
+    """
+    Algorithm that finds the best path for each net based on a heuristic function.
+    The heuristic function is the traveled distance from the starting gate
+    plus the minimal distance to the end gate. (All distances are Manhattan distances.)
+    """
+    
     def __init__(self, grid):
         self.grid = copy.deepcopy(grid)
         self.netlist = self.grid.available_nets()
@@ -10,23 +16,14 @@ class Astar():
         self.run()
     
     def run(self):
-        c = 1
-        print (f"netlist = {self.netlist}")
+        length = 0
 
         for net in self.netlist:
 
-            print(f"net: {c}")
-            c += 1
-
             self.grid.current_net = net
 
-            # miss in methode in grid
             start = net.start
             end = net.end
-
-            print(f"start: {start.location}")
-            print(f"end: {end.location}")
-            print("")
 
             count = 0
             open_set = PriorityQueue()
@@ -35,50 +32,34 @@ class Astar():
             open_set.put((0, count, start))
             previous = {}
 
-            # AANPASSEN voor 3d
-            g_score = {crossing: float("inf") for row in self.grid.grid[0] for crossing in row}
+            g_score = {crossing: float("inf") for layer in self.grid.grid for row in layer for crossing in row}
             g_score[start] = 0
 
-            f_score = {crossing: float("inf") for row in self.grid.grid[0] for crossing in row}
+            f_score = {crossing: float("inf") for layer in self.grid.grid for row in layer for crossing in row}
             f_score[start] = self.h_score(start)
-            #print(f"f_score start: {f_score[start]}")
 
             # items in PriorityQueue
             items = {start}
 
             while not open_set.empty():
                 current = open_set.get()[2]
-                print(f"current location: {current.location}")
                 items.remove(current)
 
                 if current == end:
-                    self.reconstruct(current, previous, start)
-                    print("jeej eind bereikt")
+                    path = self.reconstruct(current, previous, start)
+                    directions_to_end = self.get_directions_to_end(path)
+                    length += len(directions_to_end)
+                    self.add_net(directions_to_end, net)
                     break
+                
+                directions = self.grid.get_directions(current)
                 
                 neighbors = []
 
-                self.grid.current_crossing = current
-
-                directions = self.grid.get_directions()
-                #print(f"directions: {directions}")
-
-                # weghalen bij 3d en korter schrijven
-                if 'U' in directions:
-                    directions.remove('U')
-                
-                print(f"directions: {directions}")
-
                 for direction in directions:
-                    neighbors.append(self.grid.crossing_at_direction(direction))
-                
-                # later weghalen
-                for neighbor in neighbors:
-                    print(f"neighbor: {neighbor.location}")
+                    neighbors.append(self.grid.crossing_at_direction(direction, current))
                 
                 temp_g_score = g_score[current] + 1
-                #hier ggat het mis
-                print(f"temp g_score: {temp_g_score}")
 
                 for neighbor in neighbors:
                     
@@ -86,55 +67,64 @@ class Astar():
                         previous[neighbor] = current
                         g_score[neighbor] = temp_g_score
                         f_score[neighbor] = temp_g_score + self.h_score(neighbor)
-
-                        #print(f"g_score neighbor: {g_score[neighbor]}")
-                        #print(f"f_score neighbor: {f_score[neighbor]}")
                         
                         if neighbor not in items:
                             count += 1
                             open_set.put((f_score[neighbor], count, neighbor))
                             items.add(neighbor)
-                    print("")
-            print("")
-                    
-                    
-            # stop na 1 net
-            #break
         
-        return False
-    
+        intersections = self.grid.amount_of_intersections
+
+        costs =  length + 300 * intersections
+
+        # Optional
+        print("")
+        print(f"Total length: {length}")
+        print(f"Amount of intersections: {intersections}")
+        print(f"Costs: {costs}")
+        print("")
+
+        self.grid.get_output(costs)
+
     def h_score(self, crossing):
         self.grid.current_crossing = crossing
-        #print(f"directions to end from {crossing.location}: {self.grid.current_net.get_route_to_end(crossing)}")
         return len(self.grid.get_directions_to_end())
     
     def reconstruct(self, current, previous, start):
         path = []
         
-        # aanpassen
         while current in previous:
-            path.append(current.location)
+            path.append(current)
             current = previous[current]
         
-        path.append(start.location)
-        
-        print(f"path: {path}")
+        path.append(start)
+        path.reverse()
 
-'''
-Aanpassing net class
+        return path
+    
+    def get_directions_to_end(self, path):
+        directions = []
 
- def get_route_to_end(self, current_crossing = ""):
-        """
-        Returns the amount of steps still needed in a certain direction as a list, order: x, y, z
-        If net is finished, returns None
-        """
+        for i in range(len(path) - 1):
+            current = path[i].location
+            next = path[i + 1].location
 
-        if self.finished == True:
-            return None
-
-        # save the coordinates of all relevant crossings
-        if current_crossing == "":
-            current_crossing = self.routelist[-1]
-        current_location = current_crossing.location
-        destination = self.end.location
-'''
+            if next[0] - current[0] == 1:
+                directions.append('E')
+            elif next[0] - current[0] == -1:
+                directions.append('W')
+            elif next[1] - current[1] == 1:
+                directions.append('S')
+            elif next[1] - current[1] == -1:
+                directions.append('N')
+            elif next[2] - current[2] == 1:
+                directions.append('U')
+            elif next[2] - current[2] == -1:
+                directions.append('D')
+            
+        return directions
+    
+    def add_net(self, directions, net):
+        self.grid.current_crossing = net.start
+        for direction in directions:
+            self.grid.add_to_net(direction)

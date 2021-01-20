@@ -50,6 +50,7 @@
 ## 16-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
+| Jade | 00:00 | 2:00 | Started debugging A* algorithm |
 | Birgit | 12:00 | 13:00 | Working on analysis. |
 
 ## 18-01-2021
@@ -59,9 +60,14 @@
 | Matthijs | 10:00 | 15:00 | Working on hillclimber algorithm |
 | Matthijs | 17:00 | 19:30 | Working on hillclimber algorithm |
 | Birgit | 22:30 | 00:00 | Wrote down ideas for improving algorithm in analysis |
+| Jade | 21:00 | 23:59 | Worked on debugging A* algorithm. |
 
 ## 19-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
+| Jade | 00:00 | 02:00 | Worked on debugging A* algorithm. |
 | Birgit | 10:00 | 10:30 | Resolving proxy errors |
 | Birgit | 10:30 | | Working out ideas of yesterday for the algorithm |
+| Matthijs | 08.30 | 20:00 | Developing hillclimber algorithm |
+| Jade | 13:00 | 16:00 | Worked on A* algorithm |
+| Jade | 22:00 | 23:59 | Finished A* algorithm (could still use some cleanup though). |

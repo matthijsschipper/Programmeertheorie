@@ -282,12 +282,14 @@ class Grid():
         # indexing order: z, y, x
         return self.grid[z][y][x]
 
-    def get_directions(self):
+    def get_directions(self, crossing = ""):
         """
-        Returns possible directions from current crossing as list
+        Returns possible directions from crossing as list
         """
+        if crossing == "":
+            crossing = self.current_crossing
 
-        return self.current_crossing.directions
+        return crossing.directions
 
     def get_directions_to_end(self, current_crossing = ""):
         """

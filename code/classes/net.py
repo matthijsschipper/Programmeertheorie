@@ -65,8 +65,8 @@ class Net:
         If net is finished, returns None
         """
 
-        if self.finished == True:
-            return None
+        # if self.finished == True:
+        #     return None
 
         # save the coordinates of all relevant crossings
         if current_crossing == "":
