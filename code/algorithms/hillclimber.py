@@ -88,7 +88,6 @@ class HillClimber():
             new_solution = copy.deepcopy(self.random_solution)
             new_grid = new_solution.grid
             route_points = new_grid.netlist
-            # self.costs = new_solution.c
 
             if i == 0:
                 print(f'Original costs: {self.costs}')
@@ -139,11 +138,13 @@ class HillClimber():
         net = new_solution.grid.netlist[self.index]
         new_length = net.get_length()
         old_length = self.length
+        new_costs = new_solution.calculate_costs()
+        current_costs = self.random_solution.calculate_costs()
 
         if new_length == 0:
             return
 
-        if new_length < old_length:
+        if new_length < old_length and new_costs < current_costs:
             # Update initializer copy with better or equal copy
             self.random_solution = new_solution
             self.length = new_length
