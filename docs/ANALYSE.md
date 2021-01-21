@@ -24,6 +24,22 @@ Al hoewel het logisch is dat een random algoritme weinig 'goede' oplossingen gen
 * Je zou perongeluk met je pad andere gates kunnen insluiten, waardoor er voor die gates geen enkele mogelijkheid meer is.
 * Met de random paden leg je ontzettend veel kruispunten, waaronder met jezelf, wat hoge kosten oplevert.
 
+Wanneer het random algoritme zolang wordt gerund totdat er een oplossing is gevonden voor netlist 2 van chip 0, ziet de oplossing er zo uit:
+
+![example 3 random algorithm](./images/random_chip_0_net_2.png "Example image")
+
+Nu we een hillclimber algoritme hebben ontwikkeld dat oplossingen optimaliseert op basis van kosten en we dit algoritme de laatst gegeven oplossing laten optimaliseren, zien we de volgende verbetering:
+
+![example hillclimber algorithm](.images/hillclimber_chip_0_net_2_random.png "Example image")
+
+        Cost optimization results for 10000 tries:
+        -------------------------------------------------------
+        Optimized chip 0 and netlist 2
+        Optimized costs from 24327 to 43
+        Optimized intersections from 80 to 0   
+
+Interessant aan dit resultaat is dat de gevonden optimalisatie gelijk staat aan de oplossing die het A* algoritme vindt voor netlist 2 van chip 0, namelijk kosten van 43. 
+
 Wat kan beter?
 
 * Probeer richting je eindgate te lopen
@@ -68,3 +84,4 @@ Dit kan beter door bv aan de start, voor elke gate en elk net, de richtingen van
 * Waarom gaat hij 7 plekken volledig omhoog, dan opzij en dan alle 7 weer omlaag?
 * Ipv random een pad te kiezen, altijd zo veel mogelijk naar de buitenkant afwijken?
 * Paden met 4 nets eerder leggen dan met minder?
+* Waarom maak je x iteraties bij het zoeken van een oplossing? Vanaf welke iteratie worden er oplossingen gevonden?
