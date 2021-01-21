@@ -72,3 +72,7 @@
 | Jade | 13:00 | 16:00 | Worked on A* algorithm |
 | Birgit | 14:00 | 18:00 | Wrote report for deadline and geathered the results |
 | Jade | 22:00 | 23:59 | Finished A* algorithm (could still use some cleanup though). |
+
+## 20-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
