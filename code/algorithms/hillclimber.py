@@ -123,6 +123,9 @@ class HillClimber():
         new_costs = new_solution.calculate_costs()
         old_costs = self.costs
 
+        if len(new_solution.grid.available_nets()) > 0:
+            return
+
         if new_costs <= old_costs:
             # Update initializer copy with better or equal copy
             self.random_solution = new_solution
