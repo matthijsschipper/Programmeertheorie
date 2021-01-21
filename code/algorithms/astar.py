@@ -5,46 +5,60 @@ from queue import PriorityQueue
 class Astar():
     """
     Algorithm that finds the best path for each net based on a heuristic function.
-    The heuristic function is the traveled distance from the starting gate
-    plus the minimal distance to the end gate. (All distances are Manhattan distances.)
+    The heuristic function considers the traveled distance from the starting gate,
+    the minimal distance to the end gate and the amount of intersections along the path.
+    (All distances are Manhattan distances.)
     """
     
     def __init__(self, grid):
         self.grid = copy.deepcopy(grid)
         self.netlist = self.grid.available_nets()
 
+        self.failed_nets = []
+        self.costs = 0
+
         self.run()
     
     def run(self):
+        """
+        Runs A* algoritm until all nets are considered.
+        """
+
+        # total wire length starts at 0
         length = 0
 
+        # solve problem net by net
         for net in self.netlist:
-
             self.grid.current_net = net
 
+            # save start and end crossing
             start = net.start
             end = net.end
 
-            count = 0
-            open_set = PriorityQueue()
-            
-            # f-score, count for breaking ties 
-            open_set.put((0, count, start))
-            previous = {}
-
+            # set all g-scores and f-scores to infinity and update for start
             g_score = {crossing: float("inf") for layer in self.grid.grid for row in layer for crossing in row}
-            g_score[start] = 0
-
             f_score = {crossing: float("inf") for layer in self.grid.grid for row in layer for crossing in row}
+            g_score[start] = 0
             f_score[start] = self.h_score(start)
 
-            # items in PriorityQueue
-            items = {start}
+            count = 0
 
+            # initialise open set and insert start crossing
+            open_set = PriorityQueue()
+            open_set.put((0, count, start))
+
+            # keep track of elements in open_set
+            elements = {start}
+            
+            # keep track of previous crossing
+            previous = {}
+
+            # keep trying until no more crossings left
             while not open_set.empty():
                 current = open_set.get()[2]
-                items.remove(current)
+                elements.remove(current)
 
+                # check if end is reached, if so reconstruct path and break
                 if current == end:
                     path = self.reconstruct(current, previous, start)
                     directions_to_end = self.get_directions_to_end(path)
@@ -52,45 +66,60 @@ class Astar():
                     self.add_net(directions_to_end, net)
                     break
                 
+                # get available directions for considered crossing
                 directions = self.grid.get_directions(current)
                 
-                neighbors = []
-
+                # consider all available neighbouring crossings
                 for direction in directions:
-                    neighbors.append(self.grid.crossing_at_direction(direction, current))
-                
-                temp_g_score = g_score[current] + 1
-
-                for neighbor in neighbors:
+                    neighbour = self.grid.crossing_at_direction(direction, current)
+                    temp_g_score = g_score[current] + 1
                     
-                    if temp_g_score < g_score[neighbor]:
-                        previous[neighbor] = current
-                        g_score[neighbor] = temp_g_score
-                        f_score[neighbor] = temp_g_score + self.h_score(neighbor)
+                    # if you only want to consider distances and not the cost of interections remove the following if statement
+                    # if intersection at neighbour increment temp_g_score with 300 (cost of intersection)
+                    if (neighbour.initial_amount_of_directions - len(neighbour.directions)) > 1:
+                        temp_g_score += 300
+
+                    # check whether calculated g-score is smaller than saved g-score, if so update g-score and f-score
+                    if temp_g_score < g_score[neighbour]:
+                        previous[neighbour] = current
+                        g_score[neighbour] = temp_g_score
+                        f_score[neighbour] = temp_g_score + self.h_score(neighbour)
                         
-                        if neighbor not in items:
+                        # make sure considered crossing is in open_set
+                        if neighbour not in elements:
                             count += 1
-                            open_set.put((f_score[neighbor], count, neighbor))
-                            items.add(neighbor)
+                            open_set.put((f_score[neighbour], count, neighbour))
+                            elements.add(neighbour)
+
+            # if net is not finished it failed
+            if not net.finished:
+                self.failed_nets.append(f"from {net.start} to {net.end}")
         
         intersections = self.grid.amount_of_intersections
-
         self.costs =  length + 300 * intersections
 
         # Optional
         print("")
         print(f"Total length: {length}")
         print(f"Amount of intersections: {intersections}")
+        print(f"{len(self.failed_nets)} failed nets: {self.failed_nets}")
         print(f"Costs: {self.costs}")
         print("")
 
         self.grid.get_output(self.costs)
 
     def h_score(self, crossing):
-        self.grid.current_crossing = crossing
-        return len(self.grid.get_directions_to_end())
+        """
+        Calculates the h-score of a given crossing.
+        """
+        return len(self.grid.get_directions_to_end(crossing))
     
     def reconstruct(self, current, previous, start):
+        """
+        Reconstructs the path between the start and end crossing of a net
+        based on a dictionary with crossings and their predecessors.
+        The steps are saved in a list.
+        """
         path = []
         
         while current in previous:
@@ -103,6 +132,10 @@ class Astar():
         return path
     
     def get_directions_to_end(self, path):
+        """
+        Takes a list of crossings from the start to the end of
+        a net and converts it to a list of directions.
+        """
         directions = []
 
         for i in range(len(path) - 1):
@@ -125,6 +158,9 @@ class Astar():
         return directions
     
     def add_net(self, directions, net):
+        """
+        Creates a complete net based on a list of directions.
+        """
         self.grid.current_crossing = net.start
         for direction in directions:
             self.grid.add_to_net(direction)

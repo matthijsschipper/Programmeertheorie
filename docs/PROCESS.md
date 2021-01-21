@@ -76,3 +76,7 @@
 ## 20-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
+| Jade | 01:00 | 03:00 | Worked on cleaning up A* algorithm. |
+| Matthijs | 08:30 | 17:00 | Developing hillclimber algorithm (breaks included) |
+| Jade | 13:00 | 16:00 | Changed A* algorithm to take in consideration the costs of intersections. |
+| Jade | 18:00 | 19:00 | Finished cleaning up of new version A* algorithm. |

@@ -14,6 +14,7 @@ class Random():
         self.start_gate = None
         self.end_gate = None
         self.solved = False
+        self.costs = None
         
         self.random_routes(self.netlist)
     
@@ -95,14 +96,14 @@ class Random():
         for net in self.grid.netlist:
             total_wires_length += net.get_length()
         
-        total_costs = total_wires_length
-        total_costs += (self.grid.amount_of_intersections * 300)
+        self.costs = total_wires_length
+        self.costs += (self.grid.amount_of_intersections * 300)
 
-        self.grid.get_output(total_costs)
+        self.grid.get_output(self.costs)
 
         # print(f'Total amount of costs for this ciruit: {total_costs}.')
 
-        return total_costs
+        return self.costs
     
     def is_solution(self):
         """
