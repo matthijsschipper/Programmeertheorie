@@ -291,12 +291,14 @@ class Grid():
 
         return crossing.directions
 
-    def get_directions_to_end(self, current_crossing = ""):
+    def get_directions_to_end(self, crossing = ""):
         """
         Returns a list of directions to the end of the current net, order: x, y, z
         """
+        if crossing == "":
+            crossing = self.current_crossing
 
-        literal_directions = self.current_net.get_route_to_end(current_crossing)
+        literal_directions = self.current_net.get_route_to_end(crossing)
         directions = []
 
         # translate to directions
