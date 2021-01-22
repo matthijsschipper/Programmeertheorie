@@ -2,6 +2,8 @@ import copy
 import random
 from code.classes import net
 from code.algorithms.random import Random
+from code.algorithms import astar
+import operator
 
 class HillClimber():
     """
@@ -21,13 +23,17 @@ class HillClimber():
 
     def optimize_wire_length(self, chip_number, netlist_number):
         """
-        Optimize given solution on base of wire length for every net.
+        Optimize given solution on base of wire length for every net. NOT FINISHED + BUGGY
         """
         self.index = 0
+        netlist = self.random_solution.grid.netlist
 
-        for net in self.random_solution.grid.netlist:
+        # for net in sorted(self.random_solution.grid.netlist, key=operator.methodcaller('get_length')):
+        for net in netlist:
             new_solution = copy.deepcopy(self.random_solution)
             new_grid = new_solution.grid
+
+            self.index = self.random_solution.grid.netlist.index(net)
 
             net = new_grid.netlist[self.index]
 
@@ -46,7 +52,7 @@ class HillClimber():
 
             steps = 0
 
-            while self.length >= distance and steps < 50:
+            while self.length >= distance and steps < 200:
 
                 new_route = Random(new_grid)
 
@@ -99,9 +105,10 @@ class HillClimber():
             new_grid.delete_net(net, -1)
 
             # Make new route
-            r = Random(new_grid)
+            # r = Random(new_grid)
+            a = astar.Astar(new_grid)
 
-            self.check_solution(r)
+            self.check_solution(a)
         
         self.random_solution.grid.get_output(self.costs)
 
@@ -120,7 +127,9 @@ class HillClimber():
         Check if new found costs are lower than or equal to old costs. Overwrite values
         if true.
         """
-        new_costs = new_solution.calculate_costs()
+        # new_costs = new_solution.calculate_costs()
+        # These costs are focussed on calculating costs of A* solution and is a temporary fix
+        new_costs = new_solution.grid.netlist_length() + (300 * new_solution.grid.amount_of_intersections)
         old_costs = self.costs
 
         if len(new_solution.grid.available_nets()) > 0:
