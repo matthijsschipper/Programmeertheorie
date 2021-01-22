@@ -17,6 +17,8 @@ class Astar():
         self.failed_nets = []
         self.costs = 0
 
+        self.height = 0
+
         self.run()
     
     def run(self):
@@ -61,6 +63,11 @@ class Astar():
                 # check if end is reached, if so reconstruct path and break
                 if current == end:
                     path = self.reconstruct(current, previous, start)
+                    
+                     # alleen om hoogte te bepalen
+                     for p in path:
+                        self.height = max(self.height, p.location[2])
+
                     directions_to_end = self.get_directions_to_end(path)
                     length += len(directions_to_end)
                     self.add_net(directions_to_end, net)
@@ -104,6 +111,7 @@ class Astar():
         print(f"Amount of intersections: {intersections}")
         print(f"{len(self.failed_nets)} failed nets: {self.failed_nets}")
         print(f"Costs: {self.costs}")
+        print(f"Height: {self.height}")
         print("")
 
         self.grid.get_output(self.costs)
