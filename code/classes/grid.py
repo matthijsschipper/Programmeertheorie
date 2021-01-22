@@ -396,7 +396,8 @@ class Grid():
         Can be called on the grid to write an outputfile
         """
 
-        with open(f"./data/outputfiles/chip_{self.chip_id}_net_{self.netlist_id}.csv", 'w') as file:
+        # with open(f"./data/outputfiles/chip_{self.chip_id}_net_{self.netlist_id}.csv", 'w') as file:
+        with open('./data/outputfiles/output.csv', 'w') as file:
             output = writer(file)
             output.writerow(["net", "wires"])
 
@@ -409,3 +410,11 @@ class Grid():
                 output.writerow([route_string, f"{routelist_string}"])
             
             output.writerow([f"chip_{self.chip_id}_net_{self.netlist_id},{total_costs}"])
+    
+    def netlist_length(self):
+        length = []
+
+        for net in self.netlist:
+            length.append(net.get_length())
+        
+        return sum(length)
