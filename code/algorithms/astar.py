@@ -65,7 +65,7 @@ class Astar():
                     path = self.reconstruct(current, previous, start)
                     
                      # alleen om hoogte te bepalen
-                     for p in path:
+                    for p in path:
                         self.height = max(self.height, p.location[2])
 
                     directions_to_end = self.get_directions_to_end(path)
@@ -78,7 +78,15 @@ class Astar():
                 
                 # consider all available neighbouring crossings
                 for direction in directions:
+                    
                     neighbour = self.grid.crossing_at_direction(direction, current)
+
+                    # OVERGENOMEN VAN STEERED RANDOM
+                    # if the crossing is a gate, only allow it if it's the endgate of the net
+                    if neighbour.is_gate:
+                        if neighbour != end:
+                            continue
+                    
                     temp_g_score = g_score[current] + 1
                     
                     # if you only want to consider distances and not the cost of interections remove the following if statement
