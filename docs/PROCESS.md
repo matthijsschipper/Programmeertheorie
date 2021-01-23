@@ -84,8 +84,11 @@
 ## 21-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
+| Jade | 00:00 | 02:00 | Started thinking out ways to improve the A* algorithm. |
 | Matthijs | 10:00 | 20:00 | Working on hillclimber + presentation |
+| Jade | 14:00 | 17:30 | Worked on presentation. |
 | Birgit | 21:30 | 00:00 | Rewriting first algorithm report, working on presentation for friday |
+| Jade | 23:00 | 23:59 | Started documenting all results of the A* algorithm. |
 
 ## 22-01-2021
 | Name | Start-time | End-time | Description |

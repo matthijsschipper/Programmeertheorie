@@ -180,3 +180,20 @@ class Astar():
         self.grid.current_crossing = net.start
         for direction in directions:
             self.grid.add_to_net(direction)
+    '''
+    # OVERGENOMEN VAN STEERED RANDOM (miss moeten we er een methode in grid.py van maken)
+    def select_shortest_nets(self, netlist):
+        """
+        Takes the netlist of a grid as input
+        Determines which nets should be the shortest to lay down
+        Returns an ordered list where the first nets are the shortest and they grow in size
+        """
+
+        nets_with_length = []
+        for net in netlist:
+            amount_of_steps = sum([abs(i) for i in net.get_route_to_end()])
+            nets_with_length.append((amount_of_steps, net))
+        nets_with_length.sort(key = lambda x : x[0])
+        
+        return [i[1] for i in nets_with_length]
+    '''
