@@ -94,3 +94,5 @@
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
 | Birgit | 9:00 | | Working on bettering the algoritm, analysing the problems it comes across |
+| Matthijs | 10:00 | 13:00 | Working on presentation + hillclimber |
+| Matthijs | 16:00 | 21:00 | Working on hillclimber heuristics |
