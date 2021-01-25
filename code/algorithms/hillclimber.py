@@ -16,30 +16,6 @@ class HillClimber():
         self.old_intersections = self.solution.grid.amount_of_intersections
         self.convergence_count = 0
 
-<<<<<<< HEAD
-        for net in self.random_solution.grid.netlist:
-            new_solution = copy.deepcopy(self.random_solution)
-            new_grid = new_solution.grid
-
-            net = new_grid.netlist[self.index]
-
-            # print(f'Optimizing net {net}....')
-
-            self.length = net.get_length()
-            self.old_total_length.append(self.length)
-
-            # print(f'Original length: {self.length}')
-
-            distance = net.get_route_to_end()
-            distance = abs(distance[0]) + abs(distance[1]) + 1
-
-            # Remove net
-            new_grid.delete_net(net, -1)
-
-            steps = 0
-
-            while self.length >= distance and steps < 50:
-=======
     def optimize_costs(self, chip_number, netlist_number):
         """
         Otimize a given solution on base of the total costs. Remove a randomly chosen net and let 
@@ -48,22 +24,12 @@ class HillClimber():
         """
         self.costs = self.solution.costs
         # self.iterations = iterations
->>>>>>> e257a00e8069d4e67c95a4c911b33dcf99ac36d0
 
         # Print original costs before optimalization
         print(f'Original costs: {self.costs}')
         print('Optimizing original solution....')
 
-<<<<<<< HEAD
-                self.check_length(new_route)
-                
-                steps += 1
-            
-            # print(f'Found new length of {self.random_solution.grid.netlist[self.index].get_length()}')
-            # print()
-=======
         while self.convergence_count != 1500:
->>>>>>> e257a00e8069d4e67c95a4c911b33dcf99ac36d0
 
             # Print status of the loop on every 100th iteration
             # if i % 100 == 0:
