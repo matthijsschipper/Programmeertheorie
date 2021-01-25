@@ -1,21 +1,32 @@
 from copy import deepcopy
 from random import choice
+<<<<<<< HEAD
 from code.classes import net
 from code.algorithms.random import Random
 from code.algorithms import astar
 import operator
+=======
+from code.algorithms.astar import Astar
+
+>>>>>>> b7d898867451d753bc2ed0693eab09dc32692f23
 
 class HillClimber():
     def __init__(self, solution):
         """
-        Hillclimber optimializes valid solutions by removing a randomly chosen net and calling the
-        A* algorithm to plot it again for the amount of provided iterations.
+        Hillclimber optimizes valid solutions by removing a randomly chosen net and calling the
+        A* algorithm to plot it again. This process is repeated until the same amount of costs
+        is found for 1500 times.
         """
         self.solution = deepcopy(solution)
         self.old_costs = self.solution.costs
         self.old_intersections = self.solution.grid.amount_of_intersections
         self.old_length = self.solution.grid.netlist_length()
+<<<<<<< HEAD
         self.convergence_count = 0
+=======
+        self.cost_occurence = 0
+        self.costs = self.solution.costs
+>>>>>>> b7d898867451d753bc2ed0693eab09dc32692f23
 
     def optimize_costs(self, chip_number, netlist_number):
         """
@@ -23,14 +34,24 @@ class HillClimber():
         the A* algorithm plot it again. If the costs of the new solution are lower than or equal to
         the old costs, remember the new solution. Else, continue with the loop.
         """
+<<<<<<< HEAD
         self.costs = self.solution.costs
         # self.iterations = iterations
+=======
+>>>>>>> b7d898867451d753bc2ed0693eab09dc32692f23
 
         # Print original costs before optimalization
-        print(f'Original costs: {self.costs}')
-        print('Optimizing original solution....')
+        print(f"""
+        Original costs: {self.costs}
+        Optimizing original solution....
+        """)
 
+<<<<<<< HEAD
         while self.convergence_count != 1500:
+=======
+        # Loop keeps running until convergence_count equals 1500
+        while self.cost_occurence != 1500:
+>>>>>>> b7d898867451d753bc2ed0693eab09dc32692f23
 
             # Print status of the loop on every 100th iteration
             # if i % 100 == 0:
@@ -46,7 +67,7 @@ class HillClimber():
             new_grid.delete_net(net, -1)
 
             # Let A* algorithm plot new route for removed net
-            new_astar_solution = astar.Astar(new_grid)
+            new_astar_solution = Astar(new_grid)
 
             # Costs check
             self.check_solution(new_astar_solution)
@@ -79,9 +100,9 @@ class HillClimber():
 
         # Checking for convergence
         if old_costs == new_costs:
-            self.convergence_count += 1
+            self.cost_occurence += 1
         else:
-            self.convergence_count = 0
+            self.cost_occurence = 0
 
         # No new route found
         if len(new_solution.grid.available_nets()) > 0:
