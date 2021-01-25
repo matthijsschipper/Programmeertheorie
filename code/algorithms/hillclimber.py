@@ -14,25 +14,26 @@ class HillClimber():
         self.solution = copy.deepcopy(solution)
         self.old_costs = self.solution.costs
         self.old_intersections = self.solution.grid.amount_of_intersections
+        self.convergence_count = 0
 
-    def optimize_costs(self, iterations, chip_number, netlist_number):
+    def optimize_costs(self, chip_number, netlist_number):
         """
         Otimize a given solution on base of the total costs. Remove a randomly chosen net and let 
         the A* algorithm plot it again. If the costs of the new solution are lower than or equal to
         the old costs, remember the new solution. Else, continue with the loop.
         """
         self.costs = self.solution.costs
-        self.iterations = iterations
+        # self.iterations = iterations
 
         # Print original costs before optimalization
         print(f'Original costs: {self.costs}')
         print('Optimizing original solution....')
 
-        for i in range(iterations):
+        while self.convergence_count != 1500:
 
             # Print status of the loop on every 100th iteration
-            if i % 100 == 0:
-                print(f'On iteration {i}/{iterations}')
+            # if i % 100 == 0:
+            #     print(f'On iteration {i}/{iterations}')
             
             # Make new copy of solution
             new_solution = copy.deepcopy(self.solution)
@@ -50,9 +51,10 @@ class HillClimber():
             self.check_solution(new_astar_solution)
         
         self.solution.grid.get_output(self.costs)
+        # Cost optimization results for {self.iterations} tries:
 
         print(f'''
-        Cost optimization results for {self.iterations} tries:
+        Convergence of {self.convergence_count} reached!
         -------------------------------------------------------
         Optimized chip {chip_number} and netlist {netlist_number}
         Optimized costs from {self.old_costs} to {self.costs}
@@ -71,6 +73,12 @@ class HillClimber():
         # Might be useful to write a function for the grid class or the algorithm to calculate the costs
         new_costs = new_solution.grid.netlist_length() + (300 * new_solution.grid.amount_of_intersections)
         old_costs = self.costs
+
+        # Checking for convergence
+        if old_costs == new_costs:
+            self.convergence_count += 1
+        else:
+            self.convergence_count = 0
 
         # No new route found
         if len(new_solution.grid.available_nets()) > 0:
