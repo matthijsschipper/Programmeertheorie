@@ -12,7 +12,7 @@ class steered_random_routes:
     def __init__(self, grid):
         self.grid = deepcopy(grid)
         self.total_wires_length = 0
-        self.run(50)
+        self.costs = 0
 
     def select_shortest_nets(self, netlist):
         """
@@ -33,6 +33,7 @@ class steered_random_routes:
         """
         Takes the netlist of a grid as input
         Determines which nets are most on the sides of the grid
+        Preferes short nets above longer nets
         Returns an ordered list where the first nets are the most on the outside
         """
 
@@ -159,8 +160,6 @@ class steered_random_routes:
         for net in self.grid.netlist:
             if net.finished == False:
                 succesful = False
-
-        # return self.grid
 
         self.costs = 300 * self.grid.amount_of_intersections + self.total_wires_length
 

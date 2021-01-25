@@ -5,7 +5,7 @@ from code.algorithms import random, steered_random, astar, hillclimber as hc
 if __name__ == "__main__":
     
     chip_number = 0
-    netlist_number = 1
+    netlist_number = 3
 
     printfile = f"./data/chip_{chip_number}/print_{chip_number}.csv"
     netlistfile = f"./data/chip_{chip_number}/netlist_{netlist_number}.csv"
@@ -24,17 +24,16 @@ if __name__ == "__main__":
     # Testing A* algorithm
     # a = astar.Astar(grid)
 
-    # vis.visualise(printfile, outputfile, 'original')
+    vis.visualise(printfile, outputfile, 'original')
 
     # Testing hillclimber algorithm
-    # h = hc.HillClimber(a)
+    # h = hc.HillClimber(steered_random)
 
     # Optimizing solution on wire length
     # optimized_length = h.optimize_wire_length(chip_number, netlist_number)
 
     # Optimizing optimized length solution on costs
-    # optimization = hc.HillClimber(a).optimize_costs(500, chip_number, netlist_number)
-
+    # optimization = hc.HillClimber(steered_random).optimize_costs(500, chip_number, netlist_number)
 
     # vis.visualise(printfile, outputfile, 'optimalizations')
     # vis.visualise(printfile, outputfile)

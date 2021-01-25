@@ -31,12 +31,12 @@ class HillClimber():
 
             net = new_grid.netlist[self.index]
 
-            print(f'Optimizing net {net}....')
+            # print(f'Optimizing net {net}....')
 
             self.length = net.get_length()
             self.old_total_length.append(self.length)
 
-            print(f'Original length: {self.length}')
+            # print(f'Original length: {self.length}')
 
             distance = net.get_route_to_end()
             distance = abs(distance[0]) + abs(distance[1]) + 1
@@ -54,8 +54,8 @@ class HillClimber():
                 
                 steps += 1
             
-            print(f'Found new length of {self.random_solution.grid.netlist[self.index].get_length()}')
-            print()
+            # print(f'Found new length of {self.random_solution.grid.netlist[self.index].get_length()}')
+            # print()
 
             self.new_total_length.append(self.length)
             
