@@ -4,8 +4,8 @@ from code.algorithms import random, steered_random, astar, hillclimber as hc
 
 if __name__ == "__main__":
     
-    chip_number = 0
-    netlist_number = 1
+    chip_number = 1
+    netlist_number = 4
 
     printfile = f"./data/chip_{chip_number}/print_{chip_number}.csv"
     netlistfile = f"./data/chip_{chip_number}/netlist_{netlist_number}.csv"
@@ -20,26 +20,21 @@ if __name__ == "__main__":
     while not r.is_solution():
         r = random.Random(grid)
 
+    # while not r.is_solution():
+    #     r = random.Random(grid)
+    
     # Testing steered random algorithm
-    # steered_random = steered_random_object.run(50)
     # sr = steered_random.steered_random_routes(grid)
 
     # Testing A* algorithm
-    # a = astar.Astar(grid)
-
-    # for net in a.grid.netlist:
-    #     print(net.get_length())
+    a = astar.Astar(grid)
 
     vis.visualise(printfile, outputfile, 'original')
 
-    # Testing hillclimber algorithm
-    # h = hc.HillClimber(r)
-
     # Optimizing solution on wire length
-    # optimized_length = h.optimize_wire_length(chip_number, netlist_number)
+    # optimized_length = hc.HillClimber(a).optimize_wire_length(chip_number, netlist_number)
 
-    # Optimizing optimized length solution on costs
-    # optimization = hc.HillClimber(sr).optimize_costs(3000, chip_number, netlist_number)
+    # Optimizing solution on costs
+    optimization = hc.HillClimber(a).optimize_costs(200, chip_number, netlist_number)
 
-
-    # vis.visualise(printfile, outputfile, 'optimalizations')
+    vis.visualise(printfile, outputfile, 'optimalizations')

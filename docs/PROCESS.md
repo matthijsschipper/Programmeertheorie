@@ -80,10 +80,19 @@
 | Matthijs | 08:30 | 17:00 | Developing hillclimber algorithm (breaks included) |
 | Jade | 13:00 | 16:00 | Changed A* algorithm to take in consideration the costs of intersections. |
 | Jade | 18:00 | 19:00 | Finished cleaning up of new version A* algorithm. |
-| Birgit | 21:30 | 00:00 | Rewriting first algorithm report, working on presentation for friday |
 
 ## 21-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
-| Birgit | 9:00 | | Working on bettering the algoritm, analysing the problems it comes across |
+| Jade | 00:00 | 02:00 | Started thinking out ways to improve the A* algorithm. |
 | Matthijs | 10:00 | 20:00 | Working on hillclimber + presentation |
+| Jade | 14:00 | 17:30 | Worked on presentation. |
+| Birgit | 21:30 | 00:00 | Rewriting first algorithm report, working on presentation for friday |
+| Jade | 23:00 | 23:59 | Started documenting all results of the A* algorithm. |
+
+## 22-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
+| Birgit | 9:00 | | Working on bettering the algoritm, analysing the problems it comes across |
+| Matthijs | 10:00 | 13:00 | Working on presentation + hillclimber |
+| Matthijs | 16:00 | 21:00 | Working on hillclimber heuristics |
