@@ -1,86 +1,53 @@
-import copy
-import random
-from code.classes import net
-from code.algorithms.random import Random
-from code.algorithms import astar
-import operator
+from copy import deepcopy
+from random import choice
+from code.algorithms.astar import Astar
+
 
 class HillClimber():
     def __init__(self, solution):
         """
-        Hillclimber optimializes valid solutions by removing a randomly chosen net and calling the
-        A* algorithm to plot it again for the amount of provided iterations.
+        Hillclimber optimizes valid solutions by removing a randomly chosen net and calling the
+        A* algorithm to plot it again. This process is repeated until the same amount of costs
+        is found for 1500 times.
         """
-        self.solution = copy.deepcopy(solution)
+        self.solution = deepcopy(solution)
         self.old_costs = self.solution.costs
         self.old_intersections = self.solution.grid.amount_of_intersections
         self.old_length = self.solution.grid.netlist_length()
-        self.convergence_count = 0
+        self.cost_occurence = 0
+        self.costs = self.solution.costs
 
-<<<<<<< HEAD
-        for net in self.random_solution.grid.netlist:
-            new_solution = copy.deepcopy(self.random_solution)
-            new_grid = new_solution.grid
-
-            net = new_grid.netlist[self.index]
-
-            # print(f'Optimizing net {net}....')
-
-            self.length = net.get_length()
-            self.old_total_length.append(self.length)
-
-            # print(f'Original length: {self.length}')
-
-            distance = net.get_route_to_end()
-            distance = abs(distance[0]) + abs(distance[1]) + 1
-
-            # Remove net
-            new_grid.delete_net(net, -1)
-
-            steps = 0
-
-            while self.length >= distance and steps < 50:
-=======
     def optimize_costs(self, chip_number, netlist_number):
         """
         Otimize a given solution on base of the total costs. Remove a randomly chosen net and let 
         the A* algorithm plot it again. If the costs of the new solution are lower than or equal to
         the old costs, remember the new solution. Else, continue with the loop.
         """
-        self.costs = self.solution.costs
-        # self.iterations = iterations
->>>>>>> e257a00e8069d4e67c95a4c911b33dcf99ac36d0
 
         # Print original costs before optimalization
-        print(f'Original costs: {self.costs}')
-        print('Optimizing original solution....')
+        print(f"""
+        Original costs: {self.costs}
+        Optimizing original solution....
+        """)
 
-<<<<<<< HEAD
-                self.check_length(new_route)
-                
-                steps += 1
-            
-            # print(f'Found new length of {self.random_solution.grid.netlist[self.index].get_length()}')
-            # print()
-=======
-        while self.convergence_count != 1500:
->>>>>>> e257a00e8069d4e67c95a4c911b33dcf99ac36d0
+        # Loop keeps running until convergence_count equals 1500
+        while self.cost_occurence != 1500:
 
             # Print status of the loop on every 100th iteration
             # if i % 100 == 0:
             #     print(f'On iteration {i}/{iterations}')
             
             # Make new copy of solution
-            new_solution = copy.deepcopy(self.solution)
+            new_solution = deepcopy(self.solution)
             new_grid = new_solution.grid
             route_points = new_grid.netlist
 
             # Choose random net from the copy and remove it 
-            net = random.choice(route_points)
+            net = choice(route_points)
             new_grid.delete_net(net, -1)
 
             # Let A* algorithm plot new route for removed net
-            new_astar_solution = astar.Astar(new_grid)
+            new_astar_solution = Astar(new_grid)
 
             # Costs check
             self.check_solution(new_astar_solution)
@@ -113,9 +80,9 @@ class HillClimber():
 
         # Checking for convergence
         if old_costs == new_costs:
-            self.convergence_count += 1
+            self.cost_occurence += 1
         else:
-            self.convergence_count = 0
+            self.cost_occurence = 0
 
         # No new route found
         if len(new_solution.grid.available_nets()) > 0:
