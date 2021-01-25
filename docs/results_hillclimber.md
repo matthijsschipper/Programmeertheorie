@@ -1,7 +1,7 @@
 # Results Hillclimber algorithm
 
 These results are reached until convergence was reached.
-Convergence is reached if the same level of costs is found for 1500 times.
+Convergence is reached if the same level of costs is found for 1500 times, is the assumption for this collection of results.
 Furthermore, the A* algorithm is used for optimization.
 
 ## Optimizing random solutions
@@ -86,7 +86,16 @@ Furthermore, the A* algorithm is used for optimization.
 ### Netlist 8
 | Original costs | Original intersections | Original length | Original height | New costs | New intersections | New length | New height |
 | -------------- | ---------------------- | --------------- | --------------- | --------- | ----------------- | ---------- | ---------- |
+| 18298          | 58                     | 898             | 5               | 3960      | 10                | 960        | 6          |
+
+#### Original solution
+![Original random solution](./images/results_hillclimber/3d_chip_2_net_8_original.png "Original random solution")
+
+#### Optimization
+
+![Optmization random solution](./images/results_hillclimber/3d_chip_2_net_8_optimalizations.png "Optimization random solution")
 
 ### Netlist 9
 | Original costs | Original intersections | Original length | Original height | New costs | New intersections | New length | New height |
 | -------------- | ---------------------- | --------------- | --------------- | --------- | ----------------- | ---------- | ---------- |
+| 36631          | 118                    | 1231            | 6               | 7083      | 19                | 1383       | 7          |
