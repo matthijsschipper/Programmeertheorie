@@ -101,3 +101,4 @@
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
 | Birgit | 10:30 | 15:00 | Working on deliverable deadline today | 
+| Birgit | 17:00 | 18:00 | Working on deliverable |
