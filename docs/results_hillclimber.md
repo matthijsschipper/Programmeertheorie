@@ -47,7 +47,7 @@ Furthermore, the A* algorithm is used for optimization.
 ### Netlist 3
 | Original costs | Original intersections | Original length | Original height | New costs | New intersections | New length | New height |
 | -------------- | ---------------------- | --------------- | --------------- | --------- | ----------------- | ---------- | ---------- |
-| 72             | 0                      | 72              | 3               | 43        | 0                 | 43         | 3          |
+| 72             | 0                      | 72              | 3               | 72        | 0                 | 72         | 3          |
 
 ### Netlist 4
 | Original costs | Original intersections | Original length | Original height | New costs | New intersections | New length | New height |
