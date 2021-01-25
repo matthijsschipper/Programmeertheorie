@@ -14,6 +14,7 @@ class HillClimber():
         self.solution = copy.deepcopy(solution)
         self.old_costs = self.solution.costs
         self.old_intersections = self.solution.grid.amount_of_intersections
+        self.old_length = self.solution.grid.netlist_length()
         self.convergence_count = 0
 
     def optimize_costs(self, chip_number, netlist_number):
@@ -59,6 +60,8 @@ class HillClimber():
         Optimized chip {chip_number} and netlist {netlist_number}
         Optimized costs from {self.old_costs} to {self.costs}
         Optimized intersections from {self.old_intersections} to {self.solution.grid.amount_of_intersections}
+        Optimized length from {self.old_length} to {self.solution.grid.netlist_length()}
+        Failed nets: {self.solution.failed_nets}
         ''')
 
         return self.solution
