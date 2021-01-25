@@ -101,7 +101,7 @@ class Random():
 
         self.grid.get_output(self.costs)
 
-        # print(f'Total amount of costs for this ciruit: {total_costs}.')
+        # print(f'Total amount of costs for this ciruit: {self.costs}.')
 
         return self.costs
     
