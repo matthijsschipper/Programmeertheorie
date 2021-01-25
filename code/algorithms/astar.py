@@ -17,6 +17,8 @@ class Astar():
         self.failed_nets = []
         self.costs = 0
 
+        self.height = 0
+
         self.run()
     
     def run(self):
@@ -61,6 +63,11 @@ class Astar():
                 # check if end is reached, if so reconstruct path and break
                 if current == end:
                     path = self.reconstruct(current, previous, start)
+                    
+                     # alleen om hoogte te bepalen
+                    for p in path:
+                        self.height = max(self.height, p.location[2])
+
                     directions_to_end = self.get_directions_to_end(path)
                     length += len(directions_to_end)
                     self.add_net(directions_to_end, net)
@@ -71,7 +78,15 @@ class Astar():
                 
                 # consider all available neighbouring crossings
                 for direction in directions:
+                    
                     neighbour = self.grid.crossing_at_direction(direction, current)
+
+                    # OVERGENOMEN VAN STEERED RANDOM
+                    # if the crossing is a gate, only allow it if it's the endgate of the net
+                    if neighbour.is_gate:
+                        if neighbour != end:
+                            continue
+                    
                     temp_g_score = g_score[current] + 1
                     
                     # if you only want to consider distances and not the cost of interections remove the following if statement
@@ -104,6 +119,7 @@ class Astar():
         print(f"Amount of intersections: {intersections}")
         print(f"{len(self.failed_nets)} failed nets: {self.failed_nets}")
         print(f"Costs: {self.costs}")
+        print(f"Height: {self.height}")
         print("")
 
         self.grid.get_output(self.costs)
@@ -164,3 +180,20 @@ class Astar():
         self.grid.current_crossing = net.start
         for direction in directions:
             self.grid.add_to_net(direction)
+    '''
+    # OVERGENOMEN VAN STEERED RANDOM (miss moeten we er een methode in grid.py van maken)
+    def select_shortest_nets(self, netlist):
+        """
+        Takes the netlist of a grid as input
+        Determines which nets should be the shortest to lay down
+        Returns an ordered list where the first nets are the shortest and they grow in size
+        """
+
+        nets_with_length = []
+        for net in netlist:
+            amount_of_steps = sum([abs(i) for i in net.get_route_to_end()])
+            nets_with_length.append((amount_of_steps, net))
+        nets_with_length.sort(key = lambda x : x[0])
+        
+        return [i[1] for i in nets_with_length]
+    '''

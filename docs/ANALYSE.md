@@ -28,8 +28,6 @@ Wanneer het random algoritme zolang wordt gerund totdat er een oplossing is gevo
 
 ![example 3 random algorithm](./images/random_chip_0_net_2.png "Example image")
 
-Nu we een hillclimber algoritme hebben ontwikkeld dat oplossingen optimaliseert op basis van kosten en we dit algoritme de laatst gegeven oplossing laten optimaliseren, zien we de volgende verbetering:
-
 ![example hillclimber algorithm](./images/hillclimber_chip_0_net_2_random.png "Example image")
 
         Cost optimization results for 10000 tries:
@@ -85,3 +83,17 @@ Dit kan beter door bv aan de start, voor elke gate en elk net, de richtingen van
 * Ipv random een pad te kiezen, altijd zo veel mogelijk naar de buitenkant afwijken?
 * Paden met 4 nets eerder leggen dan met minder?
 * Waarom maak je x iteraties bij het zoeken van een oplossing? Vanaf welke iteratie worden er oplossingen gevonden?
+
+### A* algoritme en Hillclimber
+Tot nu toe is het ons gelukt om met het A* algoritme alle netlists op te lossen. Daarnaast is het nu mogelijk om een A* oplossing te optimaliseren met het hillclimber algoritme
+
+#### Voorbeeld netlist 4
+A* oplossing:
+
+![example 6 astar algoritm](./images/astar_chip_1_net_4.png "Example image")
+
+Wanneer het hillclimber hierop wordt gerund voor 2000 keer en waarbij het hillclimber algoritme het A* algoritme aanroept voor iedere aanpassing, komt er de volgende oplossing uit:
+
+![example 7 astar optimalisation](./images/hillclimber_chip_1_net_4_astar.png "Example image")
+
+De kosten in dit voorbeeld zijn van 3687 naar 673 gegaan.

@@ -397,6 +397,8 @@ class Grid():
         """
 
         with open(f"./data/outputfiles/chip_{self.chip_id}_net_{self.netlist_id}.csv", 'w') as file:
+        # This other output file can be used for the check50
+        # with open('./data/outputfiles/output.csv', 'w') as file:
             output = writer(file)
             output.writerow(["net", "wires"])
 
@@ -409,3 +411,11 @@ class Grid():
                 output.writerow([route_string, f"{routelist_string}"])
             
             output.writerow([f"chip_{self.chip_id}_net_{self.netlist_id},{total_costs}"])
+    
+    def netlist_length(self):
+        length = []
+
+        for net in self.netlist:
+            length.append(net.get_length())
+        
+        return sum(length)
