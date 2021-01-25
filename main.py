@@ -15,26 +15,31 @@ if __name__ == "__main__":
     grid = grid.Grid(printfile, netlistfile)
 
     # Testing random algorithm
-    # r = random.Random(grid)
+    r = random.Random(grid)
+
+    while not r.is_solution():
+        r = random.Random(grid)
 
     # Testing steered random algorithm
-    # steered_random_object = steered_random.steered_random_routes(grid)
     # steered_random = steered_random_object.run(50)
+    # sr = steered_random.steered_random_routes(grid)
 
     # Testing A* algorithm
     # a = astar.Astar(grid)
 
-    # vis.visualise(printfile, outputfile, 'original')
+    # for net in a.grid.netlist:
+    #     print(net.get_length())
+
+    vis.visualise(printfile, outputfile, 'original')
 
     # Testing hillclimber algorithm
-    # h = hc.HillClimber(a)
+    # h = hc.HillClimber(r)
 
     # Optimizing solution on wire length
     # optimized_length = h.optimize_wire_length(chip_number, netlist_number)
 
     # Optimizing optimized length solution on costs
-    # optimization = hc.HillClimber(a).optimize_costs(500, chip_number, netlist_number)
+    # optimization = hc.HillClimber(sr).optimize_costs(3000, chip_number, netlist_number)
 
 
     # vis.visualise(printfile, outputfile, 'optimalizations')
-    # vis.visualise(printfile, outputfile)
