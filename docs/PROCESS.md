@@ -100,4 +100,4 @@
 ## 25-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
-| Birgit | 10:30 | | Working on deliverable deadline today | 
+| Birgit | 10:30 | 15:00 | Working on deliverable deadline today | 

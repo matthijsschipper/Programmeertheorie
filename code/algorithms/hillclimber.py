@@ -1,5 +1,5 @@
-import copy
-import random
+from copy import deepcopy
+from random import choice
 from code.classes import net
 from code.algorithms.random import Random
 from code.algorithms import astar
@@ -11,7 +11,7 @@ class HillClimber():
         Hillclimber optimializes valid solutions by removing a randomly chosen net and calling the
         A* algorithm to plot it again for the amount of provided iterations.
         """
-        self.solution = copy.deepcopy(solution)
+        self.solution = deepcopy(solution)
         self.old_costs = self.solution.costs
         self.old_intersections = self.solution.grid.amount_of_intersections
         self.convergence_count = 0
@@ -36,12 +36,12 @@ class HillClimber():
             #     print(f'On iteration {i}/{iterations}')
             
             # Make new copy of solution
-            new_solution = copy.deepcopy(self.solution)
+            new_solution = deepcopy(self.solution)
             new_grid = new_solution.grid
             route_points = new_grid.netlist
 
             # Choose random net from the copy and remove it 
-            net = random.choice(route_points)
+            net = choice(route_points)
             new_grid.delete_net(net, -1)
 
             # Let A* algorithm plot new route for removed net
@@ -110,7 +110,7 @@ class HillClimber():
 
 #     # for net in sorted(self.random_solution.grid.netlist, key=operator.methodcaller('get_length')):
 #     for net in netlist:
-#         new_solution = copy.deepcopy(self.random_solution)
+#         new_solution = deepcopy(self.random_solution)
 #         new_grid = new_solution.grid
 
 #         self.index = self.random_solution.grid.netlist.index(net)
