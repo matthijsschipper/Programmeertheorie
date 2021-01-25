@@ -101,3 +101,4 @@
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
 | Birgit | 10:30 | | Working on deliverable deadline today | 
+| Matthijs | 09:00 | 16:30 | Collecting results, improving code quality and writing second algorithm document |
