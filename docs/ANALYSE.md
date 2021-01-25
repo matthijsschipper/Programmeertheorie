@@ -28,8 +28,6 @@ Wanneer het random algoritme zolang wordt gerund totdat er een oplossing is gevo
 
 ![example 3 random algorithm](./images/random_chip_0_net_2.png "Example image")
 
-Nu we een hillclimber algoritme hebben ontwikkeld dat oplossingen optimaliseert op basis van kosten en we dit algoritme de laatst gegeven oplossing laten optimaliseren, zien we de volgende verbetering:
-
 ![example hillclimber algorithm](./images/hillclimber_chip_0_net_2_random.png "Example image")
 
         Cost optimization results for 10000 tries:
