@@ -12,7 +12,7 @@
  Een netlist is een lijst die opsomt welke gates met elkaar verbonden moeten worden om de chip werkend te krijgen.
  Het doel is om alle gates die volgens de netlist verbonden moeten worden, te verbinden.
 
- ![lege chip](./data/images/voorbeeld_chip.gif "Lege chip")
+ ![lege chip](./docs/images/voorbeeld_chip.gif "Lege chip")
 
  Hier zitten wel wat randvoorwaarden aan verbonden, die het ingewikkeld maken.
  Zo zitten er kosten verbonden aan het maken van een chip.
