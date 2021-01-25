@@ -96,3 +96,8 @@
 | Birgit | 9:00 | 15:00 | Working on bettering the algoritm, analysing the problems it comes across |
 | Matthijs | 10:00 | 13:00 | Working on presentation + hillclimber |
 | Matthijs | 16:00 | 21:00 | Working on hillclimber heuristics |
+
+## 25-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
+| Birgit | 10:30 | | Working on deliverable deadline today | 
