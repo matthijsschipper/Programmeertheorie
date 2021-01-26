@@ -23,7 +23,7 @@ class HillClimber():
         the old costs, remember the new solution. Else, continue with the loop.
         """
 
-        # Print original costs before optimalization
+        # Print original costs before optimization
         print(f"""
         Original costs: {self.old_costs}
         Optimizing original solution....
@@ -44,7 +44,7 @@ class HillClimber():
             # Let A* algorithm plot new route for removed net
             new_astar_solution = astar.Astar(new_grid)
 
-            # Costs check
+            # New solution costs check
             self.check_solution(new_astar_solution)
         
         # Write final solution to output file
