@@ -419,3 +419,6 @@ class Grid():
             length.append(net.get_length())
         
         return sum(length)
+    
+    def calculate_costs(self):
+        return self.netlist_length() + 300 * self.amount_of_intersections
