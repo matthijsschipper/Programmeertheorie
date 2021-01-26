@@ -15,8 +15,10 @@ class HillClimber():
         self.old_length = self.solution.grid.netlist_length()
         self.cost_occurence = 0
         self.costs = self.solution.costs
+        self.chip_nr = self.solution.grid.chip_id
+        self.netlist_nr = self.solution.grid.netlist_id
 
-    def optimize_costs(self, chip_number, netlist_number):
+    def optimize_costs(self):
         """
         Optimize a given solution on base of the total costs. Remove a randomly chosen net and let 
         the A* algorithm plot it again. If the costs of the new solution are lower than or equal to
@@ -51,9 +53,9 @@ class HillClimber():
         self.solution.grid.get_output(self.costs)
 
         print(f"""
-        Convergence of {self.convergence_count} reached! The results:
+        Convergence of {self.cost_occurence} reached! The results:
         -------------------------------------------------------
-        Optimized netlist {netlist_number} from chip {chip_number}
+        Optimized netlist {self.netlist_nr} from chip {self.chip_nr}
         Optimized costs from {self.old_costs} to {self.costs}
         Optimized intersections from {self.old_intersections} to {self.solution.grid.amount_of_intersections}
         Optimized length from {self.old_length} to {self.solution.grid.netlist_length()}
