@@ -13,25 +13,33 @@ class Astar():
     def __init__(self, grid):
         self.grid = copy.deepcopy(grid)
 
-        nets = self.grid.available_nets()
+        self.netlist = self.grid.available_nets()
 
         self.failed_nets = []
         self.costs = 0
 
+        self.length = 0
+        self.intersections = 0
+        self.failed = 0
+
         self.height = 0
 
-        self.run()
+        #self.run()
     
-    def run(self):
+    def run(self, method = 'default'):
         """
         Runs A* algoritm until all nets are considered.
         """
+        netlist = self.get_netlist(method)
+        print(netlist)
+        for net in netlist:
+            print(net.start, net.end)
 
         # total wire length starts at 0
         length = 0
 
         # solve problem net by net
-        for net in self.netlist:
+        for net in netlist:
             self.grid.current_net = net
 
             # save start and end crossing
@@ -113,6 +121,10 @@ class Astar():
         
         intersections = self.grid.amount_of_intersections
         self.costs =  length + 300 * intersections
+
+        self.length = length
+        self.intersections = intersections
+        self.failed = len(self.failed_nets)
 
         # Optional
         print("")
@@ -216,4 +228,26 @@ class Astar():
         return [i[1] for i in outer_nets]
     
     def get_inner(self, netlist):
-        return reversed(self.get_outer(netlist))
+        return list(reversed(self.get_outer(netlist)))
+
+    def select_longest_nets(self, netlist):
+        return list(reversed(self.select_shortest_nets(netlist)))
+    
+    def get_netlist(self, method):
+        netlist = self.netlist
+        print(netlist)
+
+        if method == 'default':
+            return netlist
+        elif method == 'reverse':
+            return list(reversed(netlist))
+        elif method == 'short':
+            return self.select_shortest_nets(netlist)
+        elif method == 'long':
+            return self.select_longest_nets(netlist)
+        elif method == 'outside':
+            return self.get_outer(netlist)
+        elif method == 'inside':
+            return self.get_inner(netlist)
+        else:
+            raise Exception('Invalid method')
