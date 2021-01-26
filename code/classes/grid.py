@@ -5,10 +5,9 @@ from csv import reader, writer
 class Grid():
     def __init__(self, printfile, netlistfile):
         """
-        Takes standard-formatted print and netlist files for the the chip as input
-        Initializes the grid through other functions
+        Takes standard-formatted print and netlist files for the the chip as input.
+        Initializes the grid through other functions.
         """
-
         self.grid = []
         self.size = [0, 0, 0]
         self.gate_coordinates = {}
@@ -21,30 +20,29 @@ class Grid():
         self.current_crossing = None
         self.current_net = None
 
-        # reads the input file, saves gate coordinates and size of grid in self
+        # Reads the input file, saves gate coordinates and size of grid in self
         self.read_chip_data(printfile)
 
-        # create and initialize the nested lists, the actual grid
+        # Create and initialize the nested lists, the actual grid
         self.make_grid()
 
-        # loads the requested netlist into the grid
+        # Loads the requested netlist into the grid
         self.set_netlist(netlistfile)
 
     def read_chip_data(self, infile):
         """
-        Takes standard-formatted print file for the the chip as input
-        Reads in all relevant data
+        Takes standard-formatted print file for the the chip as input.
+        Reads in all relevant data.
         """
-
         with open(infile) as file:
 
-            # read through file
+            # Read through file
             file_reader = reader(file)
 
-            # skip the header
+            # Skip the header
             next(file_reader, None)
 
-            # save coordinates and numbers of gates into dictionary, retrieve max_x and max_y
+            # Save coordinates and numbers of gates into dictionary, retrieve max_x and max_y
             data = [line.rstrip() for line in file]
             x_max, y_max = 0, 0
             for row in data:
@@ -60,7 +58,7 @@ class Grid():
         # +2, because there is supposed to be a row and column clean of gates around the chip
         self.size = [x_max + 2, y_max + 2, 8]
 
-        # save the number of the chip you're working with and the location of the file
+        # Save the number of the chip you're working with and the location of the file
         for char in infile:
             try:
                 self.chip_id = int(char)
@@ -69,10 +67,9 @@ class Grid():
 
     def make_grid(self):
         """
-        Creates the 3d array that hold all crossings
+        Creates the 3d array that holds all crossings.
         """
-
-        # save x, y, z values of the size of the grid
+        # Save x, y, z values of the size of the grid
         x, y, z = self.size[0], self.size[1], self.size[2]
 
         # Create 3D matrix with found size
@@ -87,30 +84,29 @@ class Grid():
                 for row in range(x):
                     column_list.append(Crossing(row, column, height, self.size))
         
-        # mark gates
+        # Mark gates
         for gate_nr in self.gate_coordinates:
             x_coordinate, y_coordinate, z_coordinate = self.gate_coordinates[gate_nr][0], self.gate_coordinates[gate_nr][1], self.gate_coordinates[gate_nr][2]
 
-            # reverse order of coordinates for indexing grid
+            # Reverse order of coordinates for indexing grid
             gate = self.grid[z_coordinate][y_coordinate][x_coordinate]
             gate.place_gate(f"{gate_nr}")
 
     def set_netlist(self, infile):
         """
-        Takes standard-formatted netlist file as input
-        Saves the routes that should be placed as net objects
-        Sets the current_crossing and current_net to the start of the first net
+        Takes standard-formatted netlist file as input.
+        Saves the routes that should be placed as net objects.
+        Sets the current_crossing and current_net to the start of the first net.
         """
-
         with open(infile) as file:
 
-            # read through file
+            # Read through file
             file_reader = reader(file)
 
-            # skip the header
+            # Skip the header
             next(file_reader, None)
 
-            # save nets into dictionary
+            # Save nets into dictionary
             data = [line.rstrip() for line in file]
             for row in data:
                 if row:
@@ -119,18 +115,18 @@ class Grid():
                     start_location = self.gate_coordinates[start]
                     end_location = self.gate_coordinates[end]
 
-                    # index the grid with [z][y][x]
+                    # Index the grid with [z][y][x]
                     start_crossing = self.grid[start_location[2]][start_location[1]][start_location[0]]
                     end_crossing = self.grid[end_location[2]][end_location[1]][end_location[0]]
 
-                    # create net object and save it to grid
+                    # Create net object and save it to grid
                     self.netlist.append(Net(start_crossing, end_crossing))
 
-        # default setting, can be changed by algorithm
+        # Default setting, can be changed by algorithm
         self.current_net = self.netlist[0]
         self.current_crossing = self.current_net.start
 
-        # save netlist id
+        # Save netlist id
         for char in infile:
             try:
                 self.netlist_id = int(char)
@@ -139,14 +135,11 @@ class Grid():
 
     def available_nets(self):
         """
-        Returns all net objects in the netlist that aren't marked as finished
+        Returns all net objects in the netlist that aren't marked as finished.
         """
         unfinished_nets = []
 
-        # search through nets
-        for net in self.netlist:
-            if not net.finished:
-                unfinished_nets.append(net)
+        comprehension = [unfinished_nets.append(net) for net in self.netlist if not net.finished]
 
         return unfinished_nets
 
@@ -155,7 +148,6 @@ class Grid():
         After calling which nets are available, pass the net you want to work on making
         If net is an unfinished net, sets net to current net, set current crossing to latest crossing in net
         """
-
         if net in self.available_nets():
             self.current_net = net
             self.current_crossing = net.get_latest_crossing()
