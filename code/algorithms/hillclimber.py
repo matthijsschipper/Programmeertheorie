@@ -33,10 +33,11 @@ class HillClimber():
         # Loop keeps running until convergence_count equals 1500
         while self.cost_occurence != 1500:
 
-            # Print status of the loop on every 100th iteration
-            # if i % 100 == 0:
-            #     print(f'On iteration {i}/{iterations}')
-            
+            if self.cost_occurence % 500 == 0 and self.cost_occurence != 0:
+                print(f"""
+                Found costs of {self.costs} for {self.cost_occurence} times now!
+                """)
+
             # Make new copy of solution
             new_solution = deepcopy(self.solution)
             new_grid = new_solution.grid
@@ -93,7 +94,8 @@ class HillClimber():
             self.solution = new_solution
             self.costs = new_costs
 
-            print(f'Found new costs: {self.costs}')
+            if self.cost_occurence % 20 == 0:
+                print(f'Found costs of {self.costs} for {self.cost_occurence} times now!')
 
 
 
