@@ -50,14 +50,14 @@ class HillClimber():
         # Write final solution to output file
         self.solution.grid.get_output(self.costs)
 
-        print(f'''
+        print(f"""
         Convergence of {self.convergence_count} reached! The results:
         -------------------------------------------------------
         Optimized netlist {netlist_number} from chip {chip_number}
         Optimized costs from {self.old_costs} to {self.costs}
         Optimized intersections from {self.old_intersections} to {self.solution.grid.amount_of_intersections}
         Optimized length from {self.old_length} to {self.solution.grid.netlist_length()}
-        ''')
+        """)
 
         return self.solution
     
@@ -67,12 +67,11 @@ class HillClimber():
         if true. Solutions with equal costs overwrite the current solution as well, because
         this creates a new solution which might prevent too early convergence.
         """
-        # new_costs = new_solution.grid.netlist_length() + (300 * new_solution.grid.amount_of_intersections)
-        
+
         # Retrieving costs of new found solution
         new_costs = new_solution.grid.calculate_costs()
 
-        # Checking for convergence
+        # Counting cost occurence
         if self.costs == new_costs:
             self.cost_occurence += 1
         else:
@@ -92,6 +91,6 @@ class HillClimber():
             elif self.cost_occurence % 50 == 0:
                 print(f"Found costs of {self.costs} for {self.cost_occurence} times now")
         
-             return True
+            return True
         
         return False
