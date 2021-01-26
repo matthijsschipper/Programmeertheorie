@@ -12,7 +12,8 @@ class Astar():
     
     def __init__(self, grid):
         self.grid = copy.deepcopy(grid)
-        self.netlist = self.grid.available_nets()
+
+        nets = self.grid.available_nets()
 
         self.failed_nets = []
         self.costs = 0
@@ -180,8 +181,7 @@ class Astar():
         self.grid.current_crossing = net.start
         for direction in directions:
             self.grid.add_to_net(direction)
-    '''
-    # OVERGENOMEN VAN STEERED RANDOM (miss moeten we er een methode in grid.py van maken)
+            
     def select_shortest_nets(self, netlist):
         """
         Takes the netlist of a grid as input
@@ -196,4 +196,24 @@ class Astar():
         nets_with_length.sort(key = lambda x : x[0])
         
         return [i[1] for i in nets_with_length]
-    '''
+
+    def get_outer(self, netlist):
+
+        outer_nets = []
+        for net in netlist:
+            start = net.start.location
+            end = net.end.location
+            size = self.grid.size
+
+            start_score = min(start[0], size[0]-start[0]-1, start[1], size[1]-start[1]-1)
+            #print(f"s_score: {start_score}")
+            end_score = min(end[0], size[0]-end[0]-1, end[1], size[1]-end[1]-1)
+            score = (start_score + end_score) / 2
+            #print(f"({start_score} + {end_score}) / 2 = {score}")
+            outer_nets.append((score, net))
+        outer_nets.sort(key = lambda x : x[0])
+        
+        return [i[1] for i in outer_nets]
+    
+    def get_inner(self, netlist):
+        return reversed(self.get_outer(netlist))

@@ -1,7 +1,14 @@
 from copy import deepcopy
 from random import choice
+<<<<<<< HEAD
+from code.classes import net
+from code.algorithms.random import Random
+from code.algorithms import astar
+import operator
+=======
 from code.algorithms.astar import Astar
 
+>>>>>>> b7d898867451d753bc2ed0693eab09dc32692f23
 
 class HillClimber():
     def __init__(self, solution):
@@ -14,8 +21,12 @@ class HillClimber():
         self.old_costs = self.solution.costs
         self.old_intersections = self.solution.grid.amount_of_intersections
         self.old_length = self.solution.grid.netlist_length()
+<<<<<<< HEAD
+        self.convergence_count = 0
+=======
         self.cost_occurence = 0
         self.costs = self.solution.costs
+>>>>>>> b7d898867451d753bc2ed0693eab09dc32692f23
 
     def optimize_costs(self, chip_number, netlist_number):
         """
@@ -23,6 +34,11 @@ class HillClimber():
         the A* algorithm plot it again. If the costs of the new solution are lower than or equal to
         the old costs, remember the new solution. Else, continue with the loop.
         """
+<<<<<<< HEAD
+        self.costs = self.solution.costs
+        # self.iterations = iterations
+=======
+>>>>>>> b7d898867451d753bc2ed0693eab09dc32692f23
 
         # Print original costs before optimalization
         print(f"""
@@ -30,8 +46,12 @@ class HillClimber():
         Optimizing original solution....
         """)
 
+<<<<<<< HEAD
+        while self.convergence_count != 1500:
+=======
         # Loop keeps running until convergence_count equals 1500
         while self.cost_occurence != 1500:
+>>>>>>> b7d898867451d753bc2ed0693eab09dc32692f23
 
             if self.cost_occurence % 500 == 0 and self.cost_occurence != 0:
                 print(f"""
@@ -116,7 +136,7 @@ class HillClimber():
 
 #     # for net in sorted(self.random_solution.grid.netlist, key=operator.methodcaller('get_length')):
 #     for net in netlist:
-#         new_solution = copy.deepcopy(self.random_solution)
+#         new_solution = deepcopy(self.random_solution)
 #         new_grid = new_solution.grid
 
 #         self.index = self.random_solution.grid.netlist.index(net)
