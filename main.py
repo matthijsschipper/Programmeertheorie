@@ -109,7 +109,7 @@ if __name__ == "__main__":
 
     # --------------------------- Hill Climber ---------------------------------
     h = hc.HillClimber(a)
-    h..optimize_wire_length(chip_number, netlist_number)s
+    h.optimize_wire_length(chip_number, netlist_number)
 
 
     # --------------------------- Visualisation --------------------------------
