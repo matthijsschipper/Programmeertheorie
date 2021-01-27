@@ -54,6 +54,9 @@ class Random():
                 # Update amount of attempts
                 attempts += 1
 
+        # Checking solution
+        self.solved_check()
+        
         return self.grid
         
     def solved_check(self):
