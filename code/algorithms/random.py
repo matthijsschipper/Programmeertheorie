@@ -7,8 +7,7 @@ class Random():
         Randomly choose one of the available connections at the current crossing, starting
         at self.start_gate, ending at self.end_gate. A chosen direction gets removed from
         the available options, as well as the opposite direction from the new location.
-        Print statements are optional and are hashed by default. This algorithm can only
-        solve netlist 1 & 2.
+        This algorithm can only solve netlist 1 & 2.
         """
         self.grid = deepcopy(grid)
         self.netlist = self.grid.available_nets()
@@ -55,9 +54,6 @@ class Random():
                 # Update amount of attempts
                 attempts += 1
 
-        if not self.solved_check():
-            print("Netlist implementation failed.")
-        
         return self.grid
         
     def solved_check(self):
@@ -70,7 +66,6 @@ class Random():
 
         self.solved = True
         self.costs = self.grid.calculate_costs()
-        # print(f"Found solution with costs of {self.costs}.")
 
         # Let grid write output file
         self.grid.get_output((self.costs))
