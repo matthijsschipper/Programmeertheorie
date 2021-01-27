@@ -31,7 +31,7 @@ class HillClimber():
         """
 
         # Loop keeps running until the same amount of costs is found 1500 times consecutively
-        while self.cost_occurence != 15:
+        while self.cost_occurence != 1500:
 
             # Make new copy of solution
             new_solution = deepcopy(self.solution)
