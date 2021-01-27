@@ -79,3 +79,5 @@
 
  ## Reproductie resultaten
  Door het runnen van de main file, kunnen alle algoritmen via een 'interface' in de terminal gerund worden.
+ We hebben zelf verschillende opties geprobeerd en deze meerdere malen met de hand gerund om de resultaten te vinden.
+ Het menu is gebouwd om voor zichzelf te spreken, zodat het vinden van resultaten zo makkelijk mogelijk moet zijn.
