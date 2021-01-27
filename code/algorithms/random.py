@@ -71,6 +71,10 @@ class Random():
         self.solved = True
         self.costs = self.grid.calculate_costs()
         # print(f"Found solution with costs of {self.costs}.")
+
+        # Let grid write output file
+        self.grid.get_output((self.costs))
+        
         return True
     
     def is_solution(self):
