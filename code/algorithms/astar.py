@@ -11,7 +11,7 @@ class Astar():
     
     def __init__(self, grid):
         self.grid = copy.deepcopy(grid)
-        self.netlist = self.grid.netlist
+        self.netlist = self.grid.available_nets()
 
         self.length = 0
         self.intersections = 0
