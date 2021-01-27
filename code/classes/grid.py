@@ -139,14 +139,16 @@ class Grid():
         """
         unfinished_nets = []
 
+        # Search through nets
         comprehension = [unfinished_nets.append(net) for net in self.netlist if not net.finished]
 
         return unfinished_nets
 
     def choose_net(self, net):
         """
-        After calling which nets are available, pass the net you want to work on making
-        If net is an unfinished net, sets net to current net, set current crossing to latest crossing in net
+        After calling which nets are available, pass the net you want to work on.
+        If net is an unfinished net, sets net to current net, set current crossing 
+        to latest crossing in net.
         """
         if net in self.available_nets():
             self.current_net = net
@@ -156,34 +158,35 @@ class Grid():
 
     def add_to_net(self, direction):
         """
-        Takes a letter to represent the direction as variable
-        Adds the new location to the net, add blockades to involved crossings
-        Returns false if invalid direction is passed or crossing is a gate not in the current_net, else true
+        Takes a letter to represent the direction as variable.
+        Adds the new location to the net, add blockades to involved crossings.
+        Returns false if invalid direction is passed or crossing is a gate not 
+        in the current_net, else true.
         """
 
-        # first check if this direction is still an option from the current crossing
+        # First check if this direction is still an option from the current crossing
         if direction in self.current_crossing.directions:
             new_crossing = self.crossing_at_direction(direction)
 
-            # block the directions from both crossings
+            # Block the directions from both crossings
             self.current_crossing.add_blockade(direction)
             already_intersection = new_crossing.intersection
             opposite = self.get_opposite(direction)
             new_crossing.add_blockade(opposite[0])
 
-            # add new crossing object to the net
+            # Add new crossing object to the net
             self.current_net.add_crossing(new_crossing)
             self.current_crossing = new_crossing
 
-            # count if intersection is created
+            # Count if intersection is created
             if not already_intersection:
                 if self.current_crossing.intersection:
                     self.amount_of_intersections += 1
 
-            # react accordingly if crossing is the end of the net
+            # React accordingly if crossing is the end of the net
             if self.current_net.finished:
 
-                # go to next unfinished net per default
+                # Go to next unfinished net per default
                 possible_nets = self.available_nets()
                 if possible_nets != []:
                     self.current_net = possible_nets[0]
@@ -194,39 +197,39 @@ class Grid():
 
             return True
 
-        # if a non-valid direction is passed, return false
+        # If a non-valid direction is passed, return false
         return False
 
     def delete_net(self, net, steps):
         """
-        Takes a net object as input, and the number of steps you want to remove from the route
-        Deletes the asked amount of steps from the end of the route from the net objects and crossing objects
-        If amount of steps is bigger then the total steps in the route, or -1, deletes the entire route
+        Takes a net object as input, and the number of steps you want to 
+        remove from the route. Deletes the asked amount of steps from the 
+        end of the route from the net objects and crossing objects.
+        If amount of steps is bigger then the total steps in the route, 
+        or -1, deletes the entire route.
         """
-
         if steps > net.get_length() or steps < 0:
             steps = net.get_length()
         
-        # remove the last crossing from the net as many times as is necessary
+        # Remove the last crossing from the net as many times as is necessary
         while steps > 0:
             self.delete_last_crossing(net)
             steps  -= 1
 
-        # when a crossing is removed, the net can never be finished anymore
+        # When a crossing is removed, the net can never be finished anymore
         net.mark_unfinished()
 
     def delete_last_crossing(self, net):
         """
-        Takes a net object as input
-        Removes the last added crossing from the route
-        Removes the blockades in the crossing objects
+        Takes a net object as input and removes the last  added crossing from the 
+        route. Also removes the blockades in the crossing objects.
         """
 
-        # retrieve relevant crossing objects
+        # Retrieve relevant crossing objects
         crossings = net.get_latest_two_crossings()
         last_crossing, second_last_crossing = crossings[0], crossings[1]
 
-        # retrieves the direction between the crossing objects
+        # Retrieves the direction between the crossing objects
         last_crossing_coordinates = last_crossing.location
         second_last_crossing_coordinates = second_last_crossing.location
 
@@ -234,10 +237,10 @@ class Grid():
         y_difference = last_crossing_coordinates[1] - second_last_crossing_coordinates[1]
         z_difference = last_crossing_coordinates[2] - second_last_crossing_coordinates[2]
 
-        # check if last of second last crossing is an intersection
+        # Check if last of second last crossing is an intersection
         check_last_crossing = last_crossing.intersection
 
-        # removes the blockades on both crossings
+        # Removes the blockades on both crossings
         if x_difference < 0:
             last_crossing.remove_blockade('E')
             second_last_crossing.remove_blockade('W')
@@ -257,26 +260,26 @@ class Grid():
             last_crossing.remove_blockade('D')
             second_last_crossing.remove_blockade('U')
 
-        # adjusts amount of intersections accordingly
+        # Adjusts amount of intersections accordingly
         if check_last_crossing == True:
             if last_crossing.intersection == False:
                 self.amount_of_intersections -= 1
 
-        # deletes the last crossing object in the net
+        # Eeletes the last crossing object in the net
         net.delete_last_crossing()
 
     def get_crossing(self, x, y, z):
         """
-        Takes the coordinates x, y and z as integers as input
-        Returns the crossing object in that location
+        Takes the coordinates x, y and z as input.
+        Returns the crossing object in that location.
         """
 
-        # indexing order: z, y, x
+        # Indexing order: z, y, x
         return self.grid[z][y][x]
 
     def get_directions(self, crossing = ""):
         """
-        Returns possible directions from crossing as list
+        Returns possible directions from crossing as list.
         """
         if crossing == "":
             crossing = self.current_crossing
@@ -293,7 +296,7 @@ class Grid():
         literal_directions = self.current_net.get_route_to_end(crossing)
         directions = []
 
-        # translate to directions
+        # Translate to directions
         if literal_directions[0] >= 0:
             for i in range(literal_directions[0]):
                 directions.append("E")
@@ -319,62 +322,61 @@ class Grid():
     
     def crossing_at_direction(self, direction, crossing = ""):
         """
-        Takes as input a direction and optionally a crossing object, default is the current_crossing in the grid
-        Returns the crossing object a certain direction away from the crossing object, no matter if there is a blockade
+        Takes as input a direction and optionally a crossing object, default 
+        is the current_crossing in the grid. Returns the crossing object a certain 
+        direction away from the crossing object, no matter if there is a blockade.
         Returns None if an invalid direction was passed
         """
-
         if crossing == "":
             crossing = self.current_crossing
 
         if direction in ['N', 'S', 'E', 'W', 'U', 'D']:
-
             current_coordinates = crossing.location
 
-            # if direction if north, y coordinate goes down by one (may seem weird, has to do with indexing)
+            # If direction is north, y coordinate goes down by one (may seem weird, has to do with indexing)
             if direction == 'N':
                 new_y_coordinate = current_coordinates[1] - 1
 
                 new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
 
-            # if direction if south, y coordinate goes up by one (may seem weird, has to do with indexing)
+            # If direction is south, y coordinate goes up by one (may seem weird, has to do with indexing)
             elif direction == 'S':
                 new_y_coordinate = current_coordinates[1] + 1
 
                 new_crossing = self.grid[current_coordinates[2]][new_y_coordinate][current_coordinates[0]]
 
-            # if direction if east, x coordinate goes up by one
+            # If direction is east, x coordinate goes up by one
             elif direction == 'E':
                 new_x_coordinate = current_coordinates[0] + 1
 
                 new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
 
-            # if direction if west, x coordinate goes down by one
+            # If direction is west, x coordinate goes down by one
             elif direction == 'W':
                 new_x_coordinate = current_coordinates[0] - 1
 
                 new_crossing = self.grid[current_coordinates[2]][current_coordinates[1]][new_x_coordinate]
 
-            # if direction is up, z coordinate goes up by one
+            # If direction is up, z coordinate goes up by one
             elif direction == 'U':
                 new_z_coordinate = current_coordinates[2] + 1
 
                 new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
 
-            # if direction is down, z coordinate goes down by one
+            # If direction is down, z coordinate goes down by one
             elif direction == 'D':
                 new_z_coordinate = current_coordinates[2] - 1
 
                 new_crossing = self.grid[new_z_coordinate][current_coordinates[1]][current_coordinates[0]]
 
             return new_crossing
+
         return None
 
     def get_opposite(self, direction):
         """
-        For each possible direction, returns the opposite
+        For each possible direction, returns the opposite.
         """
-
         if direction in ['S', 'N']:
             return [i for i in ['S', 'N'] if i != direction]
         elif direction in ['E', 'W']:
@@ -384,11 +386,11 @@ class Grid():
 
     def get_output(self, total_costs):
         """
-        Takes the total_costs of the chip as int as input
-        Can be called on the grid to write an outputfile
+        Takes the total_costs of the chip as int as input.
+        Can be called on the grid to write an outputfile.
         """
-
         with open(f"./data/outputfiles/chip_{self.chip_id}_net_{self.netlist_id}.csv", 'w') as file:
+        
         # This other output file can be used for the check50
         # with open('./data/outputfiles/output.csv', 'w') as file:
             output = writer(file)
@@ -405,6 +407,9 @@ class Grid():
             output.writerow([f"chip_{self.chip_id}_net_{self.netlist_id},{total_costs}"])
     
     def netlist_length(self):
+        """
+        Returns the total wire length for a grid.
+        """
         length = []
 
         for net in self.netlist:
@@ -413,4 +418,7 @@ class Grid():
         return sum(length)
     
     def calculate_costs(self):
+        """
+        Calculates the total costs for a grid.
+        """
         return self.netlist_length() + 300 * self.amount_of_intersections
