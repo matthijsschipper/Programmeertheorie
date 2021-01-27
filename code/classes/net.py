@@ -51,7 +51,7 @@ class Net:
         
         comprehension = [coordinates.append(tuple(crossing.location)) for crossing in self.routelist]
 
-        return coordinate_list
+        return coordinates
              
     def get_route_to_end(self, current_crossing = ""):
         """
