@@ -1,7 +1,6 @@
 from code.classes import grid, crossing, net
 from code.visualisation import visualise as vis
 from code.algorithms import random, steered_random, astar, sort, hillclimber as hc
-from code.all_stars import get_all_results
 
 from pathlib import Path
 
@@ -25,6 +24,9 @@ if __name__ == "__main__":
         else:
             print("Netlist does not exist for given chip.")
 
+    # also save the name of the outputfile
+    outputfile = f"./data/outputfiles/chip_{chip_number}_net_{netlist_number}.csv"
+
     # create grid
     grid = grid.Grid(printfile, netlistfile)
 
@@ -44,9 +46,9 @@ if __name__ == "__main__":
 
     # ask user if they want to use an sorting method
     print("Would you like to sort the netlists before running an algorithm?\n Y/N")
-        while True:
+    while True:
         sort_answer = input()
-        if sort_answer != 'Y' of sort_answer != 'N':
+        if sort_answer != 'Y' and sort_answer != 'N':
             print("Invalid answer, please respond with either Y or N")
         else:
             break
@@ -125,7 +127,7 @@ if __name__ == "__main__":
         print("Would you like to optimize this result with the hillclimber algorithm?\n Y/N")
         while True:
             hillclimber_answer = input()
-            if hillclimber_answer != 'Y' of hillclimber_answer != 'N':
+            if hillclimber_answer != 'Y' and hillclimber_answer != 'N':
                 print("Invalid answer, please respond with either Y or N")
             else:
                 break

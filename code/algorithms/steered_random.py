@@ -12,6 +12,7 @@ class steered_random_routes:
     def __init__(self, grid):
         self.grid = deepcopy(grid)
         self.total_wires_length = 0
+        self.costs = 0
         self.succeeded = False
 
     def check_direction(self, net, direction):
@@ -130,7 +131,11 @@ class steered_random_routes:
             empty_nets = [i for i in self.grid.netlist if i not in succeeded_nets]
             tries -= 1
 
+        # save in the object if it has succeeded in finding a solution
         if empty_nets == []:
             self.succeeded = True
 
-        self.grid.get_output(self.costs)
+            # calculate costs of solution
+            self.costs = self.grid.calculate_costs()
+
+            self.grid.get_output(self.costs)
