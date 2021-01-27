@@ -125,15 +125,6 @@ class Astar():
         self.intersections = intersections
         self.failed = len(self.failed_nets)
 
-        # Print results
-        # print("")
-        # print(f"Total length: {length}")
-        # print(f"Amount of intersections: {intersections}")
-        # print(f"{len(self.failed_nets)} failed nets: {self.failed_nets}")
-        # print(f"Costs: {self.costs}")
-        # print(f"Height: {self.height}")
-        # print("")
-
         self.grid.get_output(self.costs)
 
     def h_score(self, crossing):

@@ -1,8 +1,9 @@
 from code.classes import grid, crossing, net
 from code.visualisation import visualise as vis
 from code.algorithms import random, steered_random, astar, sort, hillclimber as hc
-
 from code.all_stars import get_all_results
+
+from pathlib import Path
 
 if __name__ == "__main__":
     
@@ -18,30 +19,6 @@ if __name__ == "__main__":
 
     # sort netlists
     grid = sort.select_longest_nets(grid)
-
-    # Testing random algorithm
-    # r = random.Random(grid)
-
-    # while not r.is_solution():
-    #     r = random.Random(grid)
-    
-    # Testing steered random algorithm
-    # sr = steered_random.steered_random_routes(grid)
-
-    # Testing A* algorithm
-    #a = astar.Astar(grid)
-    #a.run()
-    # get_all_results(f"./data/results_astar/net_test.csv", grid)
-
-    # vis.visualise(printfile, outputfile, 'original')
-
-    # Optimizing solution on wire length
-    # optimized_length = hc.HillClimber(a).optimize_wire_length(chip_number, netlist_number)
-
-    # Optimizing solution on costs
-    # optimization = hc.HillClimber(a).optimize_costs(200, chip_number, netlist_number)
-
-    # vis.visualise(printfile, outputfile, 'optimalizations')
 
     #VOORSTEL VOOR MAIN.PY
 
@@ -63,13 +40,9 @@ if __name__ == "__main__":
         else:
             print("Netlist does not exist for given chip.")
 
-    # VOLGENSMIJ DOEN WE HIER NU NIETS MEE!! Voorstel: of verwijderen of meegeven aan grid
-    outputfile = f"./data/outputfiles/chip_{chip_number}_net_{netlist_number}.csv"
-
     options = {"A": "Random", "B": "Steered Random", "C": "A*", "D": "Hillclimber"}
     
-    print()
-    print("Choose an algorithm")
+    print("\nChoose an algorithm")
     for key, value in options.items():
         print(f"{key}: {value}")
     
@@ -79,15 +52,15 @@ if __name__ == "__main__":
     grid = grid.Grid(printfile, netlistfile)
 
     # --------------------------- Random ---------------------------------------
-    r = random.Random(grid)
+    random_object = random.Random(grid)
 
-    if r.is_solution():
+    if random_object.is_solution():
         print(f"Costs: {r.costs}")
     else:
         print("No solution found") 
 
     # --------------------------- Steered Random -------------------------------
-    sr = steered_random.steered_random_routes(grid)
+    steered_random_object = steered_random.steered_random_routes(grid)
 
     while True:
         try:
@@ -99,12 +72,12 @@ if __name__ == "__main__":
         except ValueError:
             print("Input needs to be an integer")
     
-    sr.run(tries)
+    steered_random_object.run(tries)
     print(f"Costs: {sr.costs}") #MISS EEN MANIER TOEVOEGEN OM TE CHECKEN VOOR GELDIGE OPLOSSING?
 
     # --------------------------- A* -------------------------------------------
-    a = astar.Astar(grid)
-    a.run()
+    astar_object = astar.Astar(grid)
+    astar_object.run()
     print(f"Costs: {a.costs}")
 
     # --------------------------- Visualisation BEFORE Hillclimber has run --------------------------------
@@ -112,14 +85,14 @@ if __name__ == "__main__":
     vis.visualise(printfile, outputfile, 'original')
 
     # --------------------------- Hill Climber ---------------------------------
-    h = hc.HillClimber(a)
+    hillclimber_object = hc.HillClimber(a)
 
     print(f"""
         Original costs: {h.old_costs}
         Optimizing original solution....
     """)
 
-    h.optimize_costs()
+    hillclimber_object.optimize_costs()
 
     print(f"""
         Convergence reached! (found {h.cost_occurence} consecutive times the same costs). Results:

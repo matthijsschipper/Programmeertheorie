@@ -28,4 +28,39 @@
 
  ## Algoritmen
 
+ #### Sort
+ Dit is niet echt een algoritme, maar eerder een heuristiek.
+ We hebben verschillende functies geschreven die de volgorde van de nets ten opzichte van de inputfile aanpassen.
+ Deze functies moeten worden gerund voor een oplossing algoritme wordt gerund.
+ De opties zijn:
+ - de nets waarbij de start- en eind-gate het dichtst bij elkaar liggen, vooraan te zetten,
+ - de nets waarbij de start- en eind-gate het verst van elkaar af liggen, vooraan te zetten,
+ - de nets waarbij de start- en eind-gate het dichtst bij de rand van de grid liggen, vooraan zetten,
+ - de nets waarbij de start- en eind-gate het dichtst bij het centrum van de grid liggen, vooraan zetten.
+
+ #### Random
+ Het eerste algoritme dat we hebben gemaakt is een random algoritme.
+ Dit algoritme gaat de nets die gelegd moeten worden in de volgorde waarin ze in de grid staan af.
+ Voor een net begint hij bij de start-gate, de eerste gate die gegeven is in de grid.
+ Vanaf daar gaat het algoritme kijken welke kanten het nog op kan binnen de restricties van het probleem.
+ Uit de richtingen die het op kan, kiest het een random richting en herhaalt dan de eerdere stappen weer.
+ Na elke stap kijkt hij of hij op de eind-gate is beland.
+ Als hij bij de eind-gate is, stopt hij met verder lopen en gaat hij naar de volgende gate.
+ Mocht het zo zijn dat het algoritme ergens is gekomen vanaf waar het niet verder kan, dat stopt het en delete hij het hele gelegde pad.
+
+ #### Steered random
+ Als eerste verbetering op random, waren we nieuwschierig naar hoe veel het zou schelen als het algoritme zou proberen de juiste richting op te lopen.
+ In dit geval begint het algoritme weer bij de start-gate.
+ Vanaf hier kijkt het algoritme welke richtingen het nog op zou moeten lopen om bij de eind-gate te komen.
+ Deze richtingen vergelijkt hij met de richtingen die beschikbaar zijn om vanaf dit punt te bewandelen.
+ Als hier overlap in zit, geeft het algoritme de voorkeur aan omlaag gaan, mocht dat niet nodig zijn, kiest het een random richting uit de goede richtingen.
+ Hierbij checkt hij nog wel even snel of deze richtingen niet een doodlopend eind zouden zijn.
+ Mocht het niet lukken om de 'goede' kant op te lopen, dan gaat de voorkeur uit naar omhoog gaan.
+ Mocht zelfs dat niet lukken, dan pas kiest het algoritme zelf een random richting die hij nog wel op kan vanuit dit punt.
+ Bij elk punt worden deze zelfde keuzes gemaakt tot hij bij het einde is.
+ Mocht hij eerder een doodlopend eind tegen komen dan de eind-gate, dan verwijdert hij de gelopen route en gaat hij verder met de volgende netlist.
+
+ #### A*
+ 
+
  ## Reproductie resultaten
