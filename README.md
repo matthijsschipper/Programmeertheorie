@@ -61,7 +61,13 @@
  Mocht hij eerder een doodlopend eind tegen komen dan de eind-gate, dan verwijdert hij de gelopen route en gaat hij verder met de volgende netlist.
 
  #### A*
-
+ Bij het A* algoritme worden punten in het grid beoordeeld op basis van een kostenfunctie.
+ Deze functie is de som van kosten om van de start-gate naar het beschouwde punt te komen en de minimale kosten om de eind-gate te bereiken.
+ Hierbij heeft een eenheid draadlengte (de afstand tussen twee aangelegen punten) een kosten van 1 en een kruispunt (tussen twee draden) kost 300 (dit is in overeenstemming met de kostenfunctie die geminimaliseerd moet worden).
+ Het algoritme begint bij de start-gate en beschouwt alle aangrenzende punten. Vervolgens kiest het algoritme het punt met de laagste functiewaarde en vergelijkt dan de buren van dit nieuwe punt en alle nog niet beschouwde voorgaande punten.
+ Opnieuw kiest het algoritme het punt met de laagste functiewaarde.
+ Dit process herhaalt zich tot de eind-gate gevonden is.
+ Ten slotte wordt het pad tussen de start- en eind-gate gereconstrueerd.
 
  #### Hillclimber
  Dit algoritme heeft als input al een valide oplossing nodig.
