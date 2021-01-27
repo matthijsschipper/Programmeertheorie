@@ -156,10 +156,10 @@ class steered_random_routes:
             ordered_nets = [i for i in ordered_nets if i not in succeeded_nets]
             tries -= 1
 
-        succesful = True
-        for net in self.grid.netlist:
-            if net.finished == False:
-                succesful = False
+        # succesful = True
+        # for net in self.grid.netlist:
+        #     if net.finished == False:
+        #         succesful = False
 
         self.costs = 300 * self.grid.amount_of_intersections + self.total_wires_length
 
