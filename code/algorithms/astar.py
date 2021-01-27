@@ -23,14 +23,13 @@ class Astar():
         self.failed = 0
 
         self.height = 0
-
-        #self.run()
     
     def run(self, method = 'default'):
         """
         Runs A* algoritm until all nets are considered.
         """
-        netlist = self.get_netlist(method)
+
+        # netlist = self.get_netlist(method)
         print(netlist)
         for net in netlist:
             print(net.start, net.end)
@@ -77,7 +76,7 @@ class Astar():
                     for p in path:
                         self.height = max(self.height, p.location[2])
 
-                    directions_to_end = self.get_directions_to_end(path)
+                    directions_to_end = self.get_path_as_list_of_directions(path)
                     length += len(directions_to_end)
                     self.add_net(directions_to_end, net)
                     break
@@ -126,14 +125,14 @@ class Astar():
         self.intersections = intersections
         self.failed = len(self.failed_nets)
 
-        # Optional
-        print("")
-        print(f"Total length: {length}")
-        print(f"Amount of intersections: {intersections}")
-        print(f"{len(self.failed_nets)} failed nets: {self.failed_nets}")
-        print(f"Costs: {self.costs}")
-        print(f"Height: {self.height}")
-        print("")
+        # Print results
+        # print("")
+        # print(f"Total length: {length}")
+        # print(f"Amount of intersections: {intersections}")
+        # print(f"{len(self.failed_nets)} failed nets: {self.failed_nets}")
+        # print(f"Costs: {self.costs}")
+        # print(f"Height: {self.height}")
+        # print("")
 
         self.grid.get_output(self.costs)
 
@@ -141,6 +140,7 @@ class Astar():
         """
         Calculates the h-score of a given crossing.
         """
+
         return len(self.grid.get_directions_to_end(crossing))
     
     def reconstruct(self, current, previous, start):
@@ -149,6 +149,7 @@ class Astar():
         based on a dictionary with crossings and their predecessors.
         The steps are saved in a list.
         """
+
         path = []
         
         while current in previous:
@@ -160,11 +161,12 @@ class Astar():
 
         return path
     
-    def get_directions_to_end(self, path):
+    def get_path_as_list_of_directions(self, path):
         """
         Takes a list of crossings from the start to the end of
         a net and converts it to a list of directions.
         """
+
         directions = []
 
         for i in range(len(path) - 1):
@@ -190,64 +192,7 @@ class Astar():
         """
         Creates a complete net based on a list of directions.
         """
+
         self.grid.current_crossing = net.start
         for direction in directions:
             self.grid.add_to_net(direction)
-            
-    def select_shortest_nets(self, netlist):
-        """
-        Takes the netlist of a grid as input
-        Determines which nets should be the shortest to lay down
-        Returns an ordered list where the first nets are the shortest and they grow in size
-        """
-
-        nets_with_length = []
-        for net in netlist:
-            amount_of_steps = sum([abs(i) for i in net.get_route_to_end()])
-            nets_with_length.append((amount_of_steps, net))
-        nets_with_length.sort(key = lambda x : x[0])
-        
-        return [i[1] for i in nets_with_length]
-
-    def get_outer(self, netlist):
-
-        outer_nets = []
-        for net in netlist:
-            start = net.start.location
-            end = net.end.location
-            size = self.grid.size
-
-            start_score = min(start[0], size[0]-start[0]-1, start[1], size[1]-start[1]-1)
-            #print(f"s_score: {start_score}")
-            end_score = min(end[0], size[0]-end[0]-1, end[1], size[1]-end[1]-1)
-            score = (start_score + end_score) / 2
-            #print(f"({start_score} + {end_score}) / 2 = {score}")
-            outer_nets.append((score, net))
-        outer_nets.sort(key = lambda x : x[0])
-        
-        return [i[1] for i in outer_nets]
-    
-    def get_inner(self, netlist):
-        return list(reversed(self.get_outer(netlist)))
-
-    def select_longest_nets(self, netlist):
-        return list(reversed(self.select_shortest_nets(netlist)))
-    
-    def get_netlist(self, method):
-        netlist = self.netlist
-        print(netlist)
-
-        if method == 'default':
-            return netlist
-        elif method == 'reverse':
-            return list(reversed(netlist))
-        elif method == 'short':
-            return self.select_shortest_nets(netlist)
-        elif method == 'long':
-            return self.select_longest_nets(netlist)
-        elif method == 'outside':
-            return self.get_outer(netlist)
-        elif method == 'inside':
-            return self.get_inner(netlist)
-        else:
-            raise Exception('Invalid method')

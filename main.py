@@ -1,13 +1,13 @@
 from code.classes import grid, crossing, net
 from code.visualisation import visualise as vis
-from code.algorithms import random, steered_random, astar, hillclimber as hc
+from code.algorithms import random, steered_random, astar, sort, hillclimber as hc
 
 from code.all_stars import get_all_results
 
 if __name__ == "__main__":
     
-    chip_number = 2
-    netlist_number = 9
+    chip_number = 0
+    netlist_number = 1
 
     printfile = f"./data/chip_{chip_number}/print_{chip_number}.csv"
     netlistfile = f"./data/chip_{chip_number}/netlist_{netlist_number}.csv"
@@ -15,6 +15,9 @@ if __name__ == "__main__":
 
     # create grid object
     grid = grid.Grid(printfile, netlistfile)
+
+    # sort netlists
+    grid = sort.select_longest_nets(grid)
 
     # Testing random algorithm
     # r = random.Random(grid)
@@ -28,7 +31,7 @@ if __name__ == "__main__":
     # Testing A* algorithm
     #a = astar.Astar(grid)
     #a.run()
-    get_all_results(f"./data/results_astar/net_test.csv", grid)
+    # get_all_results(f"./data/results_astar/net_test.csv", grid)
 
     # vis.visualise(printfile, outputfile, 'original')
 

@@ -14,31 +14,6 @@ class steered_random_routes:
         self.total_wires_length = 0
         self.costs = 0
 
-    def select_shortest_nets(self, netlist):
-        """
-        Takes the netlist of a grid as input
-        Determines which nets should be the shortest to lay down
-        Returns an ordered list where the first nets are the shortest and they grow in size
-        """
-
-        nets_with_length = []
-        for net in netlist:
-            amount_of_steps = sum([abs(i) for i in net.get_route_to_end()])
-            nets_with_length.append((amount_of_steps, net))
-        nets_with_length.sort(key = lambda x : x[0])
-        
-        return [i[1] for i in nets_with_length]
-
-    def select_outer_nets(self, netlist):
-        """
-        Takes the netlist of a grid as input
-        Determines which nets are most on the sides of the grid
-        Preferes short nets above longer nets
-        Returns an ordered list where the first nets are the most on the outside
-        """
-
-        pass
-
     def check_direction(self, net, direction):
         """
         Takes a net object and a direction as input
@@ -76,7 +51,7 @@ class steered_random_routes:
         """
 
         # order the nets by expected size
-        ordered_nets = self.select_shortest_nets(self.grid.netlist)
+        # ordered_nets = self.select_shortest_nets(self.grid.netlist)
         succeeded_nets = []
 
         # try given amount of times

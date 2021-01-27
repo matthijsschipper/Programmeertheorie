@@ -103,3 +103,8 @@
 | Birgit | 10:30 | 15:00 | Working on deliverable deadline today | 
 | Matthijs | 09:00 | 16:30 | Collecting results, improving code quality and writing second algorithm document |
 | Birgit | 17:00 | 18:00 | Working on deliverable |
+
+## 27-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
+| Birgit | 15:00 | | Cleaning up main |
