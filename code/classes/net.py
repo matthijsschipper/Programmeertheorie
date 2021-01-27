@@ -4,7 +4,7 @@ class Net:
     def __init__(self, start, end):
         """
         Takes the crossing-objects of the startgate and endgate of a 
-        route as input. Creates a route object
+        route as input. Creates a route object.
         """
         self.start = start
         self.end = end
