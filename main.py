@@ -6,21 +6,6 @@ from code.all_stars import get_all_results
 from pathlib import Path
 
 if __name__ == "__main__":
-    
-    chip_number = 0
-    netlist_number = 2
-
-    printfile = f"./data/chip_{chip_number}/print_{chip_number}.csv"
-    netlistfile = f"./data/chip_{chip_number}/netlist_{netlist_number}.csv"
-    outputfile = f"./data/outputfiles/chip_{chip_number}_net_{netlist_number}.csv"
-
-    # create grid object
-    grid = grid.Grid(printfile, netlistfile)
-
-    # sort netlists
-    grid = sort.select_longest_nets(grid)
-
-    #VOORSTEL VOOR MAIN.PY
 
     # get print file
     while True:

@@ -61,6 +61,15 @@
  Mocht hij eerder een doodlopend eind tegen komen dan de eind-gate, dan verwijdert hij de gelopen route en gaat hij verder met de volgende netlist.
 
  #### A*
- 
+
+
+ #### Hillclimber
+ Dit algoritme heeft als input al een valide oplossing nodig.
+ Het doel van dit algoritme is om deze oplossing dan te proberen te optimaliseren.
+ Het algoritme kiest een random net uit de oplossing, slaat deze lokaal op, en verwijdert deze route van uit de grid.
+ Daarna probeert hij met het A* algoritme dit pad opnieuw te leggen.
+ Als het lukt om dit pad opnieuw te leggen voor lagere kosten, laat hij het nieuwe pad staan, anders wordt het oude pad terug geplaatst.
+ Het algoritme blijft telkens random nieuwe nets hiervoor uitkiezen, tot het 1500 keer niet lukt om de kosten lager te krijgen.
 
  ## Reproductie resultaten
+ Door het runnen van de main file, kunnen alle algoritmen via een 'interface' in de terminal gerund worden.
