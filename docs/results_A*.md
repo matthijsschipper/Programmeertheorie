@@ -1,82 +1,79 @@
-# Results A* algorithm
-
 # Netlist 1
-| Algorithm   | Length | Intersections | Costs | Failed | Height |
-| ----------- | ------ | ------------- | ----- | ------ | ------ |
-| Distance    | 20     | 1             | 320   | 0      | 0      |
-| R\_Distance | 20     | 0             | 20    | 0      | 0      |
-| &nbsp;      |        |               |       |        |        |
-| Costs       | 22     | 0             | 22    | 0      | 0      |
-| R\_Costs    | 20     | 0             | 20    | 0      | 0      |
+| Order       | Length | Intersections | Costs |
+| Given       | 22     | 0             | 22    |
+| Reversed    | 20     | 0             | 20    |
+| Short_first | 22     | 0             | 22    |
+| Long_first  | 20     | 0             | 20    |
+| Outer_first | 20     | 0             | 20    |
+| Inner_first | 22     | 0             | 22    |
 
 # Netlist 2
-| Algorithm   | Length | Intersections | Costs | Failed | Height |
-| ----------- | ------ | ------------- | ----- | ------ | ------ |
-| Distance    | 41     | 5             | 1541  | 0      | 1      |
-| R\_Distance | 41     | 3             | 941   | 0      | 1      |
-| &nbsp;      |        |               |       |        |        |
-| Costs       | 43     | 0             | 43    | 0      | 1      |
-| R\_Costs    | 41     | 0             | 41    | 0      | 1      |
+| Order       | Length | Intersections | Costs |
+| Given       | 43     | 0             | 43    |
+| Reversed    | 41     | 0             | 41    |
+| Short_first | 39     | 0             | 39    |
+| Long_first  | 43     | 0             | 43    |
+| Outer_first | 43     | 0             | 43    |
+| Inner_first | 41     | 0             | 41    |
 
 # Netlist 3
-| Algorithm   | Length | Intersections | Costs | Failed | Height |
-| ----------- | ------ | ------------- | ----- | ------ | ------ |
-| Distance    | 60     | 7             | 2160  | 0      | 1      |
-| R\_Distance | 60     | 6             | 1860  | 0      | 1      |
-| &nbsp;      |        |               |       |        |        |
-| Costs       | 72     | 0             | 72    | 0      | 3      |
-| R\_Costs    | 62     | 1             | 362   | 0      | 1      |
+| Order       | Length | Intersections | Costs |
+| Given       | 72     | 0             | 72    |
+| Reversed    | 62     | 1             | 362   |
+| Short_first | 60     | 0             | 60    |
+| Long_first  | 66     | 1             | 366   |
+| Outer_first | 68     | 1             | 368   |
+| Inner_first | 64     | 1             | 364   |
 
 # Netlist 4
-| Algorithm   | Length | Intersections | Costs | Failed | Height |
-| ----------- | ------ | ------------- | ----- | ------ | ------ |
-| Distance    | 327    | 44            | 13527 | 0      | 1      |
-| R\_Distance | 339    | 63            | 19239 | 0      | 2      |
-| &nbsp;      |        |               |       |        |        |
-| Costs       | 387    | 11            | 3687  | 0      | 3      |
-| R\_Costs    | 385    | 14            | 4585  | 0      | 3      |
+| Order       | Length | Intersections | Costs |
+| Given       | 387    | 11            | 3687  |
+| Reversed    | 385    | 14            | 4585  |
+| Short_first | 363    | 6             | 2163  |
+| Long_first  | 379    | 20            | 6379  |
+| Outer_first | 401    | 12            | 4001  |
+| Inner_first | 367    | 6             | 2167  |
 
 # Netlist 5
-| Algorithm   | Length | Intersections | Costs | Failed | Height |
-| ----------- | ------ | ------------- | ----- | ------ | ------ |
-| Distance    | 383    | 84            | 25583 | 1      | 1      |
-| R\_Distance | 397    | 95            | 28897 | 2      | 2      |
-| &nbsp;      |        |               |       |        |        |
-| Costs       | 491    | 26            | 8291  | 0      | 3      |
-| R\_Costs    | 473    | 26            | 8273  | 0      | 3      |
+| Order       | Length | Intersections | Costs |
+| Given       | 491    | 26            | 8291  |
+| Reversed    | 473    | 26            | 8273  |
+| Short_first | 457    | 11            | 3757  |
+| Long_first  | 507    | 37            | 11607 |
+| Outer_first | 495    | 40            | 1249  |
+| Inner_first | 503    | 16            | 5303  |
 
 # Netlist 6
-| Algorithm   | Length | Intersections | Costs | Failed | Height |
-| ----------- | ------ | ------------- | ----- | ------ | ------ |
-| Distance    | 564    | 138           | 41964 | 2      | 2      |
-| R\_Distance | 588    | 159           | 48288 | 1      | 2      |
-| &nbsp;      |        |               |       |        |        |
-| Costs       | 747    | 61            | 19047 | 0      | 4      |
-| R\_Costs    | 791    | 64            | 19991 | 0      | 4      |
+| Order       | Length | Intersections | Costs |
+| Given       | 747    | 61            | 19047 |
+| Reversed    | 791    | 64            | 19991 |
+| Short_first | 681    | 27            | 8781  |
+| Outer_first | 779    | 83            | 25679 |
+| Inner_first | 749    | 57            | 17849 |
 
 # Netlist 7
-| Algorithm   | Length | Intersections | Costs | Failed | Height |
-| ----------- | ------ | ------------- | ----- | ------ | ------ |
-| Distance    | 762    | 206           | 62526 | 0      | 3      |
-| R\_Distance | 738    | 194           | 58938 | 0      | 3      |
-| &nbsp;      |        |               |       |        |        |
-| Costs       | 918    | 48            | 15318 | 0      | 5      |
-| R\_Costs    | 882    | 35            | 11382 | 0      | 5      |
+| Order       | Length | Intersections | Costs |
+| Given       | 918    | 48            | 15318 |
+| Reversed    | 882    | 35            | 11382 |
+| Short_first | 834    | 18            | 6234  |
+| Long_first  | 972    | 72            | 22572 |
+| Outer_first | 902    | 80            | 24902 |
+| Inner_first | 914    | 20            | 6914  |
+
 
 # Netlist 8
-| Algorithm   | Length | Intersections | Costs | Failed | Height |
-| ----------- | ------ | ------------- | ----- | ------ | ------ |
-| Distance    | 644    | 161           | 48944 | 4      | 2      |
-| R\_Distance | 703    | 173           | 52603 | 1      | 3      |
-| &nbsp;      |        |               |       |        |        |
-| Costs       | 898    | 58            | 18298 | 0      | 5      |
-| R\_Costs    | 924    | 61            | 19224 | 0      | 5      |
+| Order       | Length | Intersections | Costs |
+| Given       | 898    | 58            | 18298 |
+| Reversed    | 924    | 61            | 19224 |
+| Short_first | 858    | 32            | 10458 |
+| Long_first  | 928    | 93            | 28828 |
+| Outer_first | 922    | 81            | 25222 |
+| Inner_first | 878    | 59            | 18578 |
 
 # Netlist 9
-| Algorithm   | Length | Intersections | Costs | Failed | Height |
-| ----------- | ------ | ------------- | ----- | ------ | ------ |
-| Distance    | 905    | 249           | 75605 | 5      | 3      |
-| R\_Distance | 881    | 242           | 73481 | 5      | 2      |
-| &nbsp;      |        |               |       |        |        |
-| Costs       | 1231   | 118           | 36631 | 0      | 6      |
-| R\_Costs    | 1243   | 101           | 31543 | 0      | 6      |
+| Order       | Length | Intersections | Costs |
+| Given       | 1231   | 118           | 36631 |
+| Reversed    | 1243   | 101           | 31543 |
+| Short_first | 1195   | 54            | 17395 |
+| Outer_first | 1293   | 134           | 41493 |
+| Inner_first | 1217   | 64            | 20417 |
