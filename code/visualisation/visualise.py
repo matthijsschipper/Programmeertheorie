@@ -5,9 +5,8 @@ from mpl_toolkits.mplot3d import Axes3D
 
 def visualise(printfile, outputfile, folder):
     """
-    Takes in the standard-formatted output.csv file.
-    Outputs a visual representation of that file in the form of a graph.
-    Saves that file in the data/visualisations/ folder.
+    Takes in the standard-formatted output.csv file, reads it and stores it
+    in datastructures. Then, calls the plot function with those datastructures.
     """
     with open(printfile) as file:
 
@@ -38,7 +37,7 @@ def visualise(printfile, outputfile, folder):
         
         # Save information in variables
         net_coordinates = []
-        
+
         for row in file_reader:
 
             # Seperate footer row
@@ -61,6 +60,14 @@ def visualise(printfile, outputfile, folder):
 
                 # Add coordinates to list
                 net_coordinates.append((x_coordinates, y_coordinates, z_coordinates))
+    
+    plot(net_coordinates, gates, gen_info, folder)
+
+def plot(net_coordinates, gates, gen_info, folder):
+    """
+    Outputs a visual representation of that file in the form of a graph.
+    Saves that file in the data/visualisations/ folder.
+    """
 
     # Create plot
     fig = plt.figure()
