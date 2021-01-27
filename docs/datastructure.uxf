@@ -1,4 +1,4 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>620</x><y>34</y><w>210</w><h>210</h></coordinates><panel_attributes>Crossing
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>667</x><y>54</y><w>210</w><h>210</h></coordinates><panel_attributes>Crossing
 --
 name: String
 is_gate: Bool
@@ -10,7 +10,7 @@ intersection: Bool
 set_directions(self, grid_size): None
 place_gate(self, number): None
 add_blockade(self, direction): Bool
-remove_blockade(self, direction): None</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>34</y><w>270</w><h>390</h></coordinates><panel_attributes>Grid
+remove_blockade(self, direction): None</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>57</x><y>54</y><w>310</w><h>390</h></coordinates><panel_attributes>Grid
 --
 grid: List
 size: [Int]
@@ -37,7 +37,7 @@ crossing_at_direction(self, direction, crossing): Crossing
 get_opposite(self, direction): String
 get_output(self, total_costs): None
 netlist_length(self): Int
-calculate_costs(self): Int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>340</x><y>34</y><w>210</w><h>240</h></coordinates><panel_attributes>Net
+calculate_costs(self): Int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>667</x><y>354</y><w>210</w><h>240</h></coordinates><panel_attributes>Net
 --
 start: Crossing
 end: Crossing
@@ -52,4 +52,6 @@ show_route_coordinates(self): [(Int)]
 get_route_to_end(self, crossing): [Int]
 mark_unfinished(self): None
 get_length(self): Int
-reverse(self): None</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+reverse(self): None</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>357</x><y>120</y><w>330</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;10;310;10</additional_attributes></element><element><id>Relation</id><coordinates><x>757</x><y>260</y><w>50</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>357</x><y>390</y><w>320</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>300;10;10;10</additional_attributes></element></diagram>
