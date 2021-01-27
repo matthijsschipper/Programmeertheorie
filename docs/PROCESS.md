@@ -93,18 +93,24 @@
 ## 22-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
+| Jade | 00:00 | 02:00 | Worked on A* |
 | Birgit | 9:00 | 15:00 | Working on bettering the algoritm, analysing the problems it comes across |
 | Matthijs | 10:00 | 13:00 | Working on presentation + hillclimber |
+| Jade | 11:00 | 13:00 | Worked on presentation |
 | Matthijs | 16:00 | 21:00 | Working on hillclimber heuristics |
+| Jade | 22:00 | 23:59 | Worked on A* heuristics |
 
 ## 25-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
 | Birgit | 10:30 | 15:00 | Working on deliverable deadline today | 
 | Matthijs | 09:00 | 16:30 | Collecting results, improving code quality and writing second algorithm document |
-| Birgit | 17:00 | 18:00 | Working on deliverable |
+| Jade | 13:00 | 18:00 | Working on deadline and heuristics A* | 
+| Birgit | 17:00 | 18:00 | Working on deliverable deadline today |
+| Jade | 22:00 | 23:59 | Working on cleaning up A* | 
 
 ## 27-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
+| Jade | 14:00 | | Working on cleaning up A* and main.py | 
 | Birgit | 15:00 | | Cleaning up main |
