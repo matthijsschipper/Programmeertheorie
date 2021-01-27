@@ -136,23 +136,19 @@ if __name__ == "__main__":
 
     # --------------------------- Hill Climber ---------------------------------
     if hillclimber_answer == 'Y':
-        hillclimber_object = hc.HillClimber()
+        hillclimber_object = hc.HillClimber(solution)
 
-        print(f"""
-            Original costs: {hillclimber_object.old_costs}
-            Optimizing original solution....
-        """)
+        print(f"Original costs: {hillclimber_object.old_costs}\n"
+              f"Optimizing original solution....")
 
         hillclimber_object.optimize_costs()
 
-        print(f"""
-            Convergence reached! (found {h.cost_occurence} consecutive times the same costs). Results:
-            -------------------------------------------------------
-            Optimized netlist {netlist_number} from chip {chip_number}
-            Optimized costs from {h.old_costs} to {h.costs}
-            Optimized intersections from {h.old_intersections} to {h.solution.grid.amount_of_intersections}
-            Optimized length from {h.old_length} to {h.solution.grid.netlist_length()}
-        """)
+        print(f"Convergence reached! (found {h.cost_occurence} consecutive times the same costs). Results:\n"
+            "-------------------------------------------------------\n"
+            f"Optimized netlist {netlist_number} from chip {chip_number}\n"
+            f"Optimized costs from {h.old_costs} to {h.costs}\n"
+            f"Optimized intersections from {h.old_intersections} to {h.solution.grid.amount_of_intersections}\n"
+            f"Optimized length from {h.old_length} to {h.solution.grid.netlist_length()}")
 
 
     # --------------------------- Visualisation AFTER Hillclimber has run --------------------------------
