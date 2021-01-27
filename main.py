@@ -25,7 +25,8 @@ if __name__ == "__main__":
         else:
             print("Netlist does not exist for given chip.")
 
-    options = {"A": "Random", "B": "Steered Random", "C": "A*", "D": "Hillclimber"}
+    # make user choose an algorithm
+    options = {"A": "Random", "B": "Steered Random", "C": "A*"}
     
     print("\nChoose an algorithm")
     for key, value in options.items():
@@ -36,60 +37,86 @@ if __name__ == "__main__":
     # create grid
     grid = grid.Grid(printfile, netlistfile)
 
-    # --------------------------- Random ---------------------------------------
-    random_object = random.Random(grid)
+    # value to keep track if a solution is found
+    solution = False
 
-    if random_object.is_solution():
-        print(f"Costs: {random_object.costs}")
-    else:
-        print("No solution found") 
+    # --------------------------- Random ---------------------------------------
+    if options[algorithm] == "Random":
+        random_object = random.Random(grid)
+
+        if random_object.is_solution():
+            print(f"Costs: {random_object.costs}")
+            solution = random_object
+        else:
+            print("No solution found") 
 
     # --------------------------- Steered Random -------------------------------
-    steered_random_object = steered_random.steered_random_routes(grid)
+    elif options[algorithm] == "Steered Random":
+        steered_random_object = steered_random.steered_random_routes(grid)
 
-    while True:
-        try:
-            tries = int(input("Enter amount of tries: "))
-            if tries > 0:
-                break
-            else:
-                print("Input needs to be positive")
-        except ValueError:
-            print("Input needs to be an integer")
+        tries = 0
+        while tries <= 0:
+            try:
+                tries = int(input("Enter amount of tries: "))
+                if tries > 0:
+                    break
+                else:
+                    print("Input needs to be positive")
+            except ValueError:
+                print("Input needs to be an integer")
     
-    steered_random_object.run(tries)
-    print(f"Costs: {steered_random_object.costs}") #MISS EEN MANIER TOEVOEGEN OM TE CHECKEN VOOR GELDIGE OPLOSSING?
+        steered_random_object.run(tries)
+        if steered_random_object.succeeded:
+            print(f"Costs: {steered_random_object.costs}")
+            solution = steered_random_object
+        else:
+            print(f"Unfortunately, no solution was found")
 
     # --------------------------- A* -------------------------------------------
-    astar_object = astar.Astar(grid)
-    astar_object.run()
-    print(f"Costs: {astar_object.costs}")
+    elif options[algorithm] == "A*":
+        astar_object = astar.Astar(grid)
+        astar_object.run()
+        solution = astar_object
+        print(f"Costs: {astar_object.costs}")
 
     # --------------------------- Visualisation BEFORE Hillclimber has run --------------------------------
     # This visualisation is for all algorithms except the Hillclimber
     vis.visualise(printfile, outputfile, 'original')
 
+    if solution:
+        print("Would you like to optimize this result with the hillclimber algorithm?\n Y/N")
+        while True:
+            hillclimber_answer = input()
+            if hillclimber_answer != 'Y' of hillclimber_answer != 'N':
+                print("Invalid answer, please respond with either Y or N")
+            else:
+                break
+    else:
+        hillclimber_answer = False
+
     # --------------------------- Hill Climber ---------------------------------
-    hillclimber_object = hc.HillClimber(a)
+    if hillclimber_answer == 'Y':
+        hillclimber_object = hc.HillClimber()
 
-    print(f"""
-        Original costs: {hillclimber_object.old_costs}
-        Optimizing original solution....
-    """)
+        print(f"""
+            Original costs: {hillclimber_object.old_costs}
+            Optimizing original solution....
+        """)
 
-    hillclimber_object.optimize_costs()
+        hillclimber_object.optimize_costs()
 
-    print(f"""
-        Convergence reached! (found {h.cost_occurence} consecutive times the same costs). Results:
-        -------------------------------------------------------
-        Optimized netlist {netlist_number} from chip {chip_number}
-        Optimized costs from {h.old_costs} to {h.costs}
-        Optimized intersections from {h.old_intersections} to {h.solution.grid.amount_of_intersections}
-        Optimized length from {h.old_length} to {h.solution.grid.netlist_length()}
-    """)
+        print(f"""
+            Convergence reached! (found {h.cost_occurence} consecutive times the same costs). Results:
+            -------------------------------------------------------
+            Optimized netlist {netlist_number} from chip {chip_number}
+            Optimized costs from {h.old_costs} to {h.costs}
+            Optimized intersections from {h.old_intersections} to {h.solution.grid.amount_of_intersections}
+            Optimized length from {h.old_length} to {h.solution.grid.netlist_length()}
+        """)
 
 
     # --------------------------- Visualisation AFTER Hillclimber has run --------------------------------
     # This visualisation command should only be used if the Hillclimber algorithm has run!
     # Allows visual comparison between solution before and after Hillclimber optimization
-    vis.visualise(printfile, outputfile, 'optimizations')
+    if hillclimber_answer == 'Y':
+        vis.visualise(printfile, outputfile, 'optimizations')
