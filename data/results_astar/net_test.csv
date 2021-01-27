@@ -1,0 +1,7 @@
+Method,Length,Intersections,Costs,Height,Failed
+default,1231,118,36631,6,0
+reverse,1243,101,31543,6,0
+short,1195,54,17395,6,0
+long,1295,146,45095,6,1
+outside,1293,134,41493,6,0
+inside,1217,64,20417,6,0
