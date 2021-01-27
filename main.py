@@ -7,7 +7,7 @@ from code.all_stars import get_all_results
 if __name__ == "__main__":
     
     chip_number = 0
-    netlist_number = 1
+    netlist_number = 2
 
     printfile = f"./data/chip_{chip_number}/print_{chip_number}.csv"
     netlistfile = f"./data/chip_{chip_number}/netlist_{netlist_number}.csv"
@@ -81,10 +81,10 @@ if __name__ == "__main__":
     # --------------------------- Random ---------------------------------------
     r = random.Random(grid)
 
-    if r.solved:
+    if r.is_solution():
         print(f"Costs: {r.costs}")
     else:
-        print("No solution found") #IN RANDOM ZELF STAAT OOK PRINTSTATEMENT MAAR HET LIJKT MIJ LOGISCHER OM NIKS IN DE CLASSES UIT TE PRINTEN
+        print("No solution found") 
 
     # --------------------------- Steered Random -------------------------------
     sr = steered_random.steered_random_routes(grid)
@@ -107,10 +107,31 @@ if __name__ == "__main__":
     a.run()
     print(f"Costs: {a.costs}")
 
+    # --------------------------- Visualisation BEFORE Hillclimber has run --------------------------------
+    # This visualisation is for all algorithms except the Hillclimber
+    vis.visualise(printfile, outputfile, 'original')
+
     # --------------------------- Hill Climber ---------------------------------
     h = hc.HillClimber(a)
-    h.optimize_wire_length(chip_number, netlist_number)
+
+    print(f"""
+        Original costs: {h.old_costs}
+        Optimizing original solution....
+    """)
+
+    h.optimize_costs()
+
+    print(f"""
+        Convergence reached! (found {h.cost_occurence} consecutive times the same costs). Results:
+        -------------------------------------------------------
+        Optimized netlist {netlist_number} from chip {chip_number}
+        Optimized costs from {h.old_costs} to {h.costs}
+        Optimized intersections from {h.old_intersections} to {h.solution.grid.amount_of_intersections}
+        Optimized length from {h.old_length} to {h.solution.grid.netlist_length()}
+    """)
 
 
-    # --------------------------- Visualisation --------------------------------
-    #vis.visualise(printfile, outputfile) #WELKE FOLDER???
+    # --------------------------- Visualisation AFTER Hillclimber has run --------------------------------
+    # This visualisation command should only be used if the Hillclimber algorithm has run!
+    # Allows visual comparison between solution before and after Hillclimber optimization
+    vis.visualise(printfile, outputfile, 'optimizations')
