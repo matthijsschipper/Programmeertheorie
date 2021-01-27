@@ -25,6 +25,9 @@ if __name__ == "__main__":
         else:
             print("Netlist does not exist for given chip.")
 
+    # create grid
+    grid = grid.Grid(printfile, netlistfile)
+
     # make user choose an algorithm
     options = {"A": "Random", "B": "Steered Random", "C": "A*"}
     
@@ -32,12 +35,47 @@ if __name__ == "__main__":
     for key, value in options.items():
         print(f"{key}: {value}")
     
-    algorithm = input()
+    while True:
+        algorithm = input()
+        if algorithm in options:
+            break
+        else:
+            print("Please respond with the letter of your choice")
 
-    # create grid
-    grid = grid.Grid(printfile, netlistfile)
+    # ask user if they want to use an sorting method
+    print("Would you like to sort the netlists before running an algorithm?\n Y/N")
+        while True:
+        sort_answer = input()
+        if sort_answer != 'Y' of sort_answer != 'N':
+            print("Invalid answer, please respond with either Y or N")
+        else:
+            break
 
-    # value to keep track if a solution is found
+    if sort_answer == 'Y':
+        sort_options = {"A": "Shortest nets first", "B": "Longest nets first", "C": "Outer nets first", "D": "Inner nets first"}
+
+        print("Which sorting method would you like to use?")
+        for key, value in sort_options.items():
+            print(f"{key}: {value}")
+
+        while True:
+            sorting_method = input()
+            if sorting_method in sort_options:
+                break
+            else:
+                print("Please respond with the letter of your choice")
+        
+        # use correct sorting on the grid
+        if sorting_method == "A":
+            grid = sort.select_shortest_nets(grid)
+        elif sorting_method == "B":
+            grid = sort.select_longest_nets(grid)
+        elif sorting_method == "C":
+            grid = sort.select_outer_nets(grid)
+        else:
+            grid = sort.select_inner_nets(grid)
+
+    # value to keep track if a solution is found with chosen algorithm
     solution = False
 
     # --------------------------- Random ---------------------------------------
