@@ -50,15 +50,14 @@ class steered_random_routes:
         Returns a grid object with solutions if succesful, else None
         """
 
-        # order the nets by expected size
-        # ordered_nets = self.select_shortest_nets(self.grid.netlist)
         succeeded_nets = []
+        empty_nets = self.grid.netlist
 
         # try given amount of times
         while tries > 0:
 
             # solve puzzle net by net
-            for net in ordered_nets:
+            for net in empty_nets:
 
                 # variable to keep track if net failed or succeeded
                 succes = True
@@ -128,13 +127,8 @@ class steered_random_routes:
                     self.total_wires_length += net.get_length()
                     succeeded_nets.append(net)
 
-            ordered_nets = [i for i in ordered_nets if i not in succeeded_nets]
+            empty_nets = [i for i in self.grid.netlist if i not in succeeded_nets]
             tries -= 1
-
-        # succesful = True
-        # for net in self.grid.netlist:
-        #     if net.finished == False:
-        #         succesful = False
 
         self.costs = 300 * self.grid.amount_of_intersections + self.total_wires_length
 

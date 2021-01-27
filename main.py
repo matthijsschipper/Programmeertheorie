@@ -40,7 +40,7 @@ if __name__ == "__main__":
     random_object = random.Random(grid)
 
     if random_object.is_solution():
-        print(f"Costs: {r.costs}")
+        print(f"Costs: {random_object.costs}")
     else:
         print("No solution found") 
 
@@ -58,12 +58,12 @@ if __name__ == "__main__":
             print("Input needs to be an integer")
     
     steered_random_object.run(tries)
-    print(f"Costs: {sr.costs}") #MISS EEN MANIER TOEVOEGEN OM TE CHECKEN VOOR GELDIGE OPLOSSING?
+    print(f"Costs: {steered_random_object.costs}") #MISS EEN MANIER TOEVOEGEN OM TE CHECKEN VOOR GELDIGE OPLOSSING?
 
     # --------------------------- A* -------------------------------------------
     astar_object = astar.Astar(grid)
     astar_object.run()
-    print(f"Costs: {a.costs}")
+    print(f"Costs: {astar_object.costs}")
 
     # --------------------------- Visualisation BEFORE Hillclimber has run --------------------------------
     # This visualisation is for all algorithms except the Hillclimber
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     hillclimber_object = hc.HillClimber(a)
 
     print(f"""
-        Original costs: {h.old_costs}
+        Original costs: {hillclimber_object.old_costs}
         Optimizing original solution....
     """)
 
