@@ -9,6 +9,11 @@ class HillClimber():
         A* algorithm to plot it again. This process is repeated until the same amount of costs
         is found for 1500 times.
         """
+        
+        # Checking random algoritm solution validity
+        if solution.__class__.__name__ == 'Random' and not solution.is_solution():
+            raise Exception('Hillclimber requires a valid solution from the random algorithm')
+
         self.solution = deepcopy(solution)
         self.old_costs = self.solution.costs
         self.old_intersections = self.solution.grid.amount_of_intersections
@@ -25,12 +30,6 @@ class HillClimber():
         the old costs, remember the new solution. Else, continue with the loop.
         """
 
-        # Print original costs before optimization
-        print(f"""
-        Original costs: {self.old_costs}
-        Optimizing original solution....
-        """)
-
         # Loop keeps running until the same amount of costs is found 1500 times consecutively
         while self.cost_occurence != 1500:
 
@@ -45,21 +44,13 @@ class HillClimber():
 
             # Let A* algorithm plot new route for removed net
             new_astar_solution = astar.Astar(new_grid)
+            new_astar_solution.run()
 
             # New solution costs check
             self.check_solution(new_astar_solution)
         
         # Write final solution to output file
         self.solution.grid.get_output(self.costs)
-
-        print(f"""
-        Convergence of {self.cost_occurence} reached! The results:
-        -------------------------------------------------------
-        Optimized netlist {self.netlist_nr} from chip {self.chip_nr}
-        Optimized costs from {self.old_costs} to {self.costs}
-        Optimized intersections from {self.old_intersections} to {self.solution.grid.amount_of_intersections}
-        Optimized length from {self.old_length} to {self.solution.grid.netlist_length()}
-        """)
 
         return self.solution
     
