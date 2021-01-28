@@ -82,7 +82,7 @@ class HillClimber():
             if self.cost_occurence == 0:
                 print(f"Found new costs of {self.costs}")
             elif self.cost_occurence % 50 == 0:
-                print(f"Found costs of {self.costs} for {self.cost_occurence} times now")
+                print(f"Found costs of {self.costs} for {self.cost_occurence}/1500 times now")
         
             return True
         
