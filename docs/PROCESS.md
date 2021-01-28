@@ -109,8 +109,14 @@
 | Birgit | 17:00 | 18:00 | Working on deliverable deadline today |
 | Jade | 22:00 | 23:59 | Working on cleaning up A* | 
 
+## 26-01-2021
+| Name | Start-time | End-time | Description |
+| --- | --- | --- | --- |
+| Matthijs | 09:00 | 13:00 | Checking code, improving it here and there |
+
 ## 27-01-2021
 | Name | Start-time | End-time | Description |
 | --- | --- | --- | --- |
 | Jade | 14:00 | | Working on cleaning up A* and main.py | 
 | Birgit | 15:00 | | Cleaning up main |
+| Matthijs | 15:00 | 20:00 | Cleaning up code |
