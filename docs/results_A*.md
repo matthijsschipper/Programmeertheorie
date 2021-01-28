@@ -40,7 +40,7 @@
 | Reversed    | 473    | 26            | 8273  |
 | Short_first | 457    | 11            | 3757  |
 | Long_first  | 507    | 37            | 11607 |
-| Outer_first | 495    | 40            | 1249  |
+| Outer_first | 495    | 40            | 12495  |
 | Inner_first | 503    | 16            | 5303  |
 
 # Netlist 6
